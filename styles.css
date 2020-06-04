@@ -8,7 +8,7 @@ body {
 
 .error {
 	color: red;
-
+	text-align: center;
 }
 
 .d-none {
@@ -42,6 +42,14 @@ body {
 	display: block;
 }
 
+.col-1 {
+	min-width: 120px;
+}
+
+.col-2, .col-2 * {
+	width: 100%;
+}
+
 /** SIZE */
 
 .w-80 {
@@ -57,6 +65,7 @@ body {
 .menu ul {
 	margin: 0;
 	padding: 4px;
+	font-family: "Arial Black";
 }
 
 .menu ul li {
@@ -76,10 +85,7 @@ body {
 .form {
 	font-family: "Arial Black";
 	background-color: white;
-	/*width: 100%;*/
 	text-align: left;
-	/*height: 200px;*/
-	/*padding-left: 50px;*/
 }
 
 .form.login {
@@ -93,25 +99,25 @@ body {
 	height: 400px;
 }
 
-.form.search {
-	padding-left: 50px;
+.search-form {
+	padding-left: 20px;
 }
 
 .form .logo {
 	margin: auto;
 	font-size: 44pt;
+	text-align: center;
 }
 
 .form .header {
 	display: inline-block;
 	margin: auto;
-	font-size: 15pt;
+	font-size: 12pt;
 }
 
 .form .label {
 	display: inline-block;
 	text-align: left;
-	width: 30%;
 }
 
 .form .block {
@@ -124,6 +130,7 @@ body {
 	display: inline-block;
 	text-align: center;
 	padding-bottom: 5px;
+	margin-right: 10px;
 }
 
 .form .field {
@@ -132,15 +139,15 @@ body {
 
 .form .textarea {
 	display: block;
-	width: 100%;
-	min-width: 100%;
-	max-width: 100%;
+	/*position: absolute;*/
+	max-width: 600px;
+	min-width: 600px;
+	height: 80px;
 }
 
-.form input[type=submit] {
+.form input[type=submit], .form input[type=button] {
 	background-color: white;
 	font-weight: bold;
-	/*width: 90%;*/
 	height: 25px;
 	border: 1px solid #7b7b7b;
 }
@@ -186,20 +193,20 @@ body {
 	/* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
-	width: 80%;
+	width: 400px;
 	/* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
 
-.close {
+span.close {
 	color: #aaa;
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
 }
 
-.close:hover, .close:focus {
+span.close:hover, span.close:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;

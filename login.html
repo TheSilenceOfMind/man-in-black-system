@@ -1,20 +1,39 @@
 <link rel="stylesheet" type="text/css" href="styles.css" />
 <div class="container">
 	<form class="form login center-300" method="POST" action="restcontroller.asdaasd">
-		<div class="logo">MIB</div>
-		<div class="block w-100">
-			<div class="label">Логин:</div>
-			<input name="login" class="field" type="text" placeholder="Логин" />
-		</div>
-		<div class="block w-100">
-			<div class="label">Пароль:</div>
-			<input name="password" class="field" type="password" placeholder="********" />
-		</div>
-		<div class="block w-80">
-			<input value="Войти" class="field" type="submit" />
-		</div>
-		<div class="block w-80 error d-none">
-			SOME ERROR
-		</div>
+
+		<table>
+			<tr>
+				<td colspan="2">
+					<div class="logo">MIB</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="label">Логин:</div>
+				</td>
+				<td class="col-2"><input name="login" class="field w-100" type="text" placeholder="Логин" /></td>
+			</tr>
+			<tr>
+				<td>
+					<div class="label">Пароль:</div>
+				</td>
+				<td class="col-2"><input name="password" class="field w-100" type="password" placeholder="********" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="w-100">
+					<input value="Войти" class="field w-100" type="submit" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="w-100">
+
+					<div class="block w-80 error d-none">
+						SOME ERROR
+					</div>
+				</td>
+			</tr>
+		</table>
 	</form>
 </div>
