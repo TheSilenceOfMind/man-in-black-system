@@ -2,18 +2,23 @@ package com.itmo.mibsystem.model;
 
 import com.google.common.base.Objects;
 import java.util.StringJoiner;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="mib_role_table")
 public class AccessRules {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "id_role")
     private Long roleId;
+    @Column(name = "s_table_name")
     private String tableName;
 
     protected AccessRules() {

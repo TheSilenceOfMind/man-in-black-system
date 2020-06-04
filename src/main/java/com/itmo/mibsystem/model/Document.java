@@ -2,22 +2,31 @@ package com.itmo.mibsystem.model;
 
 import com.google.common.base.Objects;
 import java.util.StringJoiner;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "mib_document")
 public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "id_category1")
     private Long idCategory1;
+    @Column(name = "id_category2")
     private Long idCategory2;
+    @Column(name = "id_category3")
     private Long idCategory3;
+    @Column(name = "s_field1")
     private String field1;
+    @Column(name = "s_field2")
     private String field2;
+    @Column(name = "s_field3")
     private String field3;
 
     protected Document() {
