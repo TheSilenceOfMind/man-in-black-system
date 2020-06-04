@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MBI Enterprise</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="documents-container">
+            <div class="menu">
+                <ul>
+                    <li>Файл</li>
+                    <li id="logout">Выйти</li>
+                </ul>
+            </div>
+            <div class="search-form">
+                <form class="form search">
+                    <div class="row">
+                        <div class="inline-block">
+                            <div class="header">
+                                Критерий 1:
+                            </div>
+                            <select name="crit_1" class="field">
+                                <option value="green">Зелёный</option>
+                                <option value="red">Красный</option>
+                                <option value="yellow">Жёлтый</option>
+                                <option value="blue">Синий</option>
+                            </select>
+                        </div>
+                        <div class="inline-block">
+                            <div class="header">
+                                Критерий 2:
+                            </div>
+                            <select name="crit_2" class="field">
+                                <option value="horns">Рожки</option>
+                                <option value="gills">Жабры</option>
+                                <option value="fur">Мех</option>
+                            </select>
+                        </div>
+                        <div class="inline-block">
+                            <div class="header">
+                                Критерий 3:
+                            </div>
+                            <select name="crit_3" class="field">
+                                <option value="reptioid">Рептилоид</option>
+                                <option value="humanoid">Гуманоид</option>
+                                <option value="daedra">Даэдра</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="inline-block">
+                            <div class="header">
+                                Ключевые слова:
+                            </div>
+                            <input name="keywords" type="text" class="field" />
+                            <input type="submit" class="field" value="Поиск" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="content">
+                <table border=1 width=100%>
+                    <tr>
+                        <th>Критерий 1</th>
+                        <th>Критерий 2</th>
+                        <th>Критерий 3</th>
+                        <th>Описание</th>
+                        <th></th>
+                    </tr>
+                    <!-- FOR aliens PRINT -->
+                    <tr>
+                        <td>Зеленый</td>
+                        <td>Рожки</td>
+                        <td>Рептилоид</td>
+                        <td>Не женат</td>
+                        <td><button id="edit">EDIT</button></td>
+                    </tr>
+                    <!-- END FOR -->
+                </table>
+            </div>
+        </div>
+
+        <div id="edit-modal" class="modal">
+            <form class="modal-content form edit" method="POST" action="restcontroller.asdaasd">
+                <div class="header">Заголовок документа</div>
+                <div class="block w-80">
+                    <div class="label">Поле 1:</div>
+                    <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                </div>
+                <div class="block w-80">
+                    <div class="label">Поле 2:</div>
+                    <input name="field_2" class="field" type="text" placeholder="Введите..." />
+                </div>
+                <div class="block w-80">
+                    <div class="label">Поле 3:</div>
+                    <input name="field_3" class="field" type="text" placeholder="Введите..." />
+                </div>
+
+                <div class="block w-80">
+                    <div class="label">Критерий 1:</div>
+                    <select name="crit_1" class="field">
+                        <option value="green">Зелёный</option>
+                        <option value="red">Красный</option>
+                        <option value="yellow">Жёлтый</option>
+                        <option value="blue">Синий</option>
+                    </select>
+                </div>
+                <div class="block w-80">
+                    <div class="label">Критерий 2:</div>
+                    <select name="crit_2" class="field">
+                        <option value="horns">Рожки</option>
+                        <option value="gills">Жабры</option>
+                        <option value="fur">Мех</option>
+                    </select>
+                </div>
+                <div class="block w-80">
+                    <div class="label">Критерий 3:</div>
+                    <select name="crit_3" class="field">
+                        <option value="reptioid">Рептилоид</option>
+                        <option value="humanoid">Гуманоид</option>
+                        <option value="daedra">Даэдра</option>
+                    </select>
+                </div>
+                <div class="block">
+                    <div class="label">Описание:</div>
+                    <textarea name="description" class="textarea"></textarea>
+                </div>
+                <div class="block">
+                    <span class="close">К документам</span>
+                    <input type="submit" value="Сохранить" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="logout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form method="POST" action="restcontroller.asdaasd">
+                <h2>Вы действительно хотите выйти?</h2>
+                <input type="submit" value="Ok" />
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var edit_modal = document.getElementById("edit-modal");
+        var logout_modal = document.getElementById("logout-modal");
+
+        var btn = document.getElementById("logout");
+        var btn_edit = document.getElementById("edit");
+
+        var span = document.getElementsByClassName("close")[0];
+        var span2 = document.getElementsByClassName("close")[1];
+
+        btn.onclick = function () {
+            logout_modal.style.display = "block";
+        }
+        btn_edit.onclick = function () {
+            edit_modal.style.display = "block";
+        }
+
+        span.onclick = function () {
+            edit_modal.style.display = "none";
+        }
+        span2.onclick = function () {
+            logout_modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == logout_modal || event.target == edit_modal) {
+                edit_modal.style.display = "none";
+                logout_modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
