@@ -32,7 +32,7 @@ public class RepositoryManager implements RulesBasedRepositoryManager {
     public void fillRepos() {
         accessRulesRepository.save(new AccessRules(0L, "USER"));
         accessRulesRepository.save(new AccessRules(1L, "DOCUMENT"));
-        documentRepository.save(new Document(0L, 0L, 0L, "f1", "f2", "f3"));
+        documentRepository.save(new Document(0L, 0L, 0L, "f1", "f2", "f3", "desp"));
         userRepository.save(new User(0L, "new username", "new pass"));
     }
 
