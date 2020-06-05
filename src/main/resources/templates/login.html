@@ -1,20 +1,56 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example </title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
-</html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Spring Security Example </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="error" th:if="${param.error}">
+  Invalid username and password.
+</div>
+<div class="error" th:if="${param.logout}">
+  You have been logged out.
+</div>
+<div class="container">
+  <form class="form login center-300" method="POST" th:action="@{/login}">
+
+    <table>
+      <tr>
+        <td colspan="2">
+          <div class="logo">MIB</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="label">Логин:</div>
+        </td>
+        <td class="col-2"><input name="username" class="field w-100" type="text"
+                                 placeholder="Логин"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="label">Пароль:</div>
+        </td>
+        <td class="col-2"><input name="password" class="field w-100" type="password"
+                                 placeholder="********"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="w-100">
+          <input value="Войти" class="field w-100" type="submit"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="w-100">
+
+          <div class="block w-80 error d-none">
+            SOME ERROR
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>

@@ -51,4 +51,8 @@ public class RepositoryManager implements RulesBasedRepositoryManager {
                 throw new Exception("Данная таблица не зарегистрирована!");
         }
     }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
 }
