@@ -28,18 +28,21 @@ public class Document {
     private String field2;
     @Column(name = "s_field3")
     private String field3;
+    @Column(name = "s_description")
+    private String description;
 
     protected Document() {
     }
 
     public Document(Long idCategory1, Long idCategory2, Long idCategory3, String field1,
-        String field2, String field3) {
+        String field2, String field3, String description) {
         this.idCategory1 = idCategory1;
         this.idCategory2 = idCategory2;
         this.idCategory3 = idCategory3;
         this.field1 = field1;
         this.field2 = field2;
         this.field3 = field3;
+        this.description = description;
     }
 
     @Override
@@ -69,6 +72,7 @@ public class Document {
             .add("field1='" + field1 + "'")
             .add("field2='" + field2 + "'")
             .add("field3='" + field3 + "'")
+            .add("description='" + description + "'")
             .toString();
     }
 
@@ -99,4 +103,6 @@ public class Document {
     public String getField3() {
         return field3;
     }
+
+    public String getDescription() { return description; }
 }
