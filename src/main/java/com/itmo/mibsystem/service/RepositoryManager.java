@@ -27,7 +27,7 @@ public class RepositoryManager implements RulesBasedRepositoryManager {
 
     @Autowired
     AccessRulesRepository accessRulesRepository;
-
+/*
     @PostConstruct
     public void fillRepos() {
         accessRulesRepository.save(new AccessRules(0L, "USER"));
@@ -35,7 +35,7 @@ public class RepositoryManager implements RulesBasedRepositoryManager {
         documentRepository.save(new Document(0L, 0L, 0L, "f1", "f2", "f3", "desp"));
         userRepository.save(new User(0L, "new username", "new pass"));
     }
-
+*/
     public CrudRepository<?, Long> getRepository(Long roleId) throws Exception {
         Optional<AccessRules> accessRules = accessRulesRepository.findById(roleId);
         if (!accessRules.isPresent()) {
