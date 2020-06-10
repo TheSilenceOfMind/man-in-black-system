@@ -1,9 +1,11 @@
-body {
-	background-color: black;
-}
-
 .documents-container {
 	background-color: white;
+}
+@media(min-width:1024px) {
+	.documents-container {
+		background-color: white;
+		padding: 215px;
+	}
 }
 
 .error {
@@ -22,6 +24,10 @@ body {
 	top: 0;
 	left: 0;
 	overflow: auto;
+}
+
+.black {
+	background-color: black;
 }
 
 .center-300 {
@@ -91,7 +97,7 @@ body {
 .form.login {
 	text-align: center;
 	width: 300px;
-	height: 200px;
+	height: 210px;
 }
 
 .form.edit {
@@ -133,8 +139,19 @@ body {
 	margin-right: 10px;
 }
 
-.form .field {
-	height: 25px;
+select.field, button.field {
+	height: 29px;
+}
+
+input.field {
+	height: 23px;
+}
+
+.button-edit {
+	background-color: white;
+	font-weight: bold;
+	height: 29px;
+	border: 1px solid #7b7b7b;
 }
 
 .form .textarea {
@@ -148,7 +165,7 @@ body {
 .form input[type=submit], .form input[type=button] {
 	background-color: white;
 	font-weight: bold;
-	height: 25px;
+	height: 29px;
 	border: 1px solid #7b7b7b;
 }
 
@@ -156,8 +173,12 @@ body {
 	background-color: white;
 	font-weight: bold;
 	width: 100%;
-	height: 25px;
+	height: 29px;
 	border: 1px solid #7b7b7b;
+}
+
+.form.login input:not([type=submit]) {	
+	height: 29px;
 }
 
 /** MODALS */

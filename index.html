@@ -11,7 +11,7 @@
         <div class="documents-container">
             <div class="menu">
                 <ul>
-                    <li>Новый документ</li>
+                    <li id="add">Новый документ</li>
                     <li id="logout">Выйти</li>
                 </ul>
             </div>
@@ -72,15 +72,107 @@
                         <td>Рожки</td>
                         <td>Рептилоид</td>
                         <td>Не женат</td>
-                        <td><button id="edit">EDIT</button></td>
+                        <td><button id="edit" class="button-edit">EDIT</button></td>
                     </tr>
                     <!-- END FOR -->
                 </table>
             </div>
         </div>
 
+        <div id="add-modal" class="modal">
+
+            <form class="modal-content form edit" method="POST" action="restcontroller.asdaasd">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <div class="header">Заголовок документа</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Поле 1:</div>
+                        </td>
+                        <td class="col-2">
+                            <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Поле 2:</div>
+                        </td>
+                        <td class="col-2">
+                            <input name="field_2" class="field" type="text" placeholder="Введите..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Поле 3:</div>
+                        </td>
+                        <td class="col-2">
+                            <input name="field_3" class="field" type="text" placeholder="Введите..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Критерий 1:</div>
+                        </td>
+                        <td class="col-2">
+                            <select name="crit_1" class="field">
+                                <option value="green">Зелёный</option>
+                                <option value="red">Красный</option>
+                                <option value="yellow">Жёлтый</option>
+                                <option value="blue">Синий</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Критерий 2:</div>
+                        </td>
+                        <td class="col-2">
+                            <select name="crit_2" class="field">
+                                <option value="horns">Рожки</option>
+                                <option value="gills">Жабры</option>
+                                <option value="fur">Мех</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Критерий 3:</div>
+                        </td>
+                        <td class="col-2">
+                            <select name="crit_3" class="field">
+                                <option value="reptioid">Рептилоид</option>
+                                <option value="humanoid">Гуманоид</option>
+                                <option value="daedra">Даэдра</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="label">Описание:</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <textarea name="description" class="textarea"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <input type="button" class="close" value="К документам">
+                        </td>
+                        <td align="right">
+                            <input type="submit" value="Создать" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
         <div id="edit-modal" class="modal">
-            
+
             <form class="modal-content form edit" method="POST" action="restcontroller.asdaasd">
                 <table>
                     <tr>
@@ -194,33 +286,32 @@
         function closeModal(modal) {
             modal.style.display = "none";
         }
-        var edit_modal = document.getElementById("edit-modal");
-        var logout_modal = document.getElementById("logout-modal");
 
-        var btn = document.getElementById("logout");
-        var btn_edit = document.getElementById("edit");
-
-        var edit_btns = document.querySelectorAll("#edit-modal .close");
-        for (let i = 0; i < edit_btns.length; i++) {
-            edit_btns[i].onclick = function() { closeModal(edit_modal); }
+        let modal_ids = ["edit-modal", "add-modal", "logout-modal"];
+        let modal_btn_ids = ["edit", "add", "logout"];
+        let modals = [];
+        
+        for (let id of modal_ids) {
+            let modal = document.getElementById(id);
+            modals.push(modal);
+            let btns = modal.querySelectorAll(".close");
+            for (let btn of btns) {
+                btn.onclick = function () { closeModal(modal); }
+            }
         }
 
-        var logout_btns = document.querySelectorAll("#logout-modal .close");
-        for (let i = 0; i < logout_btns.length; i++) {
-            logout_btns[i].onclick = function() { closeModal(logout_modal); }
-        }
-
-        btn.onclick = function () {
-            logout_modal.style.display = "block";
-        }
-        btn_edit.onclick = function () {
-            edit_modal.style.display = "block";
+        for (let id of modal_btn_ids) {
+            let btn = document.getElementById(id);
+            btn.onclick = function () {
+                document.getElementById(id+"-modal").style.display = "block";
+            }
         }
 
         window.onclick = function (event) {
-            if (event.target == logout_modal || event.target == edit_modal) {
-                edit_modal.style.display = "none";
-                logout_modal.style.display = "none";
+            for (let modal of modals) {
+                if (event.target == modal) {
+                    event.target.style.display = "none";
+                }
             }
         }
     </script>
