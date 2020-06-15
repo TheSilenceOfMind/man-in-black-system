@@ -12,7 +12,7 @@
   <div class="documents-container">
     <div class="menu">
       <ul>
-        <li>Новый документ</li>
+        <li id="new" onclick="openEditWindow(null)">Новый документ</li>
         <li id="logout">Выйти</li>
       </ul>
     </div>
@@ -27,6 +27,7 @@
             <option value="red">Красный</option>
             <option value="yellow">Жёлтый</option>
             <option value="blue">Синий</option>
+            <option value="" selected>ALL</option>
           </select>
         </div>
         <div class="inline-block">
@@ -37,6 +38,7 @@
             <option value="horns">Рожки</option>
             <option value="gills">Жабры</option>
             <option value="fur">Мех</option>
+            <option value="" selected>ALL</option>
           </select>
         </div>
         <div class="inline-block">
@@ -47,17 +49,19 @@
             <option value="reptioid">Рептилоид</option>
             <option value="humanoid">Гуманоид</option>
             <option value="daedra">Даэдра</option>
+            <option value="" selected>ALL</option>
           </select>
         </div>
         <div class="inline-block">
           <div class="header">
-            Ключевые слова:
+            Ключевые слова (регистронезависимый поиск):
           </div>
           <input name="keywords" type="text" class="field"/>
           <input type="submit" class="field" value="Поиск"/>
         </div>
       </form>
     </div>
+    <!--    Print all alients docs -->
     <div class="content">
       <table border="1" width="100%">
         <tr>
@@ -67,24 +71,23 @@
           <th>Описание</th>
           <th></th>
         </tr>
-        <!-- FOR aliens PRINT -->
-        <tr>
-          <td>Зеленый</td>
-          <td>Рожки</td>
-          <td>Рептилоид</td>
-          <td>Не женат</td>
+        <tr th:each="doc : ${docs}">
+          <td><span th:text="${doc.category1}"></span></td>
+          <td><span th:text="${doc.category2}"></span></td>
+          <td><span th:text="${doc.category3}"></span></td>
+          <td><span th:text="${doc.description}"></span></td>
           <td>
-            <button id="edit">EDIT</button>
+            <button th:value="${doc.id}" onclick="openEditWindow(this.value)">EDIT</button>
+            <button th:value="${doc.id}" onclick="deleteDocument(this.value)">DELETE</button>
           </td>
         </tr>
-        <!-- END FOR -->
       </table>
     </div>
   </div>
 
   <div id="edit-modal" class="modal">
 
-    <form class="modal-content form edit" method="POST" action="restcontroller.asdaasd">
+    <form id="changerForm" class="modal-content form edit" method="POST" th:action="@{/index}">
       <table>
         <tr>
           <td colspan="2">
@@ -96,6 +99,8 @@
             <div class="label">Поле 1:</div>
           </td>
           <td class="col-2">
+            <input name="hidden_id" type="hidden"/>
+            <input name="remove_flag" type="hidden"/>
             <input name="field_1" class="field" type="text" placeholder="Введите..."/>
           </td>
         </tr>
@@ -202,7 +207,6 @@
   var logout_modal = document.getElementById("logout-modal");
 
   var btn = document.getElementById("logout");
-  var btn_edit = document.getElementById("edit");
 
   var edit_btns = document.querySelectorAll("#edit-modal .close");
   for (let i = 0; i < edit_btns.length; i++) {
@@ -221,8 +225,18 @@
   btn.onclick = function () {
     logout_modal.style.display = "block";
   }
-  btn_edit.onclick = function () {
+
+  function openEditWindow(doc_id) {
+    document.getElementsByName("hidden_id")[0].value = doc_id;
     edit_modal.style.display = "block";
+  }
+
+  function deleteDocument(doc_id) {
+    document.getElementsByName("hidden_id")[0].value = doc_id;
+    let form = document.getElementById("changerForm");
+    document.getElementsByName("remove_flag")[0].value = "true";
+    form.submit();
+    document.getElementsByName("remove_flag")[0].value = "false";
   }
 
   window.onclick = function (event) {

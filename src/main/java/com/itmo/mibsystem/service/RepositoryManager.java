@@ -55,4 +55,9 @@ public class RepositoryManager implements RulesBasedRepositoryManager {
     public UserRepository getUserRepository() {
         return userRepository;
     }
+
+    // todo remove in later versions
+    public DocumentRepository getDocumentRepository() {
+        return documentRepository;
+    }
 }

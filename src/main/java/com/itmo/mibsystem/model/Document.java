@@ -16,12 +16,12 @@ public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "id_category1")
-    private Long idCategory1;
-    @Column(name = "id_category2")
-    private Long idCategory2;
-    @Column(name = "id_category3")
-    private Long idCategory3;
+    @Column(name = "category1")
+    private String category1;
+    @Column(name = "category2")
+    private String category2;
+    @Column(name = "category3")
+    private String category3;
     @Column(name = "s_field1")
     private String field1;
     @Column(name = "s_field2")
@@ -31,14 +31,14 @@ public class Document {
     @Column(name = "s_description")
     private String description;
 
-    protected Document() {
+    public Document() {
     }
 
-    public Document(Long idCategory1, Long idCategory2, Long idCategory3, String field1,
-        String field2, String field3, String description) {
-        this.idCategory1 = idCategory1;
-        this.idCategory2 = idCategory2;
-        this.idCategory3 = idCategory3;
+    public Document(String category1, String category2, String category3,
+        String field1, String field2, String field3, String description) {
+        this.category1 = category1;
+        this.category2 = category2;
+        this.category3 = category3;
         this.field1 = field1;
         this.field2 = field2;
         this.field3 = field3;
@@ -66,9 +66,9 @@ public class Document {
     public String toString() {
         return new StringJoiner(", ", Document.class.getSimpleName() + "[", "]")
             .add("id=" + id)
-            .add("idCategory1=" + idCategory1)
-            .add("idCategory2=" + idCategory2)
-            .add("idCategory3=" + idCategory3)
+            .add("category1='" + category1 + "'")
+            .add("category2='" + category2 + "'")
+            .add("category3='" + category3 + "'")
             .add("field1='" + field1 + "'")
             .add("field2='" + field2 + "'")
             .add("field3='" + field3 + "'")
@@ -80,29 +80,63 @@ public class Document {
         return id;
     }
 
-    public Long getIdCategory1() {
-        return idCategory1;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getIdCategory2() {
-        return idCategory2;
+    public String getCategory1() {
+        return category1;
     }
 
-    public Long getIdCategory3() {
-        return idCategory3;
+    public void setCategory1(String category1) {
+        this.category1 = category1;
+    }
+
+    public String getCategory2() {
+        return category2;
+    }
+
+    public void setCategory2(String category2) {
+        this.category2 = category2;
+    }
+
+    public String getCategory3() {
+        return category3;
+    }
+
+    public void setCategory3(String category3) {
+        this.category3 = category3;
     }
 
     public String getField1() {
         return field1;
     }
 
+    public void setField1(String field1) {
+        this.field1 = field1;
+    }
+
     public String getField2() {
         return field2;
+    }
+
+    public void setField2(String field2) {
+        this.field2 = field2;
     }
 
     public String getField3() {
         return field3;
     }
 
-    public String getDescription() { return description; }
+    public void setField3(String field3) {
+        this.field3 = field3;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
