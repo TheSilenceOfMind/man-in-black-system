@@ -56,6 +56,10 @@ body {
   width: 80%;
 }
 
+.w-96 {
+  width: 96%;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -137,6 +141,13 @@ body {
   height: 25px;
 }
 
+.button-edit {
+  background-color: white;
+  font-weight: bold;
+  height: 28px;
+  border: 1px solid #7b7b7b;
+}
+
 .form .textarea {
   display: block;
   /*position: absolute;*/
@@ -148,7 +159,7 @@ body {
 .form input[type=submit], .form input[type=button] {
   background-color: white;
   font-weight: bold;
-  height: 25px;
+  height: 29px;
   border: 1px solid #7b7b7b;
 }
 

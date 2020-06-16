@@ -77,8 +77,8 @@
           <td><span th:text="${doc.category3}"></span></td>
           <td><span th:text="${doc.description}"></span></td>
           <td>
-            <button th:value="${doc.id}" onclick="openEditWindow(this.value)">EDIT</button>
-            <button th:value="${doc.id}" onclick="deleteDocument(this.value)">DELETE</button>
+            <button class="button-edit" th:value="${doc.id}" onclick="openEditWindow(this.value)">Изменить</button>
+            <button class="button-edit" th:value="${doc.id}" onclick="deleteDocument(this.value)">Удалить</button>
           </td>
         </tr>
       </table>
