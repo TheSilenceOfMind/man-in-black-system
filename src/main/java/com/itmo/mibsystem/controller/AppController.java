@@ -2,8 +2,8 @@ package com.itmo.mibsystem.controller;
 
 import static com.itmo.mibsystem.util.Util.getDecodedCategoryName;
 
-import com.itmo.mibsystem.daos.DocumentRepository;
-import com.itmo.mibsystem.daos.UserRepository;
+import com.itmo.mibsystem.dao.DocumentRepository;
+import com.itmo.mibsystem.dao.UserRepository;
 import com.itmo.mibsystem.model.Document;
 import com.itmo.mibsystem.model.User;
 import com.itmo.mibsystem.service.RepositoryManager;

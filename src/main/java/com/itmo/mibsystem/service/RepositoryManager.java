@@ -1,13 +1,10 @@
 package com.itmo.mibsystem.service;
 
-import com.itmo.mibsystem.daos.AccessRulesRepository;
-import com.itmo.mibsystem.daos.DocumentRepository;
-import com.itmo.mibsystem.daos.UserRepository;
+import com.itmo.mibsystem.dao.AccessRulesRepository;
+import com.itmo.mibsystem.dao.DocumentRepository;
+import com.itmo.mibsystem.dao.UserRepository;
 import com.itmo.mibsystem.model.AccessRules;
-import com.itmo.mibsystem.model.Document;
-import com.itmo.mibsystem.model.User;
 import java.util.Optional;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;

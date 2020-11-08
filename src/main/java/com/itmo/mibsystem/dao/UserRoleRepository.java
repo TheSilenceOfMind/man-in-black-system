@@ -1,4 +1,4 @@
-package com.itmo.mibsystem.daos;
+package com.itmo.mibsystem.dao;
 
 import com.itmo.mibsystem.model.UserRole;
 import org.springframework.data.repository.CrudRepository;
