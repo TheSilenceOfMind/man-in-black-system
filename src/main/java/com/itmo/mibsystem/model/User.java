@@ -1,89 +1,90 @@
 package com.itmo.mibsystem.model;
 
-import com.google.common.base.Objects;
-import java.util.StringJoiner;
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "mib_user")
-public class User {
+@Table(name = "mib_user", schema="public")
+@Setter
+@Getter
+@Builder
+public class User implements UserDetails {
+
+    public User() {
+    }
+
+    public User(long userId, String username, String password, boolean disabled,
+        boolean accountExpired,
+        boolean accountLocked, boolean credentialsExpired,
+        List<Role> roles) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.disabled = disabled;
+        this.accountExpired = accountExpired;
+        this.accountLocked = accountLocked;
+        this.credentialsExpired = credentialsExpired;
+        this.roles = roles;
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(name = "id_role")
-    private Long roleId;
-    @Column(name = "s_login")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userId;
     private String username;
-    @Column(name = "s_password")
     private String password;
+    private boolean disabled;
+    private boolean accountExpired;
+    private boolean accountLocked;
+    private boolean credentialsExpired;
 
-    protected User() {
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "mib_user_role",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    List<Role> roles;
 
-    public User(Long roleId, String username, String password) {
-        this.roleId = roleId;
-        this.username = username;
-        this.password = password;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        roles.stream().map(
+            r -> authorities.add(new SimpleGrantedAuthority(r.getRoleName()))
+        );
+        return authorities;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equal(id, user.id);
+    public boolean isAccountNonExpired() {
+        return accountExpired;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public boolean isAccountNonLocked() {
+        return accountLocked;
     }
 
     @Override
-    public String toString() {
-        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
-            .add("id=" + id)
-            .add("roleId=" + roleId)
-            .add("username='" + username + "'")
-            .add("password='" + password + "'")
-            .toString();
+    public boolean isCredentialsNonExpired() {
+        return credentialsExpired;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public boolean isEnabled() {
+        return !disabled;
     }
 }

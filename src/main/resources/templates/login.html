@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="error" th:if="${param.error}">
-  Invalid username and password.
+  <th:block th:text="${param.error}"></th:block>
 </div>
 <div class="error" th:if="${param.logout}">
   You have been logged out.
