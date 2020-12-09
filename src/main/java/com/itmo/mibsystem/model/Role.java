@@ -21,6 +21,20 @@ public class Role {
     private int roleId;
     private String roleName;
 
-    protected Role() {
+    public Role() {
+    }
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public enum Type {
+        ADMIN,
+        PASSPORTER,
+        TECHNOLOGIST,
+        LAWYER,
+        OP_AGENT,
+        RESEARCHER,
+        HR
     }
 }

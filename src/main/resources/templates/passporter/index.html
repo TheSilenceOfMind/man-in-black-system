@@ -1,42 +1,36 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-   <title>MBI Enterprise</title>
-   <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>MIB Enterprise </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}">
 </head>
 
 <body>
 
    <div class="container black">
-       <div class="documents-container">
+       <div class="documents-container" >
            <div class="menu">
                <ul>
-                   <li name = "add">Новая технология</li>
-                   <li name = "logout">Выйти</li>
+                   <li name="add">Новый паспорт</li>
+                   <li name="logout">Выйти</li>
                </ul>
            </div>
            <div class="search-form">
                <form class="form search">
                     <div class="label">
-                        Название технологии:
+                        Имя пришельца:
                     </div>
                     <input name="field_1" class="field" type="text" placeholder="Введите..." />
-                    <div class="inline-block">
-                        <div class="header">
-                            Раса изобретатель:
-                        </div>
-                        <select name="crit_1" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
-                        </select>
+                    <div class="label">
+                        Родная планета:
                     </div>
+                    <input name="field_2" class="field" type="text" placeholder="Введите..." />
                     <div class="inline-block">
                        <div class="header">
-                           Способ получения:
+                           Раса пришельца:
                        </div>
-                       <select name="crit_2" class="field">
+                       <select name="crit_1" class="field">
                            <option value="reptioid">Рептилоид</option>
                            <option value="humanoid">Гуманоид</option>
                            <option value="daedra">Даэдра</option>
@@ -53,58 +47,67 @@
            </div>
            <div class="content">
                <table border="1" width="100%">
-                   <tr>
-                       <th>Название технологии</th>
-                       <th>Раса изобретатель</th>
-                       <th>Способ получения</th>
-                       <th>Описание</th>
-                       <th></th>
-                   </tr>
+                    <tr>
+                        <th>Имя пришельца</th>
+                        <th>Родная планета</th>
+                        <th>Раса пришельца</th>
+                        <th>Описание</th>
+                        <th></th>
+                    </tr>
                    <!-- FOR aliens PRINT -->
-                   <tr>
-                       <td>Зеленый</td>
-                       <td>Рожки</td>
-                       <td>Рептилоид</td>
-                       <td>Не женат</td>
-                       <td>
-                           <button name = "edit" class = "button-edit">Редактировать</button>
-                           <button name = "delete" class = "button-edit">Удалить</button>
+                    <tr>
+                        <td>Зеленый</td>
+                        <td>Рожки</td>
+                        <td>Рептилоид</td>
+                        <td>Не женат</td>
+                        <td>
+                            <button name = "edit" class = "button-edit">Редактировать</button>
+                            <button name = "delete" class = "button-edit">Удалить</button>
                         </td>
-                   </tr>
+                    </tr>
+                    <tr>
+                        <td>Зеленый</td>
+                        <td>Рожки</td>
+                        <td>Рептилоид</td>
+                        <td>Не женат</td>
+                    <td>
+                        <button name = "edit" class="button-edit">Редактировать</button>
+                        <button name = "delete" class = "button-edit">Удалить</button>
+                     </td>
+                    </tr>
                    <!-- END FOR -->
                </table>
            </div>
        </div>
 
-
-
+       
        <div id="add-modal" class="modal">
-           <form class="modal-content form technology" method="POST" action="restcontroller.asdaasd">
+           <form class="modal-content form passport" method="POST" action="restcontroller.asdaasd">
                <table>
                    <tr>
                        <td colspan="2" align="center">
-                           <div class="header">Технология</div>
+                           <div class="header">Паспорт</div>
                        </td>
                    </tr>
                    <tr>
                        <td class="col-1">
-                           <div class="label">Название технологии:</div>
+                           <div class="label">Имя пришельца:</div>
                        </td>
                        <td class="col-2">
                            <input name="field_1" class="field" type="text" placeholder="Введите..." />
                        </td>
                    </tr>
                    <tr>
-                    <td class="col-1">
-                        <div class="label">Назначение:</div>
-                    </td>
-                    <td class="col-2">
-                        <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                    </td>
-                </tr>
-                    <tr>
                        <td class="col-1">
-                           <div class="label">Раса изобритатель:</div>
+                           <div class="label">Родная планета:</div>
+                       </td>
+                       <td class="col-2">
+                           <input name="field_2" class="field" type="text" placeholder="Введите..." />
+                       </td>
+                   </tr>
+                   <tr>
+                       <td class="col-1">
+                           <div class="label">Раса пришельца:</div>
                        </td>
                        <td class="col-2">
                            <select name="crit_1" class="field">
@@ -113,21 +116,8 @@
                                <option value="daedra">Даэдра</option>
                            </select>
                        </td>
-                    </tr>
-                </tr>
-                <tr>
-                   <td class="col-1">
-                       <div class="label">Способ получения:</div>
-                   </td>
-                   <td class="col-2">
-                       <select name="crit_2" class="field">
-                           <option value="reptioid">Рептилоид</option>
-                           <option value="humanoid">Гуманоид</option>
-                           <option value="daedra">Даэдра</option>
-                       </select>
-                   </td>
-                </tr>
-                    <tr>
+                   </tr>
+                   <tr>
                        <td colspan="2">
                            <div class="label">Описание:</div>
                        </td>
@@ -150,33 +140,34 @@
        </div>
 
 
-    <div id="edit-modal" class="modal">
-        <form class="modal-content form technology" method="POST" action="restcontroller.asdaasd">
+
+       <div id="edit-modal" class="modal">
+           <form class="modal-content form passport" method="POST" action="restcontroller.asdaasd">
             <table>
                 <tr>
                     <td colspan="2" align="center">
-                        <div class="header">Технология</div>
+                        <div class="header">Паспорт</div>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-1">
-                        <div class="label">Название технологии:</div>
+                        <div class="label">Имя пришельца:</div>
                     </td>
                     <td class="col-2">
                         <input name="field_1" class="field" type="text" placeholder="Введите..." />
                     </td>
                 </tr>
                 <tr>
-                 <td class="col-1">
-                     <div class="label">Назначение:</div>
-                 </td>
-                 <td class="col-2">
-                     <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                 </td>
-             </tr>
-                 <tr>
                     <td class="col-1">
-                        <div class="label">Раса изобритатель:</div>
+                        <div class="label">Родная планета:</div>
+                    </td>
+                    <td class="col-2">
+                        <input name="field_2" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Раса пришельца:</div>
                     </td>
                     <td class="col-2">
                         <select name="crit_1" class="field">
@@ -185,21 +176,8 @@
                             <option value="daedra">Даэдра</option>
                         </select>
                     </td>
-                 </tr>
-             </tr>
-             <tr>
-                <td class="col-1">
-                    <div class="label">Способ получения:</div>
-                </td>
-                <td class="col-2">
-                    <select name="crit_2" class="field">
-                        <option value="reptioid">Рептилоид</option>
-                        <option value="humanoid">Гуманоид</option>
-                        <option value="daedra">Даэдра</option>
-                    </select>
-                </td>
-             </tr>
-                 <tr>
+                </tr>
+                <tr>
                     <td colspan="2">
                         <div class="label">Описание:</div>
                     </td>
@@ -218,8 +196,9 @@
                     </td>
                 </tr>
             </table>
-        </form>
-    </div>
+           </form>
+       </div>
+   </div>
 
    <div id="logout-modal" class="modal">
        <div class="modal-content">

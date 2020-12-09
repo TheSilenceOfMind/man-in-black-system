@@ -32,13 +32,23 @@ create table mib_user_role
 ------------------------------------------------------
 ----------------------Authentication------------------
 ------------------------------------------------------
-insert into mib_role(role_name) values ('Passporter');
-insert into mib_role(role_name) values ('Researcher');
-insert into mib_role(role_name) values ('OpAgent');
-insert into mib_role(role_name) values ('Lawyer');
+insert into mib_role(role_name) values ('PASSPORTER');
+insert into mib_role(role_name) values ('RESEARCHER');
+insert into mib_role(role_name) values ('OP_AGENT');
+insert into mib_role(role_name) values ('LAWYER');
 insert into mib_role(role_name) values ('HR');
-insert into mib_role(role_name) values ('Technologist');
+insert into mib_role(role_name) values ('TECHNOLOGIST');
 
-insert into mib_user(username, password) values ('kirill', '$2y$11$M0aiTmk9sdzH6rtRctvoauFcvEu6y9L6QX0cBIw6rcZ.WWq9wcCYy');
+insert into mib_user(username, password) values ('k1', '$2y$11$M0aiTmk9sdzH6rtRctvoauFcvEu6y9L6QX0cBIw6rcZ.WWq9wcCYy');
+insert into mib_user(username, password) values ('k2', '$2y$11$M0aiTmk9sdzH6rtRctvoauFcvEu6y9L6QX0cBIw6rcZ.WWq9wcCYy');
+insert into mib_user(username, password) values ('k3', '$2y$11$M0aiTmk9sdzH6rtRctvoauFcvEu6y9L6QX0cBIw6rcZ.WWq9wcCYy');
+insert into mib_user(username, password) values ('k4', '$2y$11$M0aiTmk9sdzH6rtRctvoauFcvEu6y9L6QX0cBIw6rcZ.WWq9wcCYy');
+insert into mib_user(username, password) values ('k5', '$2y$11$M0aiTmk9sdzH6rtRctvoauFcvEu6y9L6QX0cBIw6rcZ.WWq9wcCYy');
+insert into mib_user(username, password) values ('k6', '$2y$11$M0aiTmk9sdzH6rtRctvoauFcvEu6y9L6QX0cBIw6rcZ.WWq9wcCYy');
 
 insert into mib_user_role(user_id, role_id) values (1, 1);
+insert into mib_user_role(user_id, role_id) values (2, 2);
+insert into mib_user_role(user_id, role_id) values (3, 3);
+insert into mib_user_role(user_id, role_id) values (4, 4);
+insert into mib_user_role(user_id, role_id) values (5, 5);
+insert into mib_user_role(user_id, role_id) values (6, 6);

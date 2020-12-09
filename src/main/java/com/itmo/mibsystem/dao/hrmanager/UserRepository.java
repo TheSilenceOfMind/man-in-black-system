@@ -1,4 +1,4 @@
-package com.itmo.mibsystem.dao;
+package com.itmo.mibsystem.dao.hrmanager;
 
 import com.itmo.mibsystem.model.User;
 import java.util.Optional;

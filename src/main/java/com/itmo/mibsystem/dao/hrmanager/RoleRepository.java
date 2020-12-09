@@ -1,11 +1,9 @@
 package com.itmo.mibsystem.dao.hrmanager;
 
-import com.itmo.mibsystem.model.User;
-import com.itmo.mibsystem.model.hrmanager.Role;
+import com.itmo.mibsystem.model.Role;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.Optional;
-
 public interface RoleRepository extends CrudRepository<Role, Long> {
-    Optional<User> findByUsername(String username);
+    Optional<Role> findByRoleName(String roleName);
 }
