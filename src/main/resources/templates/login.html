@@ -5,6 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}">
 </head>
+
 <body>
 <div class="error" th:if="${param.error}">
   <th:block th:text="${param.error}"></th:block>
@@ -12,9 +13,9 @@
 <div class="error" th:if="${param.logout}">
   You have been logged out.
 </div>
-<div class="container">
-  <form class="form login center-300" method="POST" th:action="@{/login}">
 
+<div class="container black">
+  <form class="form login center-300" method="POST" th:action="@{/login}">
     <table>
       <tr>
         <td colspan="2">
@@ -25,7 +26,7 @@
         <td>
           <div class="label">Логин:</div>
         </td>
-        <td class="col-2"><input name="username" class="field w-96" type="text"
+        <td class="col-2"><input name="username" class="field w-90" type="text"
                                  placeholder="Логин"/>
         </td>
       </tr>
@@ -33,7 +34,7 @@
         <td>
           <div class="label">Пароль:</div>
         </td>
-        <td class="col-2"><input name="password" class="field w-96" type="password"
+        <td class="col-2"><input name="password" class="field w-90" type="password"
                                  placeholder="********"/>
         </td>
       </tr>

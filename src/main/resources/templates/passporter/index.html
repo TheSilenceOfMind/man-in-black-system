@@ -17,30 +17,29 @@
                </ul>
            </div>
            <div class="search-form">
-               <form class="form search">
+               <form class="form search" th:object="${findFilds}" th:action="@{/passporterIndex}" method="post">
                     <div class="label">
                         Имя пришельца:
                     </div>
-                    <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                    <input th:field="*{name}" class="field" type="text" placeholder="Введите..." />
                     <div class="label">
                         Родная планета:
                     </div>
-                    <input name="field_2" class="field" type="text" placeholder="Введите..." />
+                    <input th:field="*{homePlanet}" class="field" type="text" placeholder="Введите..." />
                     <div class="inline-block">
                        <div class="header">
                            Раса пришельца:
                        </div>
-                       <select name="crit_1" class="field">
-                           <option value="reptioid">Рептилоид</option>
-                           <option value="humanoid">Гуманоид</option>
-                           <option value="daedra">Даэдра</option>
-                       </select>
+                        <select th:field="*{idRace}" >
+                            <option value="0"> -- </option>
+                            <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
+                        </select>
                    </div>
                    <div class="inline-block">
                        <div class="header">
                            Ключевые слова:
                        </div>
-                       <input name="keywords" type="text" class="field" />
+                       <input th:field="*{description}" type="text" class="field" />
                        <input type="submit" class="field" value="Поиск" />
                    </div>
                </form>
@@ -55,26 +54,16 @@
                         <th></th>
                     </tr>
                    <!-- FOR aliens PRINT -->
-                    <tr>
-                        <td>Зеленый</td>
-                        <td>Рожки</td>
-                        <td>Рептилоид</td>
-                        <td>Не женат</td>
-                        <td>
-                            <button name = "edit" class = "button-edit">Редактировать</button>
-                            <button name = "delete" class = "button-edit">Удалить</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Зеленый</td>
-                        <td>Рожки</td>
-                        <td>Рептилоид</td>
-                        <td>Не женат</td>
-                    <td>
-                        <button name = "edit" class="button-edit">Редактировать</button>
-                        <button name = "delete" class = "button-edit">Удалить</button>
-                     </td>
-                    </tr>
+                   <tr th:each="alien : ${aliens}">
+                       <td th:utext="${alien.name}"></td>
+                       <td th:utext="${alien.homePlanet}"></td>
+                       <td th:utext="${alien.nameRace}"></td>
+                       <td th:utext="${alien.description}"></td>
+                       <td>
+                           <button name = "edit" th:data1="${alien.name}" th:data2="${alien.homePlanet}" th:data3="${alien.description}" th:onmouseup="|getAlienPassport('${alien.passportId}', this.getAttribute('data1'), this.getAttribute('data2'), ${alien.idRace}, this.getAttribute('data3'));|" class = "button-edit">Редактировать</button>
+                           <button name = "delete" th:onmouseup="|getIdByButton(${alien.passportId});|"  class = "button-edit" >Удалить</button>
+                       </td>
+                   </tr>
                    <!-- END FOR -->
                </table>
            </div>
@@ -82,7 +71,8 @@
 
        
        <div id="add-modal" class="modal">
-           <form class="modal-content form passport" method="POST" action="restcontroller.asdaasd">
+
+           <form class="modal-content form passport" th:object="${addPassport}" th:action="@{/addPassport}" method="post">
                <table>
                    <tr>
                        <td colspan="2" align="center">
@@ -94,7 +84,7 @@
                            <div class="label">Имя пришельца:</div>
                        </td>
                        <td class="col-2">
-                           <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                           <input th:field="*{name}" class="field" type="text" placeholder="Введите..." />
                        </td>
                    </tr>
                    <tr>
@@ -102,7 +92,7 @@
                            <div class="label">Родная планета:</div>
                        </td>
                        <td class="col-2">
-                           <input name="field_2" class="field" type="text" placeholder="Введите..." />
+                           <input th:field="*{homePlanet}"  class="field" type="text" placeholder="Введите..." />
                        </td>
                    </tr>
                    <tr>
@@ -110,10 +100,8 @@
                            <div class="label">Раса пришельца:</div>
                        </td>
                        <td class="col-2">
-                           <select name="crit_1" class="field">
-                               <option value="reptioid">Рептилоид</option>
-                               <option value="humanoid">Гуманоид</option>
-                               <option value="daedra">Даэдра</option>
+                           <select th:field="*{idRace}">
+                               <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
                            </select>
                        </td>
                    </tr>
@@ -124,7 +112,7 @@
                    </tr>
                    <tr>
                        <td colspan="2">
-                           <textarea name="description" class="textarea"></textarea>
+                           <textarea th:field="*{description}" class="textarea"></textarea>
                        </td>
                    </tr>
                    <tr>
@@ -142,11 +130,14 @@
 
 
        <div id="edit-modal" class="modal">
-           <form class="modal-content form passport" method="POST" action="restcontroller.asdaasd">
+           <form class="modal-content form passport" method="POST" th:object="${addPassport}" th:action="@{/updatePassport}">
             <table>
                 <tr>
                     <td colspan="2" align="center">
                         <div class="header">Паспорт</div>
+                    </td>
+                    <td>
+                        <input id="passportId" th:field="*{passportId}" class="field" type="hidden" placeholder="Введите..." />
                     </td>
                 </tr>
                 <tr>
@@ -154,7 +145,7 @@
                         <div class="label">Имя пришельца:</div>
                     </td>
                     <td class="col-2">
-                        <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                        <input name="field_1" id="passportName" th:field="*{name}" class="field" type="text" placeholder="Введите..." />
                     </td>
                 </tr>
                 <tr>
@@ -162,7 +153,7 @@
                         <div class="label">Родная планета:</div>
                     </td>
                     <td class="col-2">
-                        <input name="field_2" class="field" type="text" placeholder="Введите..." />
+                        <input name="field_2" id="passportHomePlanet" th:field="*{homePlanet}" class="field" type="text" placeholder="Введите..." />
                     </td>
                 </tr>
                 <tr>
@@ -170,10 +161,8 @@
                         <div class="label">Раса пришельца:</div>
                     </td>
                     <td class="col-2">
-                        <select name="crit_1" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
+                        <select th:field="*{idRace}" id="passportIdRace">
+                            <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
                         </select>
                     </td>
                 </tr>
@@ -184,7 +173,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <textarea name="description" class="textarea"></textarea>
+                        <textarea name="description" th:field="*{description}" id="passportDescription" class="textarea"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -203,7 +192,7 @@
    <div id="logout-modal" class="modal">
        <div class="modal-content">
            <span class="close">&times;</span>
-           <form class="form" method="POST" action="restcontroller.asdaasd">
+           <form class="form" method="POST" action="/logout">
                <table width=100%>
                    <tr>
                        <td align="center" colspan="3">
@@ -222,7 +211,7 @@
    <div id="delete-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <form class="form" method="POST" action="restcontroller.asdaasd">
+            <form class="form" method="POST" th:object="${addPassport}" th:action="@{/deletePassport}">
                 <table width=100%>
                     <tr>
                         <td align="center" colspan="3">
@@ -230,6 +219,7 @@
                         </td>
                     </tr>
                     <tr>
+                        <td width=0%><input id="passportIdDelete" th:field="*{passportId}" class="field" type="hidden" placeholder="Введите..." /></td>
                         <td width=50%><input class="w-100" type="submit" value="Ок" /></td>
                         <td width=50%><input class="w-100 close" type="button" value="Отмена" /></td>
                     </tr>
@@ -239,6 +229,18 @@
     </div>
 
    <script>
+   function getIdByButton(id) {
+       document.getElementById("passportIdDelete").value = id;
+   }
+
+   function getAlienPassport(passportId, name, homePlanet, idRace, description) {
+       document.getElementById("passportId").value = passportId;
+       document.getElementById("passportName").value = name;
+       document.getElementById("passportHomePlanet").value = homePlanet;
+       document.getElementById("passportIdRace").value = idRace;
+       document.getElementById("passportDescription").value = description;
+   }
+
     function closeModal(modal) {
         modal.style.display = "none";
     }
