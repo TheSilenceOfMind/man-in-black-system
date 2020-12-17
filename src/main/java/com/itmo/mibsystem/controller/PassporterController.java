@@ -34,7 +34,7 @@ public class PassporterController {
     }
 
     @GetMapping({"/passporterIndex"})
-    public ModelAndView passporterIndexGet(Model model) throws Exception {
+    public ModelAndView passporterIndexGet(Model model) {
         findFilds = new AlienPassport();
         addPassport = new AlienPassport();
 
@@ -45,24 +45,24 @@ public class PassporterController {
     }
 
     @PostMapping({"/passporterIndex"})
-    public ModelAndView passporterIndexPost(@ModelAttribute("findFilds") AlienPassport findFilds, Model model) throws Exception {
+    public ModelAndView passporterIndexPost(@ModelAttribute("findFilds") AlienPassport findFilds, Model model) {
         return LoadForm(findFilds, model);
     }
 
     @PostMapping({"/addPassport"})
-    public ModelAndView addPassportPost(@ModelAttribute AlienPassport addPassport, Model model) throws Exception {
+    public ModelAndView addPassportPost(@ModelAttribute AlienPassport addPassport, Model model) {
         passporterService.insertPassport(addPassport);
         return LoadForm(findFilds, model);
     }
 
     @PostMapping({"/deletePassport"})
-    public ModelAndView deletePassportPost(@ModelAttribute AlienPassport addPassport, Model model) throws Exception {
+    public ModelAndView deletePassportPost(@ModelAttribute AlienPassport addPassport, Model model) {
         passporterService.deletePassport(addPassport);
         return LoadForm(findFilds, model);
     }
 
     @PostMapping({"/updatePassport"})
-    public ModelAndView updatePassportPost(@ModelAttribute AlienPassport addPassport, Model model) throws Exception {
+    public ModelAndView updatePassportPost(@ModelAttribute AlienPassport addPassport, Model model) {
         passporterService.updatePassport(addPassport);
         return LoadForm(findFilds, model);
     }
@@ -73,8 +73,14 @@ public class PassporterController {
         model.addAttribute("findFilds", findFilds);
         List<AlienPassport> alien = passporterService.getAliensByFilds(findFilds.getName(), findFilds.getHomePlanet(), findFilds.getIdRace(), findFilds.getDescription());
         for(int i = 0; i < alien.size(); i ++) {
-            alien.get(i).setNameRace(race.get(alien.get(i).getIdRace().intValue() - 1).getName());
+            for(int j = 0; j < race.size(); j ++) {
+                if(alien.get(i).getIdRace() == race.get(j).getRaceId()) {
+                    alien.get(i).setNameRace(race.get(j).getName());
+                    break;
+                }
+            }
         }
+
         model.addAttribute("aliens", alien);
 
         return new ModelAndView("passporter/index", model.asMap());

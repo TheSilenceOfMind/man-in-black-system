@@ -69,9 +69,7 @@
            </div>
        </div>
 
-       
        <div id="add-modal" class="modal">
-
            <form class="modal-content form passport" th:object="${addPassport}" th:action="@{/addPassport}" method="post">
                <table>
                    <tr>
@@ -145,7 +143,7 @@
                         <div class="label">Имя пришельца:</div>
                     </td>
                     <td class="col-2">
-                        <input name="field_1" id="passportName" th:field="*{name}" class="field" type="text" placeholder="Введите..." />
+                        <input id="passportName" th:field="*{name}" class="field" type="text" placeholder="Введите..." />
                     </td>
                 </tr>
                 <tr>
@@ -153,7 +151,7 @@
                         <div class="label">Родная планета:</div>
                     </td>
                     <td class="col-2">
-                        <input name="field_2" id="passportHomePlanet" th:field="*{homePlanet}" class="field" type="text" placeholder="Введите..." />
+                        <input id="passportHomePlanet" th:field="*{homePlanet}" class="field" type="text" placeholder="Введите..." />
                     </td>
                 </tr>
                 <tr>
@@ -173,7 +171,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <textarea name="description" th:field="*{description}" id="passportDescription" class="textarea"></textarea>
+                        <textarea th:field="*{description}" id="passportDescription" class="textarea"></textarea>
                     </td>
                 </tr>
                 <tr>

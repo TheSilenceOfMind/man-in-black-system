@@ -25,6 +25,12 @@ create table mib_user_role
     role_id      integer references mib_role (role_id)
 );
 
+create table mib_alien_race
+(
+    race_id serial primary key,
+    name    varchar(100) unique not null
+);
+
 create table mib_alien_passport
 (
     passport_id         serial primary key,
@@ -34,12 +40,21 @@ create table mib_alien_passport
     id_race             integer references mib_alien_race (race_id)
 );
 
-create table mib_alien_race
+create table mib_source_technology
 (
-    race_id serial primary key,
-    name    varchar(100) unique not null
+    source_id serial primary key,
+    value    varchar(100) unique not null
 );
 
+create table mib_technology
+(
+    technology_id       serial primary key,
+    name                varchar(100) unique not null,
+    use                 varchar(100) not null,
+    description         varchar(100) not null,
+    id_race             integer references mib_alien_race (race_id),
+    id_source           integer references mib_source_technology (source_id)
+);
 ------------------------------------------------------
 ----------------------Documents-----------------------
 ------------------------------------------------------
@@ -68,10 +83,18 @@ insert into mib_user_role(user_id, role_id) values (4, 4);
 insert into mib_user_role(user_id, role_id) values (5, 5);
 insert into mib_user_role(user_id, role_id) values (6, 6);
 
+insert into mib_alien_race(name) values ('123');
+insert into mib_alien_race(name) values ('456');
+insert into mib_alien_race(name) values ('789');
+
 insert into mib_alien_passport(name, home_planet, description, id_race) values ('afsa', 'dsfd', 'hted', 1);
 insert into mib_alien_passport(name, home_planet, description, id_race) values ('FSFA', 'sgrwb ', 'sdgh', 2);
 insert into mib_alien_passport(name, home_planet, description, id_race) values ('bfdnd', 'yrwfgvv', 'vjhr', 3);
 
-insert into mib_alien_race(name) values ('123');
-insert into mib_alien_race(name) values ('456');
-insert into mib_alien_race(name) values ('789');
+insert into mib_source_technology(value) values ('321');
+insert into mib_source_technology(value) values ('654');
+insert into mib_source_technology(value) values ('987');
+
+insert into mib_technology(name, use, description, id_race, id_source) values ('sdfdbdgqad', 'gwvsdgdsf', 'sgeqvdseq', 1, 3);
+insert into mib_technology(name, use, description, id_race, id_source) values ('rahtaebdfd', 'dsgwrbds ', 'dsgwsvxvd', 2, 2);
+insert into mib_technology(name, use, description, id_race, id_source) values ('hyjghm', 'bfbetjdfbv', 'rtmyjdfbwrbw', 3, 1);

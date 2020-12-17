@@ -17,36 +17,34 @@
                </ul>
            </div>
            <div class="search-form">
-               <form class="form search">
+               <form class="form search" th:object="${findFilds}" th:action="@{/researcherIndex}" method="post">
                     <div class="label">
                         Название технологии:
                     </div>
-                    <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                    <input th:field="*{name}" class="field" type="text" placeholder="Введите..." />
                     <div class="inline-block">
                         <div class="header">
                             Раса изобретатель:
                         </div>
-                        <select name="crit_1" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
+                        <select th:field="*{idRace}"  class="field">
+                            <option value="0"> -- </option>
+                            <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
                         </select>
                     </div>
                     <div class="inline-block">
                        <div class="header">
                            Способ получения:
                        </div>
-                       <select name="crit_2" class="field">
-                           <option value="reptioid">Рептилоид</option>
-                           <option value="humanoid">Гуманоид</option>
-                           <option value="daedra">Даэдра</option>
+                       <select th:field="*{idSource}" class="field">
+                           <option value="0"> -- </option>
+                           <option th:each="sourceTechnology : ${sourceTechnology}"  th:value="${sourceTechnology.sourceId}"  th:utext="${sourceTechnology.value}"/>
                        </select>
                    </div>
                    <div class="inline-block">
                        <div class="header">
                            Ключевые слова:
                        </div>
-                       <input name="keywords" type="text" class="field" />
+                       <input th:field="*{description}" type="text" class="field" />
                        <input type="submit" class="field" value="Поиск" />
                    </div>
                </form>
@@ -62,14 +60,15 @@
                    </tr>
                    <!-- FOR aliens PRINT -->
                    <tr>
-                       <td>Зеленый</td>
-                       <td>Рожки</td>
-                       <td>Рептилоид</td>
-                       <td>Не женат</td>
+                   <tr th:each="technology : ${technologies}">
+                       <td th:utext="${technology.name}"></td>
+                       <td th:utext="${technology.nameRace}"></td>
+                       <td th:utext="${technology.nameSource}"></td>
+                       <td th:utext="${technology.description}"></td>
                        <td>
-                           <button name = "edit" class = "button-edit">Редактировать</button>
-                           <button name = "delete" class = "button-edit">Удалить</button>
-                        </td>
+                           <button name = "edit" th:data1="${technology.name}" th:data2="${technology.use}" th:data3="${technology.description}" th:onmouseup="|getTechnology('${technology.technologyId}', this.getAttribute('data1'), this.getAttribute('data2'), ${technology.idRace}, ${technology.idSource}, this.getAttribute('data3'));|" class = "button-edit">Редактировать</button>
+                           <button name = "delete" th:onmouseup="|getIdByButton(${technology.technologyId});|"  class = "button-edit" >Удалить</button>
+                       </td>
                    </tr>
                    <!-- END FOR -->
                </table>

@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Setter
 public class AlienRace {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "race_id")
     private Long raceId;
     @Column(name = "name")

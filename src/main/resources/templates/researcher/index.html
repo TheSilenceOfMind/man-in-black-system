@@ -8,506 +8,276 @@
 
 <body>
 
-   <div class="container black">
-       <div class="documents-container">
-           <div class="menu">
-               <ul>
-                   <li name = "addsellTech">Новая технология на продажу</li>
-                   <li name = "logout">Выйти</li>
-               </ul>
-           </div>
-
-            <div class="tab">
-                <button class="tablinks tablinkbuttons" onclick="openCity(event, 'sellTechnology')">Технологии на продажу</button>
-                <button class="tablinks tablinkbuttons" onclick="openCity(event, 'buyTechnology')">Межгалоктический рынок</button>
-                <button id="deffault" class="tablinks tablinkbuttons" onclick="openCity(event, 'distributeTechnology')">Распределение технологий</button>
-            </div>
-
-            <div id="sellTechnology" class="tabcontent">
-                <div class="search-form">
-                    <form class="form search">
-                        <div class="inline-block">
-                            <div class="header">
-                                Технология:
-                            </div>
-                            <select name="crit_1" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </div>
-                         <div class="label">
-                                Покупатель:
-                         </div>
-                         <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                         <div class="inline-block">
-                            <div class="header">
-                                Вид сделки:
-                            </div>
-                            <select name="crit_1" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </div>
-                        <div class="inline-block">
-                            <div class="header">
-                                Ключевые слова:
-                            </div>
-                            <input name="keywords" type="text" class="field" />
-                            <input type="submit" class="field" value="Поиск" />
-                        </div>
-                    </form>
-                </div>
-                <div class="content">
-                    <table border="1" width="100%">
-                        <tr>
-                            <th>Технология</th>
-                            <th>Покупатель</th>
-                            <th>Вид сделки</th>
-                            <th>Описание</th>
-                            <th></th>
-                        </tr>
-                        <!-- FOR aliens PRINT -->
-                        <tr>
-                            <td>Зеленый</td>
-                            <td>Рожки</td>
-                            <td>Рептилоид</td>
-                            <td>Не женат</td>
-                            <td>
-                                <button name = "editsellTech" class = "button-edit">Редактировать</button>
-                                <button name = "deleteselltech" class = "button-edit">Удалить</button>
-                            </td>
-                        </tr>
-                        <!-- END FOR -->
-                    </table>
-                </div>
-            </div>
-
-            <div id="buyTechnology" class="tabcontent">
-                <div class="search-form">
-                    <form class="form search">
-                        <div class="inline-block">
-                            <div class="header">
-                                Назначение:
-                            </div>
-                            <select name="crit_2" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </div>
-                        <div class="inline-block">
-                            <div class="header">
-                                Раса создатель:
-                            </div>
-                            <select name="crit_2" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </div>
-                        <div class="inline-block">
-                            <div class="header">
-                                Доставка:
-                            </div>
-                            <select name="crit_2" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </div>
-                        <div class="inline-block">
-                            <div class="header">
-                                Ключевые слова:
-                            </div>
-                            <input name="keywords" type="text" class="field" />
-                            <input type="submit" class="field" value="Поиск" />
-                        </div>
-                    </form>
-                </div>
-                <div class="content">
-                    <table border="1" width="100%">
-                        <tr>
-                            <th>Назначение</th>
-                            <th>Раса создатель</th>
-                            <th>Доставка</th>
-                            <th>Описание</th>
-                            <th></th>
-                        </tr>
-                        <!-- FOR aliens PRINT -->
-                        <tr>
-                            <td>Зеленый</td>
-                            <td>Рожки</td>
-                            <td>Рептилоид</td>
-                            <td>Не женат</td>
-                            <td>
-                                <button name = "buyTech" class = "button-edit">Купить</button>
-                            </td>
-                        </tr>
-                        <!-- END FOR -->
-                    </table>
-                </div>
-            </div>
-
-            <div id="distributeTechnology" class="tabcontent">
-                <div class="search-form">
-                    <form class="form search">
-                        <div class="label">
-                            Имя агента:
-                        </div>
-                        <input name="field_1" class="field" type="text" placeholder="Введите..." />
-                        <div class="inline-block">
-                            <div class="header">
-                                Должность:
-                            </div>
-                            <select name="crit_2" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </div>
-                        <div class="inline-block">
-                            <div class="header">
-                                Куратор:
-                            </div>
-                            <select name="crit_2" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </div>
-                        <div class="inline-block">
-                            <div class="header">
-                                Ключевые слова:
-                            </div>
-                            <input name="keywords" type="text" class="field" />
-                            <input type="submit" class="field" value="Поиск" />
-                        </div>
-                    </form>
-                </div>
-                <div class="content">
-                    <table border="1" width="100%">
-                        <tr>
-                            <th>Имя агента</th>
-                            <th>Должность</th>
-                            <th>Куратор</th>
-                            <th>Описание</th>
-                            <th></th>
-                        </tr>
-                    <!-- FOR aliens PRINT -->
-                        <tr>
-                            <td>Зеленый</td>
-                            <td>Рожки</td>
-                            <td>Рептилоид</td>
-                            <td>Не женат</td>
-                            <td>
-                                <button name = "distributeTech" class = "button-edit">Посмотреть снарежение</button>
-                            </td>
-                        </tr>
-                    <!-- END FOR -->
-                    </table>
-                </div>
-            </div>
+<div class="container black">
+    <div class="documents-container">
+        <div class="menu">
+            <ul>
+                <li name = "add">Новая технология</li>
+                <li name = "logout">Выйти</li>
+            </ul>
         </div>
-
-       <div id="addsellTech-modal" class="modal">
-           <form class="modal-content form sellTech" method="POST" action="restcontroller.asdaasd">
-               <table>
-                   <tr>
-                       <td colspan="2" align="center">
-                           <div class="header">Договор о продаже технологии</div>
-                       </td>
-                   </tr>
-                   <tr>
-                        <td class="col-1">
-                            <div class="label">Технология:</div>
-                        </td>
-                        <td class="col-2">
-                            <input name="field_1" class="field" type="text" placeholder="Введите..." />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-1">
-                            <div class="label">Покупатель:</div>
-                        </td>
-                        <td class="col-2">
-                            <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-1">
-                            <div class="label">Цена за штуку:</div>
-                        </td>
-                        <td class="col-2">
-                            <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                        </td>
-                    </tr>
-                    <tr>
-                       <td class="col-1">
-                           <div class="label">Колличиство:</div>
-                       </td>
-                       <td class="col-2">
-                           <select name="crit_1" class="field">
-                               <option value="reptioid">Рептилоид</option>
-                               <option value="humanoid">Гуманоид</option>
-                               <option value="daedra">Даэдра</option>
-                           </select>
-                       </td>
-                    </tr>
-                </tr>
+        <div class="search-form">
+            <form class="form search" th:object="${findFilds}" th:action="@{/researcherIndex}" method="post">
+                <div class="label">
+                    Название технологии:
+                </div>
+                <input th:field="*{name}" class="field" type="text" placeholder="Введите..." />
+                <div class="inline-block">
+                    <div class="header">
+                        Раса изобретатель:
+                    </div>
+                    <select th:field="*{idRace}"  class="field">
+                        <option value="0"> -- </option>
+                        <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
+                    </select>
+                </div>
+                <div class="inline-block">
+                    <div class="header">
+                        Способ получения:
+                    </div>
+                    <select th:field="*{idSource}" class="field">
+                        <option value="0"> -- </option>
+                        <option th:each="sourceTechnology : ${sourcesTechnology}"  th:value="${sourceTechnology.sourceId}"  th:utext="${sourceTechnology.value}"/>
+                    </select>
+                </div>
+                <div class="inline-block">
+                    <div class="header">
+                        Ключевые слова:
+                    </div>
+                    <input th:field="*{description}" type="text" class="field" />
+                    <input type="submit" class="field" value="Поиск" />
+                </div>
+            </form>
+        </div>
+        <div class="content">
+            <table border="1" width="100%">
                 <tr>
-                   <td class="col-1">
-                       <div class="label">Вид сделки:</div>
-                   </td>
-                   <td class="col-2">
-                       <select name="crit_2" class="field">
-                           <option value="reptioid">Рептилоид</option>
-                           <option value="humanoid">Гуманоид</option>
-                           <option value="daedra">Даэдра</option>
-                       </select>
-                   </td>
+                    <th>Название технологии</th>
+                    <th>Раса изобретатель</th>
+                    <th>Способ получения</th>
+                    <th>Описание</th>
+                    <th></th>
+                </tr>
+                <!-- FOR aliens PRINT -->
+                <tr>
+                <tr th:each="technology : ${technologies}">
+                    <td th:utext="${technology.name}"></td>
+                    <td th:utext="${technology.nameRace}"></td>
+                    <td th:utext="${technology.valueSourse}"></td>
+                    <td th:utext="${technology.description}"></td>
+                    <td>
+                        <button name = "edit" th:data1="${technology.name}" th:data2="${technology.use}" th:data3="${technology.description}" th:onmouseup="|getTechnology('${technology.technologyId}', this.getAttribute('data1'), this.getAttribute('data2'), ${technology.idRace}, ${technology.idSource}, this.getAttribute('data3'));|" class = "button-edit">Редактировать</button>
+                        <button name = "delete" th:onmouseup="|getIdByButton(${technology.technologyId});|"  class = "button-edit" >Удалить</button>
+                    </td>
+                </tr>
+                <!-- END FOR -->
+            </table>
+        </div>
+    </div>
+
+    <div id="add-modal" class="modal">
+        <form class="modal-content form technology" method="POST" th:object="${addTechnology}" th:action="@{/addTechnology}">
+            <table>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="header">Технология</div>
+                    </td>
                 </tr>
                 <tr>
                     <td class="col-1">
-                        <div class="label">Получатель:</div>
+                        <div class="label">Название технологии:</div>
                     </td>
                     <td class="col-2">
-                        <select name="crit_2" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
-                        </select>
+                        <input th:field="*{name}" class="field" type="text" placeholder="Введите..." />
                     </td>
-                 </tr>
-                    <tr>
-                       <td colspan="2">
-                           <div class="label">Описание:</div>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td colspan="2">
-                           <textarea name="description" class="textarea"></textarea>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td align="left">
-                           <input type="button" class="close" value="К документам">
-                       </td>
-                       <td align="right">
-                           <input type="submit" value="Создать" />
-                       </td>
-                   </tr>
-               </table>
-           </form>
-       </div>
-
-       <div id="editsellTech-modal" class="modal">
-            <form class="modal-content form sellTech" method="POST" action="restcontroller.asdaasd">
-                <table>
-                    <tr>
-                        <td colspan="2" align="center">
-                            <div class="header">Договор о продаже технологии</div>
-                        </td>
-                    </tr>
-                    <tr>
-                            <td class="col-1">
-                                <div class="label">Технология:</div>
-                            </td>
-                            <td class="col-2">
-                                <input name="field_1" class="field" type="text" placeholder="Введите..." />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-1">
-                                <div class="label">Покупатель:</div>
-                            </td>
-                            <td class="col-2">
-                                <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-1">
-                                <div class="label">Цена за штуку:</div>
-                            </td>
-                            <td class="col-2">
-                                <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                            </td>
-                        </tr>
-                        <tr>
-                        <td class="col-1">
-                            <div class="label">Колличиство:</div>
-                        </td>
-                        <td class="col-2">
-                            <select name="crit_1" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </td>
-                        </tr>
-                    </tr>
-                    <tr>
+                </tr>
+                <tr>
                     <td class="col-1">
-                        <div class="label">Вид сделки:</div>
+                        <div class="label">Назначение:</div>
                     </td>
                     <td class="col-2">
-                        <select name="crit_2" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
+                        <input th:field="*{use}" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Раса изобритатель:</div>
+                    </td>
+                    <td class="col-2">
+                        <select th:field="*{idRace}"  class="field">
+                            <option value="0"> -- </option>
+                            <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
                         </select>
                     </td>
+                </tr>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Способ получения:</div>
+                    </td>
+                    <td class="col-2">
+                        <select th:field="*{idSource}" class="field">
+                            <option value="0"> -- </option>
+                            <option th:each="sourceTechnology : ${sourcesTechnology}"  th:value="${sourceTechnology.sourceId}"  th:utext="${sourceTechnology.value}"/>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="label">Описание:</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea th:field="*{description}" class="textarea"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        <input type="button" class="close" value="К документам">
+                    </td>
+                    <td align="right">
+                        <input type="submit" value="Создать" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+
+    <div id="edit-modal" class="modal">
+        <form class="modal-content form technology" method="POST" th:object="${addTechnology}" th:action="@{/updateTechnology}">
+            <table>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="header">Технология</div>
+                    </td>
+                    <td>
+                        <input id="technologyId" th:field="*{technologyId}" class="field" type="hidden" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Название технологии:</div>
+                    </td>
+                    <td class="col-2">
+                        <input id="technologyName" th:field="*{name}" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Назначение:</div>
+                    </td>
+                    <td class="col-2">
+                        <input id="technologyUse" th:field="*{use}" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Раса изобритатель:</div>
+                    </td>
+                    <td class="col-2">
+                        <select id="technologyIdRace" th:field="*{idRace}"  class="field">
+                            <option value="0"> -- </option>
+                            <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
+                        </select>
+                    </td>
+                </tr>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Способ получения:</div>
+                    </td>
+                    <td class="col-2">
+                        <select id="technologyIdSource" th:field="*{idSource}" class="field">
+                            <option value="0"> -- </option>
+                            <option th:each="sourceTechnology : ${sourcesTechnology}"  th:value="${sourceTechnology.sourceId}"  th:utext="${sourceTechnology.value}"/>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="label">Описание:</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea id="technologyDescription" th:field="*{description}" class="textarea"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        <input type="button" class="close" value="К документам">
+                    </td>
+                    <td align="right">
+                        <input type="submit" value="Сохранить" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="logout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form class="form" method="POST" action="/logout">
+                <table width=100%>
+                    <tr>
+                        <td align="center" colspan="3">
+                            <h4>Вы действительно хотите выйти?</h4>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="col-1">
-                            <div class="label">Получатель:</div>
-                        </td>
-                        <td class="col-2">
-                            <select name="crit_2" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </td>
-                    </tr>
-                        <tr>
-                        <td colspan="2">
-                            <div class="label">Описание:</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <textarea name="description" class="textarea"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left">
-                            <input type="button" class="close" value="К документам">
-                        </td>
-                        <td align="right">
-                            <input type="submit" value="Сохранить" />
-                        </td>
+                        <td width=50%><input class="w-100" type="submit" value="Ok" /></td>
+                        <td width=50%><input class="w-100 close" type="button" value="Отмена" /></td>
                     </tr>
                 </table>
             </form>
         </div>
+    </div>
 
-        <div id="buyTech-modal" class="modal">
-            <form class="modal-content form buyTech" method="POST" action="restcontroller.asdaasd">
-                <table>
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form class="form" method="POST" th:object="${addTechnology}" th:action="@{/deleteTechnology}">
+                <table width=100%>
                     <tr>
-                        <td colspan="2" align="center">
-                            <div class="header">Договор о покупке технологии</div>
+                        <td align="center" colspan="3">
+                            <h4>Вы действительно хотите удалить запись?</h4>
                         </td>
                     </tr>
                     <tr>
-                            <td class="col-1">
-                                <div class="label">Название технологии:</div>
-                            </td>
-                            <td class="col-2">
-                                <input name="field_1" class="field" type="text" placeholder="Введите..." />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-1">
-                                <div class="label">Колличество:</div>
-                            </td>
-                            <td class="col-2">
-                                <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-1">
-                                <div class="label">Способ доставки:</div>
-                            </td>
-                            <td class="col-2">
-                                <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                            </td>
-                        </tr>
-                        <tr>
-                        <td class="col-1">
-                            <div class="label">Способ оплаты:</div>
-                        </td>
-                        <td class="col-2">
-                            <select name="crit_1" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
-                        </td>
-                        </tr>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div class="label">Описание:</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <textarea name="description" class="textarea"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left">
-                            <input type="button" class="close" value="К документам">
-                        </td>
-                        <td align="right">
-                            <input type="submit" value="Сохранить" />
-                        </td>
+                        <td width=0%><input id="technologyIdDelete" th:field="*{technologyId}" class="field" type="hidden" placeholder="Введите..." /></td>
+                        <td width=50%><input class="w-100" type="submit" value="Ок" /></td>
+                        <td width=50%><input class="w-100 close" type="button" value="Отмена" /></td>
                     </tr>
                 </table>
             </form>
         </div>
-
-
-        <div id="logout-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form class="form" method="POST" action="restcontroller.asdaasd">
-                    <table width=100%>
-                        <tr>
-                            <td align="center" colspan="3">
-                                <h4>Вы действительно хотите выйти?</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width=50%><input class="w-100" type="submit" value="Ok" /></td>
-                            <td width=50%><input class="w-100 close" type="button" value="Отмена" /></td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </div>
-
-        <div id="deleteselltech-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form class="form" method="POST" action="restcontroller.asdaasd">
-                    <table width=100%>
-                        <tr>
-                            <td align="center" colspan="3">
-                                <h4>Вы действительно хотите удалить запись?</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width=50%><input class="w-100" type="submit" value="Ок" /></td>
-                            <td width=50%><input class="w-100 close" type="button" value="Отмена" /></td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </div>
+    </div>
 
     <script>
+        function getIdByButton(id) {
+            document.getElementById("technologyIdDelete").value = id;
+        }
+
+        function getTechnology(technologyId, name, use, idRace, idSource, description) {
+            document.getElementById("technologyId").value = technologyId;
+            document.getElementById("technologyName").value = name;
+            document.getElementById("technologyUse").value = use;
+            document.getElementById("technologyIdRace").value = idRace;
+            document.getElementById("technologyIdSource").value = idSource;
+            document.getElementById("technologyDescription").value = description;
+        }
+
         function closeModal(modal) {
             modal.style.display = "none";
         }
 
-        let modal_ids = ["logout-modal", "addsellTech-modal", "editsellTech-modal", "deleteselltech-modal", "buyTech-modal", "distributeTech-modal"];
-        let modal_btn_names = ["logout", "addsellTech", "editsellTech", "deleteselltech", "buyTech", "distributeTech"];
+        let modal_ids = ["edit-modal", "add-modal", "logout-modal", "delete-modal"];
+        let modal_btn_names = ["edit", "add", "logout", "delete"];
         let modals = [];
-        
+
         for (let id of modal_ids) {
             let modal = document.getElementById(id);
             modals.push(modal);
@@ -535,30 +305,5 @@
         }
     </script>
 
-    <script>
-        document.getElementById("deffault").click();
-
-        function openCity(evt, cityName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    </script>
-    </body>
+</body>
 </html>
