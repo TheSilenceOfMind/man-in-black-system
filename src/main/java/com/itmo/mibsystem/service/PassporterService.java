@@ -2,8 +2,8 @@ package com.itmo.mibsystem.service;
 
 import com.itmo.mibsystem.dao.pasportist.AlienPassportRepository;
 import com.itmo.mibsystem.dao.pasportist.AlienRaceRepository;
-import com.itmo.mibsystem.model.pasportist.AlienPassport;
-import com.itmo.mibsystem.model.pasportist.AlienRace;
+import com.itmo.mibsystem.model.passporter.AlienPassport;
+import com.itmo.mibsystem.model.passporter.AlienRace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -6,7 +6,10 @@ import com.itmo.mibsystem.model.Role;
 import com.itmo.mibsystem.model.User;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+
+import com.itmo.mibsystem.model.researcher.SourceTechnology;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,10 @@ public class UserService {
 
     public Optional<User> findUserByUserName(String userName) {
         return userRepository.findByUsername(userName);
+    }
+
+    public List<User> getAgent() {
+        return userRepository.findAllByRoles("OP_AGENT");
     }
 
 

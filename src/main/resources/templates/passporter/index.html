@@ -61,7 +61,7 @@
                        <td th:utext="${alien.description}"></td>
                        <td>
                            <button name = "edit" th:data1="${alien.name}" th:data2="${alien.homePlanet}" th:data3="${alien.description}" th:onmouseup="|getAlienPassport('${alien.passportId}', this.getAttribute('data1'), this.getAttribute('data2'), ${alien.idRace}, this.getAttribute('data3'));|" class = "button-edit">Редактировать</button>
-                           <button name = "delete" th:onmouseup="|getIdByButton(${alien.passportId});|"  class = "button-edit" >Удалить</button>
+                           <button name = "delete" th:onmouseup="|getIdByButton(${alien.passportId});|" class = "button-edit" >Удалить</button>
                        </td>
                    </tr>
                    <!-- END FOR -->
@@ -171,7 +171,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <textarea th:field="*{description}" id="passportDescription" class="textarea"></textarea>
+                        <textarea id="passportDescription" th:field="*{description}" class="textarea"></textarea>
                     </td>
                 </tr>
                 <tr>

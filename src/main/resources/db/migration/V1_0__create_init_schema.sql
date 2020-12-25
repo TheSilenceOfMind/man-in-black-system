@@ -55,6 +55,38 @@ create table mib_technology
     id_race             integer references mib_alien_race (race_id),
     id_source           integer references mib_source_technology (source_id)
 );
+
+create table mib_act_detentions
+(
+    act_detention_id    serial primary key,
+    scene               varchar(100) not null,
+    description         varchar(100) not null,
+    id_user_agent       integer references mib_user (user_id),
+    id_guilty_alien     integer references mib_alien_passport (passport_id)
+);
+
+create table mib_nation
+(
+    nation_id serial primary key,
+    name    varchar(100) unique not null
+);
+
+create table mib_type_earth_documents
+(
+    type_earth_document_id serial primary key,
+    type    varchar(100) unique not null
+);
+
+create table mib_earth_document
+(
+    earth_document_id   serial primary key,
+    earth_alien_name    varchar(100) not null,
+    description         varchar(100) not null,
+    id_nation           integer references mib_nation (nation_id),
+    id_type_document    integer references mib_type_earth_documents (type_earth_document_id),
+    id_alien            integer references mib_alien_passport (passport_id)
+);
+
 ------------------------------------------------------
 ----------------------Documents-----------------------
 ------------------------------------------------------
@@ -98,3 +130,19 @@ insert into mib_source_technology(value) values ('987');
 insert into mib_technology(name, use, description, id_race, id_source) values ('sdfdbdgqad', 'gwvsdgdsf', 'sgeqvdseq', 1, 3);
 insert into mib_technology(name, use, description, id_race, id_source) values ('rahtaebdfd', 'dsgwrbds ', 'dsgwsvxvd', 2, 2);
 insert into mib_technology(name, use, description, id_race, id_source) values ('hyjghm', 'bfbetjdfbv', 'rtmyjdfbwrbw', 3, 1);
+
+insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien) values ('dsdsbryn', ',ln,lneb', 4, 1);
+insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien) values ('kmytjmtn', 'jy5jnrgdxv', 4, 2);
+insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien) values ('tijrgndsn', 'swgy4bdfdrthe', 4, 3);
+
+insert into mib_nation(name) values ('111');
+insert into mib_nation(name) values ('222');
+insert into mib_nation(name) values ('333');
+
+insert into mib_type_earth_documents(type) values ('999');
+insert into mib_type_earth_documents(type) values ('888');
+insert into mib_type_earth_documents(type) values ('777');
+
+insert into mib_earth_document(earth_alien_name, description, id_nation, id_type_document, id_alien) values ('hjtdbsvwfbhn', 'bavneg', 1, 3, 1);
+insert into mib_earth_document(earth_alien_name, description, id_nation, id_type_document, id_alien) values ('hdetjyyklyh', 'asqqnwnmy', 2, 2, 2);
+insert into mib_earth_document(earth_alien_name, description, id_nation, id_type_document, id_alien) values ('nt,lukghvmjr', ',l,cxfsj', 3, 1, 3);

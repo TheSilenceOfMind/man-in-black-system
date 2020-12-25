@@ -1,8 +1,7 @@
 package com.itmo.mibsystem.controller;
 
-import com.itmo.mibsystem.model.Role;
-import com.itmo.mibsystem.model.pasportist.AlienPassport;
-import com.itmo.mibsystem.model.pasportist.AlienRace;
+import com.itmo.mibsystem.model.passporter.AlienPassport;
+import com.itmo.mibsystem.model.passporter.AlienRace;
 import com.itmo.mibsystem.service.PassporterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

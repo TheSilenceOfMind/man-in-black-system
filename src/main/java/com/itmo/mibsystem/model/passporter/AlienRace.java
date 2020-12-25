@@ -1,10 +1,9 @@
-package com.itmo.mibsystem.model.pasportist;
+package com.itmo.mibsystem.model.passporter;
 
 import com.google.common.base.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
 import java.util.StringJoiner;
 import javax.persistence.*;
 
