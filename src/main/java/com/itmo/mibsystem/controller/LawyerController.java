@@ -29,6 +29,7 @@ public class LawyerController {
     private EarthDocument findFildsLawyer, addEarthDocument;
     List<AlienRace> race;
     List<Nation> nation;
+    List<AlienPassport> listAliens;
     List<TypeEarthDocument> typeEarthDocument;
 
     @ModelAttribute("alienRaces")
@@ -37,13 +38,19 @@ public class LawyerController {
         return race;
     }
 
-    @ModelAttribute("nation")
+    @ModelAttribute("nations")
     public List<Nation> getNation() {
         nation = lawyerService.getAllNation();
         return nation;
     }
 
-    @ModelAttribute("typeEarthDocument")
+    @ModelAttribute("listAliens")
+    public List<AlienPassport> getAliens() {
+        listAliens = passporterService.getAliens();
+        return listAliens;
+    }
+
+    @ModelAttribute("typeEarthDocuments")
     public List<TypeEarthDocument> getTypeEarthDocument() {
         typeEarthDocument = lawyerService.getAllTypeEarthDocument();
         return typeEarthDocument;
@@ -134,7 +141,7 @@ public class LawyerController {
             }
         }
 
-        model.addAttribute("earthDocument", alien);
+        model.addAttribute("earthDocuments", earthDocument);
 
         return new ModelAndView("lawyer/index", model.asMap());
     }
