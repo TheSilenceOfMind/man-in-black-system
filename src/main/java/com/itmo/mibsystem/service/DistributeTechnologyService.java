@@ -2,8 +2,6 @@ package com.itmo.mibsystem.service;
 
 import com.itmo.mibsystem.dao.distribute.technology.*;
 import com.itmo.mibsystem.model.distribute.technology.*;
-import com.itmo.mibsystem.model.passporter.AlienPassport;
-import com.itmo.mibsystem.model.passporter.AlienRace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +25,9 @@ public class DistributeTechnologyService {
     @Autowired
     private DistributeTechnologyItemRepository distributeTechnologyItemRepository;
 
+    @Autowired
+    private BuyTechnologyDocumentRepository buyTechnologyDocumentRepository;
+
     public List<DeliveryType> getAllDeliveryType() {
         List<DeliveryType> deliveryType = new ArrayList<DeliveryType>();
         deliveryTypeRepository.findAll().iterator().forEachRemaining(deliveryType::add);
@@ -46,6 +47,13 @@ public class DistributeTechnologyService {
         typeContractRepository.findAll().iterator().forEachRemaining(typeContract::add);
 
         return typeContract;
+    }
+
+    public List<BuyTechnologyDocument> getAllBuyTechnologyDocument() {
+        List<BuyTechnologyDocument> buyTechnologyDocument = new ArrayList<BuyTechnologyDocument>();
+        buyTechnologyDocumentRepository.findAll().iterator().forEachRemaining(buyTechnologyDocument::add);
+
+        return buyTechnologyDocument;
     }
 
     public List<SellTechnologyDocument> getAllSellTechnologyDocument() {
@@ -70,6 +78,30 @@ public class DistributeTechnologyService {
         return distributeTechnologyItemRepository.findDistributeTechnologyItemsByIdTechnologyAndIdAgentAnd(count , idTechnology, idAgent, discription);
     }
 
+    public List<BuyTechnologyMarket> getBuyTechnologyDocumentByFilds(BuyTechnologyMarket findBuyTechnologyMarket, List<BuyTechnologyMarket> buyTechnologyMarkets) {
+        List<BuyTechnologyMarket> findBuyTechnologyMarkets = new ArrayList<BuyTechnologyMarket>();
+        for(int i = 0; i < buyTechnologyMarkets.size(); i++) {
+            if(findBuyTechnologyMarket.getUse().length() != 0 && !buyTechnologyMarkets.get(i).getUse().equals(findBuyTechnologyMarket.getUse())) {
+                continue;
+            }
+            if(findBuyTechnologyMarket.getIdRace() != 0L && buyTechnologyMarkets.get(i).getIdRace() != findBuyTechnologyMarket.getIdRace()) {
+                continue;
+            }
+            if(findBuyTechnologyMarket.getIdDeliveryType() != 0L && buyTechnologyMarkets.get(i).getIdDeliveryType() != findBuyTechnologyMarket.getIdDeliveryType()) {
+                continue;
+            }
+            if(findBuyTechnologyMarket.getDescription().length() != 0 && !buyTechnologyMarkets.get(i).getDescription().equals(findBuyTechnologyMarket.getDescription())) {
+                continue;
+            }
+            findBuyTechnologyMarkets.add(buyTechnologyMarkets.get(i));
+        }
+        return findBuyTechnologyMarkets;
+    }
+
+    public List<BuyTechnologyDocument> getBuyTechnologyDocumentsByFilds(Long count, Long idPaymentType, Long idDeliveryType, String discription) {
+        return buyTechnologyDocumentRepository.findAllByFilds(count , idPaymentType, idDeliveryType, discription);
+    }
+
     public void insertSellTechnologyDocument(SellTechnologyDocument sellTechnologyDocument) {
         sellTechnologyDocumentRepository.save(sellTechnologyDocument);
     }
@@ -92,6 +124,18 @@ public class DistributeTechnologyService {
 
     public void updateDistributeTechnologyItem(DistributeTechnologyItem distributeTechnologyItem){
         distributeTechnologyItemRepository.save(distributeTechnologyItem);
+    }
+
+    public void insertBuyTechnologyDocument(BuyTechnologyDocument buyTechnologyDocuments) {
+        buyTechnologyDocumentRepository.save(buyTechnologyDocuments);
+    }
+
+    public void deleteBuyTechnologyDocuments(BuyTechnologyDocument distributeTechnologyItem) {
+        buyTechnologyDocumentRepository.deleteById(distributeTechnologyItem.getBuyTechnologyDocumentId());
+    }
+
+    public void updateBuyTechnologyDocuments(BuyTechnologyDocument distributeTechnologyItem){
+        buyTechnologyDocumentRepository.save(distributeTechnologyItem);
     }
 
 }

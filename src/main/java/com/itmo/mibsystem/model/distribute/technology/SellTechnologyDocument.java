@@ -29,6 +29,23 @@ public class SellTechnologyDocument {
     @Column(name = "description")
     private String description;
 
+    @Transient
+    private String technologyName;
+    @Transient
+    private String alienName;
+    @Transient
+    private String typeContractName;
+
+    public SellTechnologyDocument() {
+        sellTechnologyDocumentId = null;
+        costForOne = "";
+        count = 0L;
+        description = "";
+        idAlien = 0L;
+        idTypeContract = 0L;
+        idTechnology = 0L;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

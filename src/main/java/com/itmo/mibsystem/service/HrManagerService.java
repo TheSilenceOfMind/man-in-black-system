@@ -26,6 +26,39 @@ public class HrManagerService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
+    public List<FreePersona> getAllFreePersonaByFilds(List<FreePersona> personas, FreePersona filds) {
+        List<FreePersona> findFreePersonas = new ArrayList<FreePersona>();
+        for(int i = 0; i < personas.size(); i++) {
+            if(filds.getAge().length() != 0 && !personas.get(i).getAge().equals(filds.getAge())) {
+                continue;
+            }
+            if(filds.getProfession().length() != 0 && !personas.get(i).getProfession().equals(filds.getProfession())) {
+                continue;
+            }
+            if(filds.getEducation().length() != 0 && !personas.get(i).getEducation().equals(filds.getEducation())) {
+                continue;
+            }
+            if(filds.getDescription().length() != 0 && !personas.get(i).getDescription().equals(filds.getDescription())) {
+                continue;
+            }
+            findFreePersonas.add(personas.get(i));
+        }
+        return findFreePersonas;
+    }
+
+    public List<FreePersona> deleteFreePersonaById(List<FreePersona> personas, Long id) {
+        for(int i = 0; i < personas.size(); i++) {
+            if(personas.get(i).getFreePersonaId() == id) {
+                personas.remove(i);
+                break;
+            }
+        }
+        return personas;
+    }
+
     public List<MIBEmployee> getAllMIBEmployee() {
         List<MIBEmployee> mIBEmployee = new ArrayList<MIBEmployee>();
         mIBEmployeeRepository.findAll().iterator().forEachRemaining(mIBEmployee::add);
@@ -40,6 +73,20 @@ public class HrManagerService {
         return role;
     }
 
+    public List<Role> getRolebyUserId(Long userId) {
+        List<User> user = new ArrayList<User>();
+        userRepository.findUserByUserId(userId).iterator().forEachRemaining(user::add);
+
+        return user.get(0).getRoles();
+    }
+
+    public User getUserbyId(Long userId) {
+        List<User> user = new ArrayList<User>();
+        userRepository.findUserByUserId(userId).iterator().forEachRemaining(user::add);
+
+        return user.get(0);
+    }
+
     public List<User> getAllUser() {
         List<User> user = new ArrayList<User>();
         userRepository.findAll().iterator().forEachRemaining(user::add);
@@ -47,25 +94,40 @@ public class HrManagerService {
         return user;
     }
 
-    public List<FreePersona> getAllFreePersona() {
-        List<FreePersona> freePersona = new ArrayList<FreePersona>();
-
-        return freePersona;
+    public List<MIBEmployee> getMIBEmployeeByFilds(String name, Long idCurator, String discription) {
+        return mIBEmployeeRepository.findMIBEmployeesByNameAndIdСuratorAndDescription(name, idCurator, discription);
     }
 
-    public List<MIBEmployee> getMIBEmployeeByFilds(String name, String age, long idUser, long idRole, long idСurator, String discription) {
-        return mIBEmployeeRepository.findMIBEmployeesByNameAndAgeAndIdUserAndIdRoleAndIdCuratorAndDescription(name , age, idUser, idRole, idСurator, discription);
-    }
+    public void insertMIBEmployee(MIBEmployee mIBEmployee, List<FreePersona> personas) {
+        if(mIBEmployee.getUsername().length() == 0 || mIBEmployee.getPassword().length() == 0) {
+            return;
+        }
 
-    public void insertPassport(MIBEmployee mIBEmployee) {
+        if(mIBEmployee.getIdFreePeople() != 0L) {
+            deleteFreePersonaById(personas, mIBEmployee.getIdFreePeople());
+        }
+
+        User buffUser = userService.saveUser(new User(0L, mIBEmployee.getUsername(), mIBEmployee.getPassword(), false), mIBEmployee.getIdRole(), true);
+
+        mIBEmployee.setIdUser(buffUser.getUserId());
+
         mIBEmployeeRepository.save(mIBEmployee);
     }
 
-    public void deletePassport(MIBEmployee mIBEmployee) {
+    public void deleteMIBEmployee(MIBEmployee mIBEmployee) {
         mIBEmployeeRepository.deleteById(mIBEmployee.getMIBEmployeeId());
+        userService.deleteUserById(mIBEmployee.getIdUser());
     }
 
-    public void updatePassport(MIBEmployee mIBEmployee){
+    public void updateMIBEmployee(MIBEmployee mIBEmployee){
+        User buff =  new User(mIBEmployee.getIdUser(), mIBEmployee.getUsername(), mIBEmployee.getPassword(), false);
+        if(mIBEmployee.getPassword() == null || mIBEmployee.getPassword().length() == 0) {
+            buff.setPassword(getUserbyId(buff.getUserId()).getPassword());
+            userService.saveUser(buff, mIBEmployee.getIdRole(),false);
+        }
+        else {
+            userService.saveUser(buff, mIBEmployee.getIdRole(),true);
+        }
         mIBEmployeeRepository.save(mIBEmployee);
     }
 }

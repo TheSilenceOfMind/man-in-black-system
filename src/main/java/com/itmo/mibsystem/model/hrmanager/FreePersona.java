@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Random;
 import java.util.StringJoiner;
 
 
@@ -18,6 +19,8 @@ public class FreePersona {
     private String education;
     private String description;
 
+    final Random random = new Random();
+
     public FreePersona(Long freePersonaId, String name, String age, String profession, String education, String description) {
         this.freePersonaId = freePersonaId;
         this.name = name;
@@ -28,8 +31,39 @@ public class FreePersona {
     }
 
     public FreePersona() {
-
+        this.freePersonaId = null;
+        this.name = "";
+        this.age = "";
+        this.profession = "";
+        this.education = "";
+        this.description = "";
     }
+
+    public FreePersona(Long freePersonaId) {
+        String[] alph = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+                "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
+                "w", "x", "y", "z", " "};
+        this.freePersonaId = freePersonaId;
+        for (int i = 0; i < 3 + random.nextInt(7); i++) {
+            name += alph[random.nextInt(26)];
+        }
+        age = (20 + random.nextInt(20)) + " age";
+        for (int i = 0; i < 5 + random.nextInt(10); i++) {
+            profession += alph[random.nextInt(27)];
+        }
+        switch (random.nextInt(2)) {
+            case 0:
+                education = "secondary";
+                break;
+            case 1:
+                education = "higher";
+                break;
+        }
+        for (int i = 0; i < 5 + random.nextInt(10); i++) {
+            description += alph[random.nextInt(27)];
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {

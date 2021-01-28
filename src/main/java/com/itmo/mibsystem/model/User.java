@@ -53,4 +53,14 @@ public class User {
         this.credentialsExpired = credentialsExpired;
         this.roles = roles;
     }
+
+    public User(long userId, String username, String password, boolean credentialsExpired) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.disabled = false;
+        this.accountExpired = false;
+        this.accountLocked = false;
+        this.credentialsExpired = credentialsExpired;
+    }
 }

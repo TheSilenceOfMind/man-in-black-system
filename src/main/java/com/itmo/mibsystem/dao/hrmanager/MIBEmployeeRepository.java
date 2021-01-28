@@ -12,6 +12,10 @@ import java.util.Optional;
 public interface MIBEmployeeRepository extends CrudRepository<MIBEmployee, Long> {
     Optional<MIBEmployee> findAllByName(String name);
 
-    @Query("SELECT c FROM MIBEmployee c ")
-    List<MIBEmployee> findMIBEmployeesByNameAndAgeAndIdUserAndIdRoleAndIdCuratorAndDescription(@Param("name") String name, @Param("age") String age, @Param("idUser") Long idUser, @Param("idRole") Long idRole, @Param("idСurator") Long idСurator, @Param("description") String description);
+    @Query("SELECT c FROM MIBEmployee c " +
+            "WHERE (:name is null or :name = '' or c.name = :name) and " +
+            "(:idCurator is null or :idCurator = 0L or c.idCurator = :idCurator) and" +
+            "(:description is null or :description = '' or c.description = :description) order by " +
+            "c.MIBEmployeeId ASC")
+    List<MIBEmployee> findMIBEmployeesByNameAndIdСuratorAndDescription(@Param("name") String name, @Param("idCurator") Long idCurator, @Param("description") String description);
 }

@@ -23,18 +23,33 @@ public class MIBEmployee {
     @Column(name = "age")
     private String age;
     @Column(name = "id_curator")
-    private Long idСurator;
+    private Long idCurator;
     @Column(name = "description")
     private String description;
+    @Transient
+    private Long idRole;
+    @Transient
+    private String roleName;
+    @Transient
+    private String curatorName;
+    @Transient
+    private String username;
+    @Transient
+    private String password;
+    @Transient
+    private Long idFreePeople;
 
     public MIBEmployee() {
         MIBEmployeeId = null;
         name = "";
         age = "";
         description = "";
-        idСurator = null;
-        idUser = null;
-
+        idCurator = 0L;
+        idUser = 0L;
+        idRole = 0L;
+        username = "";
+        password = "";
+        idFreePeople = 0L;
     }
     @Override
     public boolean equals(Object o) {
@@ -60,7 +75,7 @@ public class MIBEmployee {
                 .add("id_user=" + idUser)
                 .add("name=" + name)
                 .add("age=" + age)
-                .add("id_curator=" + idСurator)
+                .add("id_curator=" + idCurator)
                 .add("description=" + description)
                 .toString();
     }

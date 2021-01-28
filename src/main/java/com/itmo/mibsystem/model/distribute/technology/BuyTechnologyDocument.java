@@ -1,21 +1,48 @@
 package com.itmo.mibsystem.model.distribute.technology;
 
 import com.google.common.base.Objects;
+import com.itmo.mibsystem.model.passporter.AlienRace;
+import com.itmo.mibsystem.service.DistributeTechnologyService;
+import com.itmo.mibsystem.service.PassporterService;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
+@Entity
+@Table(name = "mib_buy_technology_document")
 @Getter
 @Setter
 public class BuyTechnologyDocument {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "buy_technology_document_id")
     private Long buyTechnologyDocumentId;
-    private Long idTechnology;
+    @Column(name = "count")
     private Long count;
-    private Long idDeliveryType;
+    @Column(name = "id_payment_type")
     private Long idPaymentType;
+    @Column(name = "id_delivery_type")
+    private Long idDeliveryType;
+    @Column(name = "id_technology")
+    private Long idTechnology;
+    @Column(name = "description")
     private String description;
+
+    private String TechnologyName;
+    private String deliveryTypeName;
+    private String paymentTypeName;
+
+    public BuyTechnologyDocument() {
+        buyTechnologyDocumentId = null;
+        count = 0L;
+        idPaymentType = 0L;
+        idDeliveryType = 0L;
+        description = "";
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -36,13 +63,13 @@ public class BuyTechnologyDocument {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", BuyTechnologyDocument.class.getSimpleName() + "[", "]")
-                .add("buyTechnologyDocumentId=" + buyTechnologyDocumentId)
-                .add("id_technology=" + idTechnology)
+        return new StringJoiner(", ", BuyTechnologyMarket.class.getSimpleName() + "[", "]")
+                .add("buy_technology_document_id=" + buyTechnologyDocumentId)
                 .add("count=" + count)
+                .add("id_payment_type=" + idDeliveryType)
                 .add("id_delivery_type=" + idDeliveryType)
-                .add("id_payment_type=" + idPaymentType)
                 .add("description=" + description)
                 .toString();
     }
+
 }

@@ -17,8 +17,8 @@
            </div>
 
             <div class="tab">
-                <button class="tablinks tablinkbuttons" onclick="openCity(event, 'passporters')">Персонал</button>
-                <button id="deffault" class="tablinks tablinkbuttons" onclick="openCity(event, 'earthDocuments')">Поиск кадров</button>
+                <button id="deffault" class="tablinks tablinkbuttons" onclick="openCity(event, 'passporters')">Персонал</button>
+                <button class="tablinks tablinkbuttons" onclick="openCity(event, 'earthDocuments')">Поиск кадров</button>
             </div>
 
             <div id="passporters" class="tabcontent">
@@ -27,32 +27,30 @@
                         <div class="label">
                             Имя агента:
                         </div>
-                        <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                        <input th:field="*{name}" class="field" type="text" placeholder="Введите..." />
                         <div class="inline-block">
                             <div class="header">
                                 Должность:
                             </div>
-                            <select name="crit_1" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
+                            <select th:field="*{idRole}" >
+                                <option value="0"> -- </option>
+                                <option th:each="role : ${roles}"  th:value="${role.roleId}"  th:utext="${role.roleName}"/>
                             </select>
                         </div>
                         <div class="inline-block">
                             <div class="header">
                                 Куратор:
                             </div>
-                            <select name="crit_1" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
+                            <select th:field="*{idCurator}" >
+                                <option value="0"> -- </option>
+                                <option th:each="people : ${peoples}"  th:value="${people.MIBEmployeeId}"  th:utext="${people.name}"/>
                             </select>
                         </div>
                         <div class="inline-block">
                             <div class="header">
                                 Ключевые слова:
                             </div>
-                            <input name="keywords" type="text" class="field" />
+                            <input th:field="*{description}"  type="text" class="field" />
                             <input type="submit" class="field" value="Поиск" />
                         </div>
                     </form>
@@ -67,14 +65,14 @@
                             <th></th>
                         </tr>
                         <!-- FOR aliens PRINT -->
-                        <tr>
-                            <td>Зеленый</td>
-                            <td>Рожки</td>
-                            <td>Рептилоид</td>
-                            <td>Не женат</td>
+                        <tr th:each="MIBEmployee : ${MIBEmployees}">
+                            <td th:utext="${MIBEmployee.name}"></td>
+                            <td th:utext="${MIBEmployee.roleName}"></td>
+                            <td th:utext="${MIBEmployee.curatorName}"></td>
+                            <td th:utext="${MIBEmployee.description}"></td>
                             <td>
-                                <button name = "edit" class = "button-edit">Редактировать</button>
-                                <button name = "delete" class = "button-edit">Удалить</button>
+                                <button button name = "edit" th:data1="${MIBEmployee.name}" th:data2="${MIBEmployee.username}" th:data3="${MIBEmployee.password}" th:data4="${MIBEmployee.age}" th:data5="${MIBEmployee.description}" th:onmouseup="|getMIBEmployee(${MIBEmployee.MIBEmployeeId}, ${MIBEmployee.idUser}, this.getAttribute('data1'), this.getAttribute('data2'), this.getAttribute('data3'), this.getAttribute('data4'), ${MIBEmployee.idRole}, ${MIBEmployee.idCurator}, this.getAttribute('data5'));|" class = "button-edit">Редактировать</button>
+                                <button name = "delete" th:onmouseup="|getIdByButton(${MIBEmployee.MIBEmployeeId}, ${MIBEmployee.idUser});|" class = "button-edit" >Удалить</button>
                             </td>
                         </tr>
                         <!-- END FOR -->
@@ -84,42 +82,30 @@
 
             <div id="earthDocuments" class="tabcontent">
                 <div class="search-form">
-                    <form class="form search">
+                    <form class="form search" th:object="${findFreePersona}" th:action="@{/hrIndex}" method="post">
                         <div class="inline-block">
                             <div class="header">
                                 Возраст:
                             </div>
-                            <select name="crit_2" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
+                            <input th:field="*{age}" class="field" type="text" placeholder="Введите..." />
                         </div>
                         <div class="inline-block">
                             <div class="header">
                                 Профессия:
                             </div>
-                            <select name="crit_2" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
+                            <input th:field="*{profession}" class="field" type="text" placeholder="Введите..." />
                         </div>
                         <div class="inline-block">
                             <div class="header">
                                 Образование:
                             </div>
-                            <select name="crit_2" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
-                            </select>
+                            <input th:field="*{education}" class="field" type="text" placeholder="Введите..." />
                         </div>
                         <div class="inline-block">
                             <div class="header">
                                 Ключевые слова:
                             </div>
-                            <input name="keywords" type="text" class="field" />
+                            <input th:field="*{description}" type="text" class="field" />
                             <input type="submit" class="field" value="Поиск" />
                         </div>
                     </form>
@@ -135,14 +121,14 @@
                             <th></th>
                         </tr>
                         <!-- FOR aliens PRINT -->
-                        <tr>
-                            <td>Зеленый</td>
-                            <td>Зеленый</td>
-                            <td>Рожки</td>
-                            <td>Рептилоид</td>
-                            <td>Не женат</td>
+                        <tr th:each="freePersona : ${freePersonas}">
+                            <td th:utext="${freePersona.name}"></td>
+                            <td th:utext="${freePersona.age}"></td>
+                            <td th:utext="${freePersona.profession}"></td>
+                            <td th:utext="${freePersona.education}"></td>
+                            <td th:utext="${freePersona.description}"></td>
                             <td>
-                                <button name = "add" class = "button-edit">Добавить</button>
+                                <button button name = "add" th:data1="${freePersona.name}" th:data2="${freePersona.age}" th:data3="${freePersona.description}" th:onmouseup="|getFreePerson(${freePersona.freePersonaId}, this.getAttribute('data1'), this.getAttribute('data2'), this.getAttribute('data3'));|" class = "button-edit">Нанять</button>
                             </td>
                         </tr>
                         <!-- END FOR -->
@@ -152,11 +138,14 @@
        </div>
 
        <div id="add-modal" class="modal">
-            <form class="modal-content form employee" method="POST" action="restcontroller.asdaasd">
+            <form class="modal-content form employee2" th:object="${addMIBEmployee}" th:action="@{/addMIBEmployee}" method="post">
                 <table>
                     <tr>
                         <td colspan="2" align="center">
                             <div class="header">Паспорт сотрудника</div>
+                        </td>
+                        <td>
+                            <input id="idAdd" th:field="*{idFreePeople}" class="field" type="hidden" placeholder="Введите..." />
                         </td>
                     </tr>
                     <tr>
@@ -164,7 +153,23 @@
                             <div class="label">Имя агента:</div>
                         </td>
                         <td class="col-2">
-                            <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                            <input id="nameAdd" th:field="*{name}" class="field" type="text" placeholder="Введите..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Имя пользователя:</div>
+                        </td>
+                        <td class="col-2">
+                            <input th:field="*{username}" class="field" type="text" placeholder="Введите..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Пароль:</div>
+                        </td>
+                        <td class="col-2">
+                            <input th:field="*{password}" class="field" type="text" placeholder="Введите..." />
                         </td>
                     </tr>
                     <tr>
@@ -172,15 +177,7 @@
                             <div class="label">Возраст:</div>
                         </td>
                         <td class="col-2">
-                            <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-1">
-                            <div class="label">Зарплата:</div>
-                        </td>
-                        <td class="col-2">
-                            <input name="field_3" class="field" type="text" placeholder="Введите..." />
+                            <input id="ageAdd" th:field="*{age}" class="field" type="text" placeholder="Введите..." />
                         </td>
                     </tr>
                     <tr>
@@ -188,10 +185,8 @@
                            <div class="label">Должность:</div>
                        </td>
                        <td class="col-2">
-                           <select name="crit_1" class="field">
-                               <option value="reptioid">Рептилоид</option>
-                               <option value="humanoid">Гуманоид</option>
-                               <option value="daedra">Даэдра</option>
+                           <select th:field="*{idRole}" class="field">
+                               <option th:each="role : ${roles}"  th:value="${role.roleId}"  th:utext="${role.roleName}"/>
                            </select>
                        </td>
                     </tr>
@@ -201,10 +196,8 @@
                        <div class="label">Куратор:</div>
                    </td>
                    <td class="col-2">
-                       <select name="crit_2" class="field">
-                           <option value="reptioid">Рептилоид</option>
-                           <option value="humanoid">Гуманоид</option>
-                           <option value="daedra">Даэдра</option>
+                       <select th:field="*{idCurator}" class="field">
+                           <option th:each="people : ${peoples}"  th:value="${people.MIBEmployeeId}"  th:utext="${people.name}"/>
                        </select>
                    </td>
                 </tr>
@@ -215,7 +208,7 @@
                    </tr>
                    <tr>
                        <td colspan="2">
-                           <textarea name="description" class="textarea"></textarea>
+                           <textarea id="descriptionAdd" th:field="*{description}"  class="textarea"></textarea>
                        </td>
                    </tr>
                    <tr>
@@ -232,11 +225,17 @@
 
 
        <div id="edit-modal" class="modal">
-            <form class="modal-content form employee" method="POST" action="restcontroller.asdaasd">
+            <form class="modal-content form employee2" th:object="${addMIBEmployee}" th:action="@{/updateMIBEmployee}" method="post">
                 <table>
                     <tr>
                         <td colspan="2" align="center">
                             <div class="header">Паспорт сотрудника</div>
+                        </td>
+                        <td>
+                            <input id="mIBEmployeeId" th:field="*{MIBEmployeeId}" class="field" type="hidden" placeholder="Введите..." />
+                        </td>
+                        <td>
+                            <input id="mIBEmployeeUserId" th:field="*{idUser}" class="field" type="hidden" placeholder="Введите..." />
                         </td>
                     </tr>
                     <tr>
@@ -244,7 +243,23 @@
                             <div class="label">Имя агента:</div>
                         </td>
                         <td class="col-2">
-                            <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                            <input id="mIBEmployeeName" th:field="*{name}"  class="field" type="text" placeholder="Введите..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Имя пользователя:</div>
+                        </td>
+                        <td class="col-2">
+                            <input id="mIBEmployeeUsername" th:field="*{username}" type="text" placeholder="Введите..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">
+                            <div class="label">Пароль:</div>
+                        </td>
+                        <td class="col-2">
+                            <input  id="mIBEmployeePassword" th:field="*{password}" type="text" placeholder="Введите..." />
                         </td>
                     </tr>
                     <tr>
@@ -252,15 +267,7 @@
                             <div class="label">Возраст:</div>
                         </td>   
                         <td class="col-2">
-                            <input name="field_2" class="field" type="text" placeholder="Введите..." />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-1">
-                            <div class="label">Зарплата:</div>
-                        </td>
-                        <td class="col-2">
-                            <input name="field_3" class="field" type="text" placeholder="Введите..." />
+                            <input id="mIBEmployeeAge" th:field="*{age}" class="field" type="text" placeholder="Введите..." />
                         </td>
                     </tr>
                     <tr>
@@ -268,10 +275,8 @@
                             <div class="label">Должность:</div>
                         </td>
                         <td class="col-2">
-                            <select name="crit_1" class="field">
-                                <option value="reptioid">Рептилоид</option>
-                                <option value="humanoid">Гуманоид</option>
-                                <option value="daedra">Даэдра</option>
+                            <select id="mIBEmployeeRole" th:field="*{idRole}" class="field">
+                                <option th:each="role : ${roles}" th:value="${role.roleId}" th:utext="${role.roleName}"/>
                             </select>
                         </td>
                     </tr>
@@ -281,10 +286,8 @@
                         <div class="label">Куратор:</div>
                     </td>
                     <td class="col-2">
-                        <select name="crit_2" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
+                        <select id="mIBEmployeeСurator" th:field="*{idCurator}" class="field">
+                            <option th:each="people : ${peoples}" th:value="${people.MIBEmployeeId}" th:utext="${people.name}"/>
                         </select>
                     </td>
                 </tr>
@@ -295,7 +298,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <textarea name="description" class="textarea"></textarea>
+                        <textarea id="mIBEmployeeDescription" th:field="*{description}" class="textarea"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -313,7 +316,7 @@
    <div id="logout-modal" class="modal">
        <div class="modal-content">
            <span class="close">&times;</span>
-           <form class="form" method="POST" action="restcontroller.asdaasd">
+           <form class="form" method="POST" action="/logout">
                <table width=100%>
                    <tr>
                        <td align="center" colspan="3">
@@ -332,14 +335,16 @@
     <div id="delete-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <form class="form" method="POST" action="restcontroller.asdaasd">
+            <form class="form" method="POST" th:object="${addMIBEmployee}" th:action="@{/deleteMIBEmployee}">
                 <table width=100%>
                     <tr>
-                        <td align="center" colspan="3">
+                        <td align="center" colspan="4">
                             <h4>Вы действительно хотите удалить запись?</h4>
                         </td>
                     </tr>
                     <tr>
+                        <td width=0%><input id="MIBEmployeeIdDelete" th:field="*{MIBEmployeeId}" class="field" type="hidden" placeholder="Введите..." /></td>
+                        <td width=0%><input id="MIBEmployeeUserIdDelete" th:field="*{idUser}" class="field" type="hidden" placeholder="Введите..." /></td>
                         <td width=50%><input class="w-100" type="submit" value="Ок" /></td>
                         <td width=50%><input class="w-100 close" type="button" value="Отмена" /></td>
                     </tr>
@@ -349,39 +354,63 @@
     </div>
 
    <script>
-    function closeModal(modal) {
-        modal.style.display = "none";
-    }
+       function getIdByButton(id, userId) {
+           document.getElementById("MIBEmployeeIdDelete").value = id;
+           document.getElementById("MIBEmployeeUserIdDelete").value = userId;
+       }
 
-    let modal_ids = ["edit-modal", "add-modal", "logout-modal", "delete-modal", "view-modal"];
-    let modal_btn_names = ["edit", "add", "logout", "delete", "view"];
-    let modals = [];
-    
-    for (let id of modal_ids) {
-        let modal = document.getElementById(id);
-        modals.push(modal);
-        let btns = modal.querySelectorAll(".close");
-        for (let btn of btns) {
-            btn.onclick = function () { closeModal(modal); }
+       function getFreePerson(id, name, age, description) {
+           document.getElementById("idAdd").value = id;
+           document.getElementById("nameAdd").value = name;
+           document.getElementById("ageAdd").value = age;
+           document.getElementById("descriptionAdd").value = description;
+       }
+
+       function getMIBEmployee(id, userId, name, username, password, age, role, curator, description) {
+           document.getElementById("mIBEmployeeId").value = id;
+           document.getElementById("mIBEmployeeUserId").value = userId;
+           document.getElementById("mIBEmployeeName").value = name;
+           document.getElementById("mIBEmployeeUsername").value = username;
+           document.getElementById("mIBEmployeePassword").value = password;
+           document.getElementById("mIBEmployeeAge").value = age;
+           document.getElementById("mIBEmployeeRole").value = role;
+           document.getElementById("mIBEmployeeСurator").value = curator;
+           document.getElementById("mIBEmployeeDescription").value = description;
+       }
+
+        function closeModal(modal) {
+            modal.style.display = "none";
         }
-    }
 
-    for (let id of modal_btn_names) {
-        let btns = document.getElementsByName(id);
-        for(let btn of btns) {
-            btn.onclick = function () {
-                document.getElementById(id+"-modal").style.display = "block";
+        let modal_ids = ["edit-modal", "add-modal", "logout-modal", "delete-modal"];
+        let modal_btn_names = ["edit", "add", "logout", "delete"];
+        let modals = [];
+
+        for (let id of modal_ids) {
+            let modal = document.getElementById(id);
+            modals.push(modal);
+            let btns = modal.querySelectorAll(".close");
+            for (let btn of btns) {
+                btn.onclick = function () { closeModal(modal); }
             }
         }
-    }
 
-    window.onclick = function (event) {
-        for (let modal of modals) {
-            if (event.target == modal) {
-                event.target.style.display = "none";
+        for (let id of modal_btn_names) {
+            let btns = document.getElementsByName(id);
+            for(let btn of btns) {
+                btn.onclick = function () {
+                    document.getElementById(id+"-modal").style.display = "block";
+                }
             }
         }
-    }
+
+        window.onclick = function (event) {
+            for (let modal of modals) {
+                if (event.target == modal) {
+                    event.target.style.display = "none";
+                }
+            }
+        }
 </script>
 
 <script>

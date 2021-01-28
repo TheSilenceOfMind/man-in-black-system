@@ -97,6 +97,43 @@ create table mib_employees
     id_user             integer references mib_user (user_id)
 );
 
+create table mib_delivery_type
+(
+    delivery_type_id serial primary key,
+    type    varchar(100) unique not null
+);
+
+create table mib_payment_type
+(
+    payment_type_id serial primary key,
+    type    varchar(100) unique not null
+);
+
+create table mib_types_contract
+(
+    type_contract_id serial primary key,
+    type    varchar(100) unique not null
+);
+
+create table mib_sell_technology_document
+(
+    sell_technology_document_id     serial primary key,
+    cost_for_one                    varchar(100) not null,
+    count                           integer not null,
+    description                     varchar(255),
+    id_technology                   integer references mib_technology (technology_id),
+    id_type_contract                integer references mib_types_contract (type_contract_id),
+    id_alien                        integer references mib_alien_passport (passport_id)
+);
+
+create table mib_buy_technology_document
+(
+    buy_technology_document_id      serial primary key,
+    count                           integer not null,
+    description                     varchar(255),
+    id_payment_type                 integer references mib_payment_type (payment_type_id),
+    id_delivery_type                integer references mib_delivery_type (delivery_type_id)
+);
 
 ------------------------------------------------------
 ----------------------Documents-----------------------
@@ -164,3 +201,23 @@ insert into mib_employees(name, age, description, id_curator, id_user) values ('
 insert into mib_employees(name, age, description, id_curator, id_user) values ('k4 k4', '27', 'greh3rwg', 1, 5);
 insert into mib_employees(name, age, description, id_curator, id_user) values ('k5 k5', '26', 'ehhwbfssbvs', 1, 6);
 insert into mib_employees(name, age, description, id_curator, id_user) values ('k6 k6', '25', 'erh3hregw', 1, 7);
+
+insert into mib_delivery_type(type) values ('117');
+insert into mib_delivery_type(type) values ('118');
+insert into mib_delivery_type(type) values ('119');
+
+insert into mib_payment_type(type) values ('227');
+insert into mib_payment_type(type) values ('228');
+insert into mib_payment_type(type) values ('229');
+
+insert into mib_types_contract(type) values ('337');
+insert into mib_types_contract(type) values ('338');
+insert into mib_types_contract(type) values ('339');
+
+insert into mib_sell_technology_document(cost_for_one, count, description, id_technology, id_type_contract, id_alien) values ('5 rub', '1', 'erh3hregw', 1, 1, 1);
+insert into mib_sell_technology_document(cost_for_one, count, description, id_technology, id_type_contract, id_alien) values ('10 rub', '1', 'dnbed vs', 2, 2, 1);
+insert into mib_sell_technology_document(cost_for_one, count, description, id_technology, id_type_contract, id_alien) values ('15 rub', '1', 'dnefvfsdf', 3, 3, 2);
+
+insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type) values ('1', 'dnefvfsdf', 1, 3);
+insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type) values ('2', 's gfsv vsfsv s', 2, 2);
+insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type) values ('3', 'nggfedg ree vwfs', 3, 1);

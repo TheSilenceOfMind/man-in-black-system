@@ -118,7 +118,12 @@
 
 .form.employee {
   width: 600px;
-  height: 330px;
+  height: 400px;
+}
+
+.form.employee2 {
+  width: 600px;
+  height: 365px;
 }
 
 .form.sellTech {

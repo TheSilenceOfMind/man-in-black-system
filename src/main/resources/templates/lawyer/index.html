@@ -166,7 +166,7 @@
                             <div class="label">Раса пришельца:</div>
                         </td>
                         <td class="col-2">
-                            <select id="passportIdRace">
+                            <select id="passportIdRace" class="field">
                                 <option th:each="alienRace : ${alienRaces}" th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
                             </select>
                         </td>
@@ -211,7 +211,7 @@
                            <div class="label">Государство проживания:</div>
                        </td>
                        <td class="col-2">
-                           <select th:field="*{idNation}">
+                           <select th:field="*{idNation}" class="field">
                                <option th:each="nation : ${nations}"  th:value="${nation.nationId}"  th:utext="${nation.name}"/>
                            </select>
                        </td>
@@ -222,7 +222,7 @@
                        <div class="label">Вид документа:</div>
                    </td>
                    <td class="col-2">
-                       <select th:field="*{idTypeDocument}">
+                       <select th:field="*{idTypeDocument}" class="field">
                            <option th:each="typeEarthDocument : ${typeEarthDocuments}"  th:value="${typeEarthDocument.typeEarthDocumentId}"  th:utext="${typeEarthDocument.type}"/>
                        </select>
                    </td>
@@ -232,7 +232,7 @@
                         <div class="label">Получатель:</div>
                     </td>
                     <td class="col-2">
-                        <select th:field="*{idAlien}">
+                        <select th:field="*{idAlien}" class="field">
                             <option th:each="alien : ${aliens}"  th:value="${alien.passportId}"  th:utext="${alien.name}"/>
                         </select>
                     </td>
@@ -283,7 +283,7 @@
                         <div class="label">Государство проживания:</div>
                     </td>
                     <td class="col-2">
-                        <select th:field="*{idNation}" id="earthDocumentIdNation">
+                        <select th:field="*{idNation}" id="earthDocumentIdNation" class="field">
                             <option th:each="nation : ${nations}"  th:value="${nation.nationId}"  th:utext="${nation.name}"/>
                         </select>
                     </td>
@@ -294,7 +294,7 @@
                     <div class="label">Вид документа:</div>
                 </td>
                 <td class="col-2">
-                    <select th:field="*{idTypeDocument}" id="earthDocumentIdTypeDocument">
+                    <select th:field="*{idTypeDocument}" id="earthDocumentIdTypeDocument" class="field">
                         <option th:each="typeEarthDocument : ${typeEarthDocuments}"  th:value="${typeEarthDocument.typeEarthDocumentId}"  th:utext="${typeEarthDocument.type}"/>
                     </select>
                 </td>
@@ -304,7 +304,7 @@
                      <div class="label">Получатель:</div>
                  </td>
                  <td class="col-2">
-                     <select th:field="*{idAlien}" id="earthDocumentIdAlien">
+                     <select th:field="*{idAlien}" id="earthDocumentIdAlien" class="field">
                          <option th:each="alien : ${aliens}"  th:value="${alien.passportId}"  th:utext="${alien.name}"/>
                      </select>
                  </td>
@@ -429,6 +429,7 @@
 
 <script>
     document.getElementById("deffault").click();
+
 
     function openCity(evt, cityName) {
     // Declare all variables

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import com.itmo.mibsystem.model.passporter.AlienRace;
 import com.itmo.mibsystem.model.researcher.SourceTechnology;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,7 +40,6 @@ public class UserService {
         return userRepository.findAllByRoles("OP_AGENT");
     }
 
-
     public User saveUser(User user, Role.Type role) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setAccountLocked(false);
@@ -50,6 +50,26 @@ public class UserService {
         user.setRoles(new ArrayList<>(Collections.singletonList(roles)));
 
         return userRepository.save(user);
+    }
+
+    public User saveUser(User user, Long idRole, boolean isEncode) {
+        if(isEncode) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
+        else {
+            user.setPassword(user.getPassword());
+        }
+        user.setAccountLocked(false);
+        user.setAccountExpired(false);
+        user.setDisabled(false);
+
+        user.setRoles(roleRepository.findRoleByRoleId(idRole.intValue()));
+
+        return userRepository.save(user);
+    }
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 
 }
