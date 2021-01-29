@@ -132,7 +132,8 @@ create table mib_buy_technology_document
     count                           integer not null,
     description                     varchar(255),
     id_payment_type                 integer references mib_payment_type (payment_type_id),
-    id_delivery_type                integer references mib_delivery_type (delivery_type_id)
+    id_delivery_type                integer references mib_delivery_type (delivery_type_id),
+    id_technology                   integer references mib_technology (technology_id)
 );
 
 ------------------------------------------------------
@@ -174,6 +175,7 @@ insert into mib_alien_passport(name, home_planet, description, id_race) values (
 insert into mib_source_technology(value) values ('321');
 insert into mib_source_technology(value) values ('654');
 insert into mib_source_technology(value) values ('987');
+insert into mib_source_technology(value) values ('Buy');
 
 insert into mib_technology(name, use, description, id_race, id_source) values ('sdfdbdgqad', 'gwvsdgdsf', 'sgeqvdseq', 1, 3);
 insert into mib_technology(name, use, description, id_race, id_source) values ('rahtaebdfd', 'dsgwrbds ', 'dsgwsvxvd', 2, 2);
@@ -218,6 +220,6 @@ insert into mib_sell_technology_document(cost_for_one, count, description, id_te
 insert into mib_sell_technology_document(cost_for_one, count, description, id_technology, id_type_contract, id_alien) values ('10 rub', '1', 'dnbed vs', 2, 2, 1);
 insert into mib_sell_technology_document(cost_for_one, count, description, id_technology, id_type_contract, id_alien) values ('15 rub', '1', 'dnefvfsdf', 3, 3, 2);
 
-insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type) values ('1', 'dnefvfsdf', 1, 3);
-insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type) values ('2', 's gfsv vsfsv s', 2, 2);
-insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type) values ('3', 'nggfedg ree vwfs', 3, 1);
+insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type, id_technology) values ('1', 'dnefvfsdf', 1, 3, 1);
+insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type, id_technology) values ('2', 's gfsv vsfsv s', 2, 2, 2);
+insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type, id_technology) values ('3', 'nggfedg ree vwfs', 3, 1, 3);

@@ -5,6 +5,7 @@ import com.itmo.mibsystem.model.distribute.technology.*;
 import com.itmo.mibsystem.model.hrmanager.MIBEmployee;
 import com.itmo.mibsystem.model.passporter.AlienPassport;
 import com.itmo.mibsystem.model.passporter.AlienRace;
+import com.itmo.mibsystem.model.researcher.SourceTechnology;
 import com.itmo.mibsystem.model.researcher.Technology;
 import com.itmo.mibsystem.service.DistributeTechnologyService;
 import com.itmo.mibsystem.service.HrManagerService;
@@ -160,6 +161,39 @@ public class DistributeTechnologyController {
         return LoadForm(findSellTechnologyDocument, findBuyTechnologyMarket, findBuyTechnologyDocument, findDistributeTechnologyItem, model);
     }
 
+    @PostMapping({"/addBuyTechnologyDocument"})
+    public ModelAndView addBuyTechnologyDocumentPost(@ModelAttribute BuyTechnologyDocument addBuyTechnologyDocument, Model model) {
+        List<SourceTechnology> buffSource = researcherService.getSourceTechnology();
+        Long idSource = 0L;
+        for(int i = 0; i < buffSource.size(); i ++) {
+            if(buffSource.get(i).getValue().equals("Buy")) {
+                idSource = buffSource.get(i).getSourceId();
+                break;
+            }
+        }
+
+        if(addBuyTechnologyDocument.getBuyTechnologyMarketId() != null || addBuyTechnologyDocument.getBuyTechnologyMarketId() != 0) {
+            distributeTechnologyService.deleteBuyTechnologyMarketById(buyTechnologyMarkets, addBuyTechnologyDocument.getBuyTechnologyMarketId());
+        }
+
+        Technology tech = researcherService.insertTechnology(new Technology(addBuyTechnologyDocument.getTechnologyName(), addBuyTechnologyDocument.getUse(), addBuyTechnologyDocument.getDescription(), addBuyTechnologyDocument.getIdRace(), idSource));
+        addBuyTechnologyDocument.setIdTechnology(tech.getTechnologyId());
+        distributeTechnologyService.insertBuyTechnologyDocument(addBuyTechnologyDocument);
+        return LoadForm(findSellTechnologyDocument, findBuyTechnologyMarket, findBuyTechnologyDocument, findDistributeTechnologyItem, model);
+    }
+
+    @PostMapping({"/deleteBuyTechnologyDocument"})
+    public ModelAndView deleteBuyTechnologyDocumentPost(@ModelAttribute BuyTechnologyDocument addBuyTechnologyDocument, Model model) {
+        distributeTechnologyService.deleteBuyTechnologyDocuments(addBuyTechnologyDocument);
+        return LoadForm(findSellTechnologyDocument, findBuyTechnologyMarket, findBuyTechnologyDocument, findDistributeTechnologyItem, model);
+    }
+
+    @PostMapping({"/updateBuyTechnologyDocument"})
+    public ModelAndView updateBuyTechnologyDocumentPost(@ModelAttribute BuyTechnologyDocument addBuyTechnologyDocument, Model model) {
+        distributeTechnologyService.updateBuyTechnologyDocuments(addBuyTechnologyDocument);
+        return LoadForm(findSellTechnologyDocument, findBuyTechnologyMarket, findBuyTechnologyDocument, findDistributeTechnologyItem, model);
+    }
+
     @PostMapping({"/addDistributeTechnologyItem"})
     public ModelAndView addDistributeTechnologyItemPost(@ModelAttribute DistributeTechnologyItem addDistributeTechnologyItem, Model model) {
         distributeTechnologyService.insertDistributeTechnologyItem(addDistributeTechnologyItem);
@@ -186,6 +220,7 @@ public class DistributeTechnologyController {
 
         model.addAttribute("findSellTechnologyDocument", findSellTechnologyDocument);
         model.addAttribute("findBuyTechnologyMarket", findBuyTechnologyMarket);
+        model.addAttribute("findBuyTechnologyDocument", findBuyTechnologyDocument);
         model.addAttribute("findDistributeTechnologyItem", findDistributeTechnologyItem);
 
         List<SellTechnologyDocument> sellTechnologyDocuments = distributeTechnologyService.getSellTechnologyDocumentByFilds(findSellTechnologyDocument.getCostForOne(),findSellTechnologyDocument.getCount(),findSellTechnologyDocument.getIdTechnology(),findSellTechnologyDocument.getIdTypeContract(),findSellTechnologyDocument.getIdAlien(),findSellTechnologyDocument.getDescription());
@@ -213,7 +248,7 @@ public class DistributeTechnologyController {
         }
         model.addAttribute("sellTechnologyDocuments", sellTechnologyDocuments);
 
-        findBuyTechnologyMarkets = distributeTechnologyService.getBuyTechnologyDocumentByFilds(findBuyTechnologyMarket, buyTechnologyMarkets);
+        findBuyTechnologyMarkets = distributeTechnologyService.getBuyTechnologyMarketByFilds(findBuyTechnologyMarket, buyTechnologyMarkets);
         for(int i = 0; i < findBuyTechnologyMarkets.size(); i++) {
             for(int j = 0; j < alienRace.size(); j++) {
                 if(findBuyTechnologyMarkets.get(i).getIdRace() == alienRace.get(j).getRaceId()) {
@@ -229,6 +264,32 @@ public class DistributeTechnologyController {
             }
         }
         model.addAttribute("buyTechnologyMarkets", findBuyTechnologyMarkets);
+
+        List<BuyTechnologyDocument> buyTechnologyDocuments = distributeTechnologyService.getBuyTechnologyDocumentsByFilds(findBuyTechnologyDocument.getCount(), findBuyTechnologyDocument.getIdTechnology(), findBuyTechnologyDocument.getIdPaymentType(), findBuyTechnologyDocument.getIdDeliveryType(), findBuyTechnologyDocument.getDescription());
+        for(int i = 0; i < buyTechnologyDocuments.size(); i++) {
+            for (int j = 0; j < technologys.size(); j++) {
+                if (buyTechnologyDocuments.get(i).getIdTechnology() == technologys.get(j).getTechnologyId()) {
+                    buyTechnologyDocuments.get(i).setTechnologyName(technologys.get(j).getName());
+                    break;
+                }
+            }
+
+            for(int j = 0; j < paymentType.size(); j++) {
+                if(buyTechnologyDocuments.get(i).getIdPaymentType() == paymentType.get(j).getPaymentTypeId()) {
+                    buyTechnologyDocuments.get(i).setPaymentTypeName(paymentType.get(j).getType());
+                    break;
+                }
+            }
+
+            for(int j = 0; j < deliveryType.size(); j++) {
+                if(buyTechnologyDocuments.get(i).getIdDeliveryType() == deliveryType.get(j).getDeliveryTypeId()) {
+                    buyTechnologyDocuments.get(i).setDeliveryTypeName(deliveryType.get(j).getType());
+                    break;
+                }
+            }
+
+        }
+        model.addAttribute("buyTechnologyDocuments", buyTechnologyDocuments);
 
         return new ModelAndView("technologist/index", model.asMap());
     }

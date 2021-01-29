@@ -78,7 +78,7 @@
                         <td th:utext="${sellTechnologyDocument.description}"></td>
                         <td>
                             <button button name = "editsellTech" th:data1="${sellTechnologyDocument.costForOne}" th:data2="${sellTechnologyDocument.description}" th:onmouseup="|getSellTechnology(${sellTechnologyDocument.sellTechnologyDocumentId}, ${sellTechnologyDocument.idTechnology}, this.getAttribute('data1'), ${sellTechnologyDocument.count}, ${sellTechnologyDocument.idTypeContract}, ${sellTechnologyDocument.idAlien}, this.getAttribute('data2'));|" class = "button-edit">Редактировать</button>
-                            <button name = "deleteselltech" th:onmouseup="|getIdByButton(${sellTechnologyDocument.sellTechnologyDocumentId});|"  class = "button-edit" >Удалить</button>
+                            <button name = "deleteselltech" th:onmouseup="|getIdByButton(${sellTechnologyDocument.sellTechnologyDocumentId});|" class = "button-edit" >Удалить</button>
                         </td>
                     </tr>
                     <!-- END FOR -->
@@ -93,18 +93,9 @@
                         <div class="header">
                             Технология:
                         </div>
-                        <select th:field="*{id}" >
+                        <select th:field="*{idTechnology}" >
                             <option value="0"> -- </option>
-                            <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
-                        </select>
-                    </div>
-                    <div class="inline-block">
-                        <div class="header">
-                            Раса создатель:
-                        </div>
-                        <select th:field="*{idRace}" >
-                            <option value="0"> -- </option>
-                            <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
+                            <option th:each="technology : ${technologys}"  th:value="${technology.technologyId}"  th:utext="${technology.name}"/>
                         </select>
                     </div>
                     <div class="inline-block">
@@ -114,6 +105,15 @@
                         <select th:field="*{idDeliveryType}" >
                             <option value="0"> -- </option>
                             <option th:each="deliveryType : ${deliveryTypes}"  th:value="${deliveryType.deliveryTypeId}"  th:utext="${deliveryType.type}"/>
+                        </select>
+                    </div>
+                    <div class="inline-block">
+                        <div class="header">
+                            Способ оплаты:
+                        </div>
+                        <select th:field="*{idPaymentType}" >
+                            <option value="0"> -- </option>
+                            <option th:each="paymentType : ${paymentTypes}"  th:value="${paymentType.paymentTypeId}"  th:utext="${paymentType.type}"/>
                         </select>
                     </div>
                     <div class="inline-block">
@@ -128,20 +128,21 @@
             <div class="content">
                 <table border="1" width="100%">
                     <tr>
-                        <th>Назначение</th>
-                        <th>Раса создатель</th>
-                        <th>Доставка</th>
+                        <th>Технология</th>
+                        <th>Способ доставки</th>
+                        <th>Способ оплаты</th>
                         <th>Описание</th>
                         <th></th>
                     </tr>
                     <!-- FOR aliens PRINT -->
-                    <tr th:each="buyTechnologyMarket : ${buyTechnologyMarkets}">
-                        <td th:utext="${buyTechnologyMarket.use}"></td>
-                        <td th:utext="${buyTechnologyMarket.raceName}"></td>
-                        <td th:utext="${buyTechnologyMarket.deliveryTypeName}"></td>
-                        <td th:utext="${buyTechnologyMarket.description}"></td>
+                    <tr th:each="buyTechnologyDocument : ${buyTechnologyDocuments}">
+                        <td th:utext="${buyTechnologyDocument.technologyName}"></td>
+                        <td th:utext="${buyTechnologyDocument.deliveryTypeName}"></td>
+                        <td th:utext="${buyTechnologyDocument.paymentTypeName}"></td>
+                        <td th:utext="${buyTechnologyDocument.description}"></td>
                         <td>
-                            <button name = "buyTech" class = "button-edit">Купить</button>
+                            <button name = "viewBuyTech" th:data1="${buyTechnologyDocument.technologyName}" th:data2="${buyTechnologyDocument.deliveryTypeName}" th:data3="${buyTechnologyDocument.paymentTypeName}" th:data4="${buyTechnologyDocument.description}" th:onmouseup="|getBuyTechnologyDocument(this.getAttribute('data1'), ${buyTechnologyDocument.count}, this.getAttribute('data2'), this.getAttribute('data3'), this.getAttribute('data4'));|" class = "button-edit">Посмотреть</button>
+                            <button name = "deleteBuyTech" th:onmouseup="|getIdByButton2(${buyTechnologyDocument.buyTechnologyDocumentId});|" class = "button-edit">Удалить</button>
                         </td>
                     </tr>
                     <!-- END FOR -->
@@ -188,6 +189,7 @@
             <div class="content">
                 <table border="1" width="100%">
                     <tr>
+                        <th>Название</th>
                         <th>Назначение</th>
                         <th>Раса создатель</th>
                         <th>Доставка</th>
@@ -196,12 +198,13 @@
                     </tr>
                     <!-- FOR aliens PRINT -->
                     <tr th:each="buyTechnologyMarket : ${buyTechnologyMarkets}">
+                        <td th:utext="${buyTechnologyMarket.technologyName}"></td>
                         <td th:utext="${buyTechnologyMarket.use}"></td>
                         <td th:utext="${buyTechnologyMarket.raceName}"></td>
                         <td th:utext="${buyTechnologyMarket.deliveryTypeName}"></td>
                         <td th:utext="${buyTechnologyMarket.description}"></td>
                         <td>
-                            <button name = "buyTech" class = "button-edit">Купить</button>
+                            <button name = "addBuyTech" th:data1="${buyTechnologyMarket.technologyName}" th:data2="${buyTechnologyMarket.use}" th:onmouseup="|getBuyTechnologyMarket(this.getAttribute('data1'), this.getAttribute('data2'), ${buyTechnologyMarket.idRace}, ${buyTechnologyMarket.buyTechnologyMarketId});|" class = "button-edit">Купить</button>
                         </td>
                     </tr>
                     <!-- END FOR -->
@@ -426,12 +429,21 @@
         </form>
     </div>
 
-    <div id="buyTech-modal" class="modal">
-        <form class="modal-content form buyTech" method="POST" action="restcontroller.asdaasd">
+    <div id="addBuyTech-modal" class="modal">
+        <form class="modal-content form buyTech" th:object="${addBuyTechnologyDocument}" th:action="@{/addBuyTechnologyDocument}" method="post">
             <table>
                 <tr>
                     <td colspan="2" align="center">
                         <div class="header">Договор о покупке технологии</div>
+                    </td>
+                    <td>
+                        <input id="buyTechnologyDocumentUse" th:field="*{use}" class="field" type="hidden" placeholder="Введите..." />
+                    </td>
+                    <td>
+                        <input id="buyTechnologyDocumentIdRace" th:field="*{idRace}" class="field" type="hidden" placeholder="Введите..." />
+                    </td>
+                    <td>
+                        <input id="buyTechnologyDocumentIdMarket" th:field="*{buyTechnologyMarketId}" class="field" type="hidden" placeholder="Введите..." />
                     </td>
                 </tr>
                 <tr>
@@ -439,11 +451,7 @@
                         <div class="label">Технология:</div>
                     </td>
                     <td class="col-2">
-                        <select name="crit_1" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
-                        </select>
+                        <input id="buyTechnologyDocumentTechnologyName" th:field="*{technologyName}" class="field" type="text" readonly="readonly" placeholder="Введите..." />
                     </td>
                 </tr>
                 <tr>
@@ -451,11 +459,7 @@
                         <div class="label">Колличество:</div>
                     </td>
                     <td class="col-2">
-                        <select name="crit_1" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
-                        </select>
+                        <input th:field="*{count}" class="field" type="text" placeholder="Введите..." />
                     </td>
                 </tr>
                 <tr>
@@ -463,10 +467,8 @@
                         <div class="label">Способ доставки:</div>
                     </td>
                     <td class="col-2">
-                        <select name="crit_1" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
+                        <select th:field="*{idDeliveryType}" class="field">
+                            <option th:each="deliveryType : ${deliveryTypes}"  th:value="${deliveryType.deliveryTypeId}"  th:utext="${deliveryType.type}"/>
                         </select>
                     </td>
                 </tr>
@@ -475,10 +477,8 @@
                         <div class="label">Способ оплаты:</div>
                     </td>
                     <td class="col-2">
-                        <select name="crit_1" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
+                        <select th:field="*{idPaymentType}" class="field">
+                            <option th:each="paymentType : ${paymentTypes}"  th:value="${paymentType.paymentTypeId}"  th:utext="${paymentType.type}"/>
                         </select>
                     </td>
                 </tr>
@@ -490,7 +490,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <textarea name="description" class="textarea"></textarea>
+                        <textarea th:field="*{description}" class="textarea"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -505,6 +505,65 @@
         </form>
     </div>
 
+    <div id="viewBuyTech-modal" class="modal">
+        <form class="modal-content form buyTech">
+            <table>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="header">Договор о покупке технологии</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Технология:</div>
+                    </td>
+                    <td class="col-2">
+                        <input id="viewTechnologyDocumentTechnologyName" class="field" type="text" readonly="readonly" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Колличество:</div>
+                    </td>
+                    <td class="col-2">
+                        <input id="viewTechnologyDocumentTechnologyCount" readonly="readonly" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Способ доставки:</div>
+                    </td>
+                    <td class="col-2">
+                        <input id="viewTechnologyDocumentTechnologyDeliveryType" readonly="readonly" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Способ оплаты:</div>
+                    </td>
+                    <td class="col-2">
+                        <input id="viewTechnologyDocumentTechnologyPaymentType" readonly="readonly" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="label">Описание:</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea id="viewTechnologyDocumentTechnologyDescription" readonly="readonly" class="textarea"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        <input type="button" class="close" value="К документам">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
     <div id="logout-modal" class="modal">
         <div class="modal-content">
@@ -518,6 +577,26 @@
                     </tr>
                     <tr>
                         <td width=50%><input class="w-100" type="submit" value="Ok" /></td>
+                        <td width=50%><input class="w-100 close" type="button" value="Отмена" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteBuyTech-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form class="form" method="POST" th:object="${addBuyTechnologyDocument}" th:action="@{/deleteBuyTechnologyDocument}">
+                <table width=100%>
+                    <tr>
+                        <td align="center" colspan="3">
+                            <h4>Вы действительно хотите удалить запись?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=0%><input id="buyTechnologyDocumentIdDelete" th:field="*{buyTechnologyDocumentId}" class="field" type="hidden" placeholder="Введите..." /></td>
+                        <td width=50%><input class="w-100" type="submit" value="Ок" /></td>
                         <td width=50%><input class="w-100 close" type="button" value="Отмена" /></td>
                     </tr>
                 </table>
@@ -550,6 +629,10 @@
             document.getElementById("sellTechnologyDocumentIdDelete").value = id;
         }
 
+        function getIdByButton2(id) {
+            document.getElementById("buyTechnologyDocumentIdDelete").value = id;
+        }
+
         function getSellTechnology(sellTechnologyDocumentId, idTechnology, costForOne, count, idTypeContract, idAlien, description) {
             document.getElementById("sellTechnologyId").value = sellTechnologyDocumentId;
             document.getElementById("sellTechnologyIdTechnology").value = idTechnology;
@@ -560,12 +643,27 @@
             document.getElementById("sellTechnologyDescription").value = description;
         }
 
+        function getBuyTechnologyMarket(name, use, id, id2) {
+            document.getElementById("buyTechnologyDocumentTechnologyName").value = name;
+            document.getElementById("buyTechnologyDocumentUse").value = use;
+            document.getElementById("buyTechnologyDocumentIdRace").value = id;
+            document.getElementById("buyTechnologyDocumentIdMarket").value = id2;
+        }
+
+        function getBuyTechnologyDocument(name, count, deliveryType, paymentType, description) {
+            document.getElementById("viewTechnologyDocumentTechnologyName").value = name;
+            document.getElementById("viewTechnologyDocumentTechnologyCount").value = count;
+            document.getElementById("viewTechnologyDocumentTechnologyDeliveryType").value = deliveryType;
+            document.getElementById("viewTechnologyDocumentTechnologyPaymentType").value = paymentType;
+            document.getElementById("viewTechnologyDocumentTechnologyDescription").value = description;
+        }
+
         function closeModal(modal) {
             modal.style.display = "none";
         }
 
-        let modal_ids = ["logout-modal", "addsellTech-modal", "editsellTech-modal", "deleteselltech-modal", "buyTech-modal"];
-        let modal_btn_names = ["logout", "addsellTech", "editsellTech", "deleteselltech", "buyTech"];
+        let modal_ids = ["logout-modal", "addsellTech-modal", "editsellTech-modal", "deleteselltech-modal", "addBuyTech-modal", "deleteBuyTech-modal", "viewBuyTech-modal"];
+        let modal_btn_names = ["logout", "addsellTech", "editsellTech", "deleteselltech", "addBuyTech", "deleteBuyTech", "viewBuyTech"];
         let modals = [];
 
         for (let id of modal_ids) {

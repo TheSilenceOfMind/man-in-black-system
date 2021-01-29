@@ -44,10 +44,12 @@ public class FreePersona {
                 "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
                 "w", "x", "y", "z", " "};
         this.freePersonaId = freePersonaId;
+        name = "";
         for (int i = 0; i < 3 + random.nextInt(7); i++) {
             name += alph[random.nextInt(26)];
         }
         age = (20 + random.nextInt(20)) + " age";
+        profession = "";
         for (int i = 0; i < 5 + random.nextInt(10); i++) {
             profession += alph[random.nextInt(27)];
         }
@@ -59,6 +61,7 @@ public class FreePersona {
                 education = "higher";
                 break;
         }
+        description = "";
         for (int i = 0; i < 5 + random.nextInt(10); i++) {
             description += alph[random.nextInt(27)];
         }

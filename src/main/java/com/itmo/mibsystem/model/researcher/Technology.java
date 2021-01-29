@@ -40,6 +40,15 @@ public class Technology {
         this.idSource = 0L;
     }
 
+    public Technology(String name, String use, String description, Long idRace, Long idSource) {
+        this.technologyId = null;
+        this.name = name;
+        this.use = use;
+        this.description = description;
+        this.idRace = idRace;
+        this.idSource = idSource;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

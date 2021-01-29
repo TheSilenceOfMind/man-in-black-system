@@ -2,6 +2,7 @@ package com.itmo.mibsystem.service;
 
 import com.itmo.mibsystem.dao.distribute.technology.*;
 import com.itmo.mibsystem.model.distribute.technology.*;
+import com.itmo.mibsystem.model.hrmanager.FreePersona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,7 +79,7 @@ public class DistributeTechnologyService {
         return distributeTechnologyItemRepository.findDistributeTechnologyItemsByIdTechnologyAndIdAgentAnd(count , idTechnology, idAgent, discription);
     }
 
-    public List<BuyTechnologyMarket> getBuyTechnologyDocumentByFilds(BuyTechnologyMarket findBuyTechnologyMarket, List<BuyTechnologyMarket> buyTechnologyMarkets) {
+    public List<BuyTechnologyMarket> getBuyTechnologyMarketByFilds(BuyTechnologyMarket findBuyTechnologyMarket, List<BuyTechnologyMarket> buyTechnologyMarkets) {
         List<BuyTechnologyMarket> findBuyTechnologyMarkets = new ArrayList<BuyTechnologyMarket>();
         for(int i = 0; i < buyTechnologyMarkets.size(); i++) {
             if(findBuyTechnologyMarket.getUse().length() != 0 && !buyTechnologyMarkets.get(i).getUse().equals(findBuyTechnologyMarket.getUse())) {
@@ -98,8 +99,18 @@ public class DistributeTechnologyService {
         return findBuyTechnologyMarkets;
     }
 
-    public List<BuyTechnologyDocument> getBuyTechnologyDocumentsByFilds(Long count, Long idPaymentType, Long idDeliveryType, String discription) {
-        return buyTechnologyDocumentRepository.findAllByFilds(count , idPaymentType, idDeliveryType, discription);
+    public List<BuyTechnologyMarket> deleteBuyTechnologyMarketById(List<BuyTechnologyMarket> buyTechnologyMarkets, Long id) {
+        for(int i = 0; i < buyTechnologyMarkets.size(); i++) {
+            if(buyTechnologyMarkets.get(i).getBuyTechnologyMarketId() == id) {
+                buyTechnologyMarkets.remove(i);
+                break;
+            }
+        }
+        return buyTechnologyMarkets;
+    }
+
+    public List<BuyTechnologyDocument> getBuyTechnologyDocumentsByFilds(Long count, Long idTechnology, Long idPaymentType, Long idDeliveryType, String discription) {
+        return buyTechnologyDocumentRepository.findAllByFilds(count, idTechnology, idPaymentType, idDeliveryType, discription);
     }
 
     public void insertSellTechnologyDocument(SellTechnologyDocument sellTechnologyDocument) {

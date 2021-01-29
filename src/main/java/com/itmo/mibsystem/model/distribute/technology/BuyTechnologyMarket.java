@@ -23,6 +23,7 @@ public class BuyTechnologyMarket {
     private String description;
 
     private String raceName;
+    private String technologyName;
     private String deliveryTypeName;
     private String paymentTypeName;
 
@@ -44,6 +45,7 @@ public class BuyTechnologyMarket {
         ArrayList<Long> buffId = new ArrayList<Long>();
 
         this.buyTechnologyMarketId = buyTechnologyMarketId;
+        use = "";
         for (int i = 0; i < 5 + random.nextInt(10); i++) {
             use += alph[random.nextInt(27)];
         }
@@ -65,7 +67,11 @@ public class BuyTechnologyMarket {
 
         idDeliveryType = buffId.get(random.nextInt(buffId.size()));
         buffId.clear();
-
+        technologyName = "";
+        for (int i = 0; i < 5 + random.nextInt(10); i++) {
+            technologyName += alph[random.nextInt(27)];
+        }
+        description = "";
         for (int i = 0; i < 5 + random.nextInt(10); i++) {
             description += alph[random.nextInt(27)];
         }

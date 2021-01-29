@@ -32,9 +32,18 @@ public class BuyTechnologyDocument {
     @Column(name = "description")
     private String description;
 
-    private String TechnologyName;
+    @Transient
+    private Long buyTechnologyMarketId;
+    @Transient
+    private String technologyName;
+    @Transient
     private String deliveryTypeName;
+    @Transient
     private String paymentTypeName;
+    @Transient
+    private String use;
+    @Transient
+    private Long idRace;
 
     public BuyTechnologyDocument() {
         buyTechnologyDocumentId = null;

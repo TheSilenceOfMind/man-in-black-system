@@ -2,6 +2,7 @@ package com.itmo.mibsystem.service;
 
 import com.itmo.mibsystem.dao.researcher.SourceTechnologyRepository;
 import com.itmo.mibsystem.dao.researcher.TechnologyRepository;
+import com.itmo.mibsystem.model.distribute.technology.BuyTechnologyDocument;
 import com.itmo.mibsystem.model.researcher.SourceTechnology;
 import com.itmo.mibsystem.model.researcher.Technology;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,10 @@ public class ResearcherService {
 
     @Autowired
     private TechnologyRepository technologyRepository;
+
+    @Autowired
+    private DistributeTechnologyService distributeTechnologyService;
+
 
     public List<SourceTechnology> getSourceTechnology() {
         List<SourceTechnology> sourceTechnology = new ArrayList<SourceTechnology>();
@@ -36,11 +41,19 @@ public class ResearcherService {
         return technologyRepository.findTechnologyByNameAndUseAndIdRaceAAndIdSourceAndDescription(name , use, idRace, idSource, discription);
     }
 
-    public void insertTechnology(Technology technology) {
-        technologyRepository.save(technology);
+    public Technology insertTechnology(Technology technology) {
+        return technologyRepository.save(technology);
     }
 
     public void deleteTechnology(Technology technology) {
+        List<BuyTechnologyDocument>  buyTechnologyDocuments = distributeTechnologyService.getAllBuyTechnologyDocument();
+
+        for(int i = 0; i < buyTechnologyDocuments.size(); i++) {
+            if(buyTechnologyDocuments.get(i).getIdTechnology() == technology.getTechnologyId()) {
+                distributeTechnologyService.deleteBuyTechnologyDocuments(buyTechnologyDocuments.get(i));
+            }
+        }
+
         technologyRepository.deleteById(technology.getTechnologyId());
     }
 
