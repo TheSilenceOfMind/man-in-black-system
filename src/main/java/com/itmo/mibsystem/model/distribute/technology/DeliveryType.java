@@ -19,6 +19,14 @@ public class DeliveryType {
     @Column(name = "type")
     private String type;
 
+    public DeliveryType() {
+    }
+
+    public DeliveryType(Long deliveryTypeId, String type) {
+        this.deliveryTypeId = deliveryTypeId;
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
