@@ -167,6 +167,7 @@ insert into mib_user_role(user_id, role_id) values (6, 6);
 insert into mib_alien_race(name) values ('123');
 insert into mib_alien_race(name) values ('456');
 insert into mib_alien_race(name) values ('789');
+insert into mib_alien_race(name) values ('Unknown');
 
 insert into mib_alien_passport(name, home_planet, description, id_race) values ('afsa', 'dsfd', 'hted', 1);
 insert into mib_alien_passport(name, home_planet, description, id_race) values ('FSFA', 'sgrwb ', 'sdgh', 2);

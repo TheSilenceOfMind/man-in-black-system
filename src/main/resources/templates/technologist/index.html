@@ -13,6 +13,7 @@
         <div class="menu">
             <ul>
                 <li name = "addsellTech">Новая технология на продажу</li>
+                <li name = "addBuyTech" th:onmouseup="|getBuyTechnologyMarket2();|">Купить новую технологию</li>
                 <li name = "logout">Выйти</li>
             </ul>
         </div>
@@ -644,10 +645,20 @@
         }
 
         function getBuyTechnologyMarket(name, use, id, id2) {
+            document.getElementById("buyTechnologyDocumentTechnologyName").setAttribute("readonly","readonly");
             document.getElementById("buyTechnologyDocumentTechnologyName").value = name;
             document.getElementById("buyTechnologyDocumentUse").value = use;
             document.getElementById("buyTechnologyDocumentIdRace").value = id;
             document.getElementById("buyTechnologyDocumentIdMarket").value = id2;
+        }
+
+        function getBuyTechnologyMarket2() {
+            document.getElementById("buyTechnologyDocumentTechnologyName").removeAttribute("readonly");
+            document.getElementById("buyTechnologyDocumentTechnologyName").value = "";
+            document.getElementById("buyTechnologyDocumentUse").value = "Unknown";
+            document.getElementById("buyTechnologyDocumentIdRace").value = 0;
+            document.getElementById("buyTechnologyDocumentIdMarket").value = 0;
+
         }
 
         function getBuyTechnologyDocument(name, count, deliveryType, paymentType, description) {

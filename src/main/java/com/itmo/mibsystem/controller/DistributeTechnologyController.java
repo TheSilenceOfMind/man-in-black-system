@@ -164,7 +164,8 @@ public class DistributeTechnologyController {
     @PostMapping({"/addBuyTechnologyDocument"})
     public ModelAndView addBuyTechnologyDocumentPost(@ModelAttribute BuyTechnologyDocument addBuyTechnologyDocument, Model model) {
         List<SourceTechnology> buffSource = researcherService.getSourceTechnology();
-        Long idSource = 0L;
+        List<AlienRace> buffRace = passporterService.getAllRace();
+        Long idSource = 0L, idRace = 0L;
         for(int i = 0; i < buffSource.size(); i ++) {
             if(buffSource.get(i).getValue().equals("Buy")) {
                 idSource = buffSource.get(i).getSourceId();
@@ -176,7 +177,19 @@ public class DistributeTechnologyController {
             distributeTechnologyService.deleteBuyTechnologyMarketById(buyTechnologyMarkets, addBuyTechnologyDocument.getBuyTechnologyMarketId());
         }
 
-        Technology tech = researcherService.insertTechnology(new Technology(addBuyTechnologyDocument.getTechnologyName(), addBuyTechnologyDocument.getUse(), addBuyTechnologyDocument.getDescription(), addBuyTechnologyDocument.getIdRace(), idSource));
+        if(addBuyTechnologyDocument.getIdRace() == null || addBuyTechnologyDocument.getIdRace() == 0L) {
+            for(int i = 0; i < buffRace.size(); i ++) {
+                if(buffRace.get(i).getName().equals("Unknown")) {
+                    idRace = buffRace.get(i).getRaceId();
+                    break;
+                }
+            }
+        }
+        else {
+            idRace = addBuyTechnologyDocument.getIdRace();
+        }
+
+        Technology tech = researcherService.insertTechnology(new Technology(addBuyTechnologyDocument.getTechnologyName(), addBuyTechnologyDocument.getUse(), addBuyTechnologyDocument.getDescription(), idRace, idSource));
         addBuyTechnologyDocument.setIdTechnology(tech.getTechnologyId());
         distributeTechnologyService.insertBuyTechnologyDocument(addBuyTechnologyDocument);
         return LoadForm(findSellTechnologyDocument, findBuyTechnologyMarket, findBuyTechnologyDocument, findDistributeTechnologyItem, model);

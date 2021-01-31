@@ -11,7 +11,7 @@
        <div class="documents-container">
            <div class="menu">
                <ul>
-                   <li name = "add">Новый паспорт агента</li>
+                   <li name = "add" th:onmouseup="|getFreePerson2();|">Новый паспорт агента</li>
                    <li name = "logout">Выйти</li>
                </ul>
            </div>
@@ -360,10 +360,19 @@
        }
 
        function getFreePerson(id, name, age, description) {
+           document.getElementById("nameAdd").setAttribute("readonly","readonly");
            document.getElementById("idAdd").value = id;
            document.getElementById("nameAdd").value = name;
            document.getElementById("ageAdd").value = age;
            document.getElementById("descriptionAdd").value = description;
+       }
+
+       function getFreePerson2() {
+           document.getElementById("nameAdd").removeAttribute("readonly");
+           document.getElementById("idAdd").value = 0;
+           document.getElementById("nameAdd").value = "";
+           document.getElementById("ageAdd").value = "";
+           document.getElementById("descriptionAdd").value = "";
        }
 
        function getMIBEmployee(id, userId, name, username, password, age, role, curator, description) {
