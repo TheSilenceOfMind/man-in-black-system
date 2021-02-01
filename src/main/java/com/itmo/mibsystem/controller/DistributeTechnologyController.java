@@ -109,6 +109,11 @@ public class DistributeTechnologyController {
         return addBuyTechnologyDocument;
     }
 
+    @ModelAttribute("addDistributeTechnologyItem")
+    public DistributeTechnologyItem getAddDistributeTechnologyItem() {
+        return addDistributeTechnologyItem;
+    }
+
     @GetMapping({"/technologistIndex"})
     public ModelAndView technologistlogistIndexGet(Model model) {
         findSellTechnologyDocument = new SellTechnologyDocument();
@@ -117,6 +122,7 @@ public class DistributeTechnologyController {
         findBuyTechnologyDocument = new BuyTechnologyDocument();
         addBuyTechnologyDocument = new BuyTechnologyDocument();
         findDistributeTechnologyItem = new DistributeTechnologyItem();
+        addDistributeTechnologyItem = new DistributeTechnologyItem();
         buyTechnologyMarkets = new ArrayList<BuyTechnologyMarket>();
 
         buyTechnologyMarkets.add(new BuyTechnologyMarket(0L, passporterService, distributeTechnologyService));
@@ -129,6 +135,7 @@ public class DistributeTechnologyController {
         model.addAttribute("findBuyTechnologyDocument", findBuyTechnologyDocument);
         model.addAttribute("addBuyTechnologyDocument", addBuyTechnologyDocument);
         model.addAttribute("findDistributeTechnologyItem", findDistributeTechnologyItem);
+        model.addAttribute("addDistributeTechnologyItem", addDistributeTechnologyItem);
 
         return LoadForm(findSellTechnologyDocument, findBuyTechnologyMarket, findBuyTechnologyDocument, findDistributeTechnologyItem,  model);
     }
@@ -303,6 +310,24 @@ public class DistributeTechnologyController {
 
         }
         model.addAttribute("buyTechnologyDocuments", buyTechnologyDocuments);
+
+        List<DistributeTechnologyItem> distributeTechnologyItems = distributeTechnologyService.getDistributeTechnologyItemByFilds(findDistributeTechnologyItem.getCount(),findDistributeTechnologyItem.getUse(),findDistributeTechnologyItem.getIdTechnology(),findDistributeTechnologyItem.getIdAgent(),findDistributeTechnologyItem.getDescription());
+        for(int i = 0; i < distributeTechnologyItems.size(); i ++) {
+            for(int j = 0; j < technologys.size(); j++) {
+                if(distributeTechnologyItems.get(i).getIdTechnology() == technologys.get(j).getTechnologyId()) {
+                    distributeTechnologyItems.get(i).setTechnologyName(technologys.get(j).getName());
+                    break;
+                }
+            }
+
+            for(int j = 0; j < mIBEmployee.size(); j++) {
+                if(distributeTechnologyItems.get(i).getIdAgent() == mIBEmployee.get(j).getMIBEmployeeId()) {
+                    distributeTechnologyItems.get(i).setAgentName(mIBEmployee.get(j).getName());
+                    break;
+                }
+            }
+        }
+        model.addAttribute("distributeTechnologyItems", distributeTechnologyItems);
 
         return new ModelAndView("technologist/index", model.asMap());
     }

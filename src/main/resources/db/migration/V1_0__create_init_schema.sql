@@ -136,6 +136,16 @@ create table mib_buy_technology_document
     id_technology                   integer references mib_technology (technology_id)
 );
 
+create table mib_distribute_technology_item
+(
+    distribute_technology_item_id   serial primary key,
+    count                           integer not null,
+    use                             varchar(255),
+    description                     varchar(255),
+    id_technology                   integer references mib_technology (technology_id),
+    id_agent                        integer references mib_employees (mib_employee_id)
+);
+
 ------------------------------------------------------
 ----------------------Documents-----------------------
 ------------------------------------------------------
@@ -224,3 +234,7 @@ insert into mib_sell_technology_document(cost_for_one, count, description, id_te
 insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type, id_technology) values ('1', 'dnefvfsdf', 1, 3, 1);
 insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type, id_technology) values ('2', 's gfsv vsfsv s', 2, 2, 2);
 insert into mib_buy_technology_document(count, description, id_payment_type, id_delivery_type, id_technology) values ('3', 'nggfedg ree vwfs', 3, 1, 3);
+
+insert into mib_distribute_technology_item(count, use, description, id_technology, id_agent) values ('5', 'sf s fjd sf', 'fgmvdmj dda d a', 1, 1);
+insert into mib_distribute_technology_item(count, use, description, id_technology, id_agent) values ('6', 'xbsfc cadavadv ad', 'fbmvsk adjc a', 2, 2);
+insert into mib_distribute_technology_item(count, use, description, id_technology, id_agent) values ('7', 'hh htehndbdfss df', 'dsvmam ddajdjdd s', 3, 3);

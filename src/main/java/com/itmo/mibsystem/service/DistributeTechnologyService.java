@@ -75,8 +75,8 @@ public class DistributeTechnologyService {
         return sellTechnologyDocumentRepository.findSellTechnologyDocumentsByCostForOneAAndCountAndIdTechnologyAndIdTypeContractAndIdAlienAndDescription(costForOne , count, idTechnology, idTypeContract, idAlien,  discription);
     }
 
-    public List<DistributeTechnologyItem> getDistributeTechnologyItemByFilds(Long count, long idTechnology, long idAgent, String discription) {
-        return distributeTechnologyItemRepository.findDistributeTechnologyItemsByIdTechnologyAndIdAgentAnd(count , idTechnology, idAgent, discription);
+    public List<DistributeTechnologyItem> getDistributeTechnologyItemByFilds(Long count, String use, long idTechnology, long idAgent, String discription) {
+        return distributeTechnologyItemRepository.findDistributeTechnologyItemsByIdTechnologyAndIdAgentAnd(count, use, idTechnology, idAgent, discription);
     }
 
     public List<BuyTechnologyMarket> getBuyTechnologyMarketByFilds(BuyTechnologyMarket findBuyTechnologyMarket, List<BuyTechnologyMarket> buyTechnologyMarkets) {

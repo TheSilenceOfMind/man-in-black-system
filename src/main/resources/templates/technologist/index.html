@@ -14,15 +14,16 @@
             <ul>
                 <li name = "addsellTech">Новая технология на продажу</li>
                 <li name = "addBuyTech" th:onmouseup="|getBuyTechnologyMarket2();|">Купить новую технологию</li>
+                <li name = "addDistributeTechnologyItem">Новое снаряжение для агента</li>
                 <li name = "logout">Выйти</li>
             </ul>
         </div>
 
         <div class="tab">
-            <button class="tablinks tablinkbuttons" onclick="openCity(event, 'sellTechnology')">Технологии на продажу</button>
-            <button class="tablinks tablinkbuttons" onclick="openCity(event, 'buyTechnology')">Контракты на покупку</button>
-            <button class="tablinks tablinkbuttons" onclick="openCity(event, 'marketTechnology')">Межгалоктический рынок</button>
-            <button id="deffault" class="tablinks tablinkbuttons" onclick="openCity(event, 'distributeTechnology')">Распределение технологий</button>
+            <button class="tablinks tablinkbuttons" onclick="openCity(event, 'sellTechnology', this)">Технологии на продажу</button>
+            <button class="tablinks tablinkbuttons" onclick="openCity(event, 'buyTechnology', this)">Контракты на покупку</button>
+            <button class="tablinks tablinkbuttons" onclick="openCity(event, 'marketTechnology', this)">Межгалоктический рынок</button>
+            <button id="deffault" class="tablinks tablinkbuttons" onclick="openCity(event, 'distributeTechnology', this)">Распределение технологий</button>
         </div>
 
         <div id="sellTechnology" class="tabcontent">
@@ -215,36 +216,34 @@
 
         <div id="distributeTechnology" class="tabcontent">
             <div class="search-form">
-                <form class="form search">
+                <form class="form search" th:object="${findDistributeTechnologyItem}" th:action="@{/technologistIndex}" method="post">
                     <div class="label">
-                        Имя агента:
+                        Применение:
                     </div>
-                    <input name="field_1" class="field" type="text" placeholder="Введите..." />
+                    <input th:field="*{use}" class="field" type="text" placeholder="Введите..." />
                     <div class="inline-block">
                         <div class="header">
-                            Должность:
+                            Агент:
                         </div>
-                        <select name="crit_2" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
+                        <select th:field="*{idAgent}" >
+                            <option value="0"> -- </option>
+                            <option th:each="mIBEmploye : ${mIBEmployee}"  th:value="${mIBEmploye.MIBEmployeeId}"  th:utext="${mIBEmploye.name}"/>
                         </select>
                     </div>
                     <div class="inline-block">
                         <div class="header">
-                            Куратор:
+                            Технология:
                         </div>
-                        <select name="crit_2" class="field">
-                            <option value="reptioid">Рептилоид</option>
-                            <option value="humanoid">Гуманоид</option>
-                            <option value="daedra">Даэдра</option>
+                        <select th:field="*{idTechnology}" >
+                            <option value="0"> -- </option>
+                            <option th:each="technology : ${technologys}"  th:value="${technology.technologyId}"  th:utext="${technology.name}"/>
                         </select>
                     </div>
                     <div class="inline-block">
                         <div class="header">
                             Ключевые слова:
                         </div>
-                        <input name="keywords" type="text" class="field" />
+                        <input th:field="*{description}"  type="text" class="field" />
                         <input type="submit" class="field" value="Поиск" />
                     </div>
                 </form>
@@ -252,20 +251,23 @@
             <div class="content">
                 <table border="1" width="100%">
                     <tr>
-                        <th>Имя агента</th>
-                        <th>Должность</th>
-                        <th>Куратор</th>
+                        <th>Применение</th>
+                        <th>Количество</th>
+                        <th>Агент</th>
+                        <th>Технология</th>
                         <th>Описание</th>
                         <th></th>
                     </tr>
                     <!-- FOR aliens PRINT -->
-                    <tr>
-                        <td>Зеленый</td>
-                        <td>Рожки</td>
-                        <td>Рептилоид</td>
-                        <td>Не женат</td>
+                    <tr th:each="distributeTechnologyItem : ${distributeTechnologyItems}">
+                        <td th:utext="${distributeTechnologyItem.use}"></td>
+                        <td th:utext="${distributeTechnologyItem.count}"></td>
+                        <td th:utext="${distributeTechnologyItem.agentName}"></td>
+                        <td th:utext="${distributeTechnologyItem.technologyName}"></td>
+                        <td th:utext="${distributeTechnologyItem.description}"></td>
                         <td>
-                            <button name = "distributeTech" class = "button-edit">Посмотреть снарежение</button>
+                            <button button name = "editDistributeTechnologyItem" th:data1="${distributeTechnologyItem.use}"  th:data2="${distributeTechnologyItem.description}" th:onmouseup="|getDistributeTechnologyItem(${distributeTechnologyItem.distributeTechnologyItemId}, ${distributeTechnologyItem.count}, this.getAttribute('data1'), ${distributeTechnologyItem.idAgent}, ${distributeTechnologyItem.idTechnology}, this.getAttribute('data2'));|" class = "button-edit">Редактировать</button>
+                            <button name = "deleteDistributeTechnologyItem" th:onmouseup="|getIdByButton3(${distributeTechnologyItem.distributeTechnologyItemId});|" class = "button-edit" >Удалить</button>
                         </td>
                     </tr>
                     <!-- END FOR -->
@@ -566,6 +568,142 @@
         </form>
     </div>
 
+    <div id="addDistributeTechnologyItem-modal" class="modal">
+        <form class="modal-content form buyTech" th:object="${addDistributeTechnologyItem}" th:action="@{/addDistributeTechnologyItem}" method="post">
+            <table>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="header">Снаряжение агента</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Применение:</div>
+                    </td>
+                    <td class="col-2">
+                        <input th:field="*{use}" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Количество:</div>
+                    </td>
+                    <td class="col-2">
+                        <input th:field="*{count}" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Агент:</div>
+                    </td>
+                    <td class="col-2">
+                        <select th:field="*{idAgent}" class="field">
+                            <option th:each="mIBEmploye : ${mIBEmployee}"  th:value="${mIBEmploye.MIBEmployeeId}"  th:utext="${mIBEmploye.name}"/>
+                        </select>
+                    </td>
+                </tr>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Технология:</div>
+                    </td>
+                    <td class="col-2">
+                        <select th:field="*{idTechnology}" class="field">
+                            <option th:each="technology : ${technologys}"  th:value="${technology.technologyId}"  th:utext="${technology.name}"/>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="label">Описание:</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea th:field="*{description}" class="textarea"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        <input type="button" class="close" value="К документам">
+                    </td>
+                    <td align="right">
+                        <input type="submit" value="Создать" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="editDistributeTechnologyItem-modal" class="modal">
+        <form class="modal-content form buyTech" method="POST" th:object="${addDistributeTechnologyItem}" th:action="@{/updateDistributeTechnologyItem}">
+            <table>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="header">Снаряжение агента</div>
+                    </td>
+                    <td>
+                        <input id="distributeTechnologyItemId" th:field="*{distributeTechnologyItemId}" class="field" type="hidden" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Применение:</div>
+                    </td>
+                    <td class="col-2">
+                        <input id="distributeTechnologyItemUse" th:field="*{use}" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Количество:</div>
+                    </td>
+                    <td class="col-2">
+                        <input id="distributeTechnologyItemCount" th:field="*{count}" class="field" type="text" placeholder="Введите..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Агент:</div>
+                    </td>
+                    <td class="col-2">
+                        <select id="distributeTechnologyItemIdAgent" th:field="*{idAgent}" class="field">
+                            <option th:each="mIBEmploye : ${mIBEmployee}"  th:value="${mIBEmploye.MIBEmployeeId}"  th:utext="${mIBEmploye.name}"/>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-1">
+                        <div class="label">Технология:</div>
+                    </td>
+                    <td class="col-2">
+                        <select id="distributeTechnologyItemIdTechnology" th:field="*{idTechnology}" class="field">
+                            <option th:each="technology : ${technologys}"  th:value="${technology.technologyId}"  th:utext="${technology.name}"/>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="label">Описание:</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea id="distributeTechnologyItemDescription" th:field="*{description}" class="textarea"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        <input type="button" class="close" value="К документам">
+                    </td>
+                    <td align="right">
+                        <input type="submit" value="Сохранить" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
     <div id="logout-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -625,6 +763,26 @@
         </div>
     </div>
 
+    <div id="deleteDistributeTechnologyItem-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form class="form" method="POST" th:object="${addDistributeTechnologyItem}" th:action="@{/deleteDistributeTechnologyItem}">
+                <table width=100%>
+                    <tr>
+                        <td align="center" colspan="3">
+                            <h4>Вы действительно хотите удалить запись?</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=0%><input id="distributeTechnologyItemIdDelete" th:field="*{distributeTechnologyItemId}" class="field" type="hidden" placeholder="Введите..." /></td>
+                        <td width=50%><input class="w-100" type="submit" value="Ок" /></td>
+                        <td width=50%><input class="w-100 close" type="button" value="Отмена" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
     <script>
         function getIdByButton(id) {
             document.getElementById("sellTechnologyDocumentIdDelete").value = id;
@@ -632,6 +790,10 @@
 
         function getIdByButton2(id) {
             document.getElementById("buyTechnologyDocumentIdDelete").value = id;
+        }
+
+        function getIdByButton3(id) {
+            document.getElementById("distributeTechnologyItemIdDelete").value = id;
         }
 
         function getSellTechnology(sellTechnologyDocumentId, idTechnology, costForOne, count, idTypeContract, idAlien, description) {
@@ -669,12 +831,21 @@
             document.getElementById("viewTechnologyDocumentTechnologyDescription").value = description;
         }
 
+        function getDistributeTechnologyItem(distributeTechnologyItemId, count, use, idAgent, idTechnology, description) {
+            document.getElementById("distributeTechnologyItemId").value = distributeTechnologyItemId;
+            document.getElementById("distributeTechnologyItemCount").value = count;
+            document.getElementById("distributeTechnologyItemUse").value = use;
+            document.getElementById("distributeTechnologyItemIdAgent").value = idAgent;
+            document.getElementById("distributeTechnologyItemIdTechnology").value = idTechnology;
+            document.getElementById("distributeTechnologyItemDescription").value = description;
+        }
+
         function closeModal(modal) {
             modal.style.display = "none";
         }
 
-        let modal_ids = ["logout-modal", "addsellTech-modal", "editsellTech-modal", "deleteselltech-modal", "addBuyTech-modal", "deleteBuyTech-modal", "viewBuyTech-modal"];
-        let modal_btn_names = ["logout", "addsellTech", "editsellTech", "deleteselltech", "addBuyTech", "deleteBuyTech", "viewBuyTech"];
+        let modal_ids = ["logout-modal", "addsellTech-modal", "editsellTech-modal", "deleteselltech-modal", "addBuyTech-modal", "deleteBuyTech-modal", "viewBuyTech-modal", "addDistributeTechnologyItem-modal", "editDistributeTechnologyItem-modal", "deleteDistributeTechnologyItem-modal"];
+        let modal_btn_names = ["logout", "addsellTech", "editsellTech", "deleteselltech", "addBuyTech", "deleteBuyTech", "viewBuyTech", "addDistributeTechnologyItem", "editDistributeTechnologyItem", "deleteDistributeTechnologyItem"];
         let modals = [];
 
         for (let id of modal_ids) {
@@ -707,10 +878,9 @@
     <script>
         document.getElementById("deffault").click();
 
-        function openCity(evt, cityName) {
+        function openCity(evt, cityName, ellement) {
             // Declare all variables
             var i, tabcontent, tablinks;
-
             // Get all elements with class="tabcontent" and hide them
             tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {
