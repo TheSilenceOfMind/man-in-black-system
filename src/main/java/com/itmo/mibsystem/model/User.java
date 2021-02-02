@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
+@Data
 public class User {
 
     @Id
@@ -44,6 +46,7 @@ public class User {
         boolean accountExpired,
         boolean accountLocked, boolean credentialsExpired,
         List<Role> roles) {
+
         this.userId = userId;
         this.username = username;
         this.password = password;
