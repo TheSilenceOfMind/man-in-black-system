@@ -61,7 +61,7 @@ create table mib_act_detentions
     act_detention_id    serial primary key,
     scene               varchar(100) not null,
     description         varchar(100) not null,
-    id_user_agent       integer references mib_user (user_id),
+    id_user_agent       integer references mib_employees (mib_employee_id),
     id_guilty_alien     integer references mib_alien_passport (passport_id)
 );
 

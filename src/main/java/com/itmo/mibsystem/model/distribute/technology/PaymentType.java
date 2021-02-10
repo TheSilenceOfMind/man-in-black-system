@@ -19,6 +19,16 @@ public class PaymentType {
     @Column(name = "type")
     private String type;
 
+    public PaymentType() {
+        paymentTypeId = null;
+        type = "";
+    }
+
+    public PaymentType(String type) {
+        paymentTypeId = null;
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

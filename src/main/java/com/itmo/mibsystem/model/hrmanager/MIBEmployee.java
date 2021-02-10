@@ -51,6 +51,30 @@ public class MIBEmployee {
         password = "";
         idFreePeople = 0L;
     }
+
+    public MIBEmployee(String name, String age, String description, Long idUser, Long idCurator) {
+        MIBEmployeeId = null;
+        this.name = name;
+        this.age = age;
+        this.description = description;
+        this.idCurator = idCurator;
+        this.idUser = idUser;
+        this.idFreePeople = 0L;
+    }
+
+    public MIBEmployee(String name, String age, String description, String username, String password, Long idRole, Long idCurator) {
+        MIBEmployeeId = null;
+        this.name = name;
+        this.age = age;
+        this.description = description;
+        this.username = username;
+        this.password = password;
+        this.idCurator = idCurator;
+        this.idRole = idRole;
+        this.idUser = 0L;
+        this.idFreePeople = 0L;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

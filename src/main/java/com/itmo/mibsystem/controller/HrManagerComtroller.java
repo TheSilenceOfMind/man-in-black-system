@@ -95,7 +95,7 @@ public class HrManagerComtroller {
         model.addAttribute("findMIBEmployee", findMIBEmployee);
         model.addAttribute("findFreePersona", findFreePersona);
 
-        List<MIBEmployee> MIBEmployees = hrManagerService.getMIBEmployeeByFilds(findMIBEmployee.getName(), findMIBEmployee.getIdCurator(), findMIBEmployee.getDescription());
+        List<MIBEmployee> MIBEmployees = hrManagerService.getMIBEmployeeByFilds(findMIBEmployee.getName(), findMIBEmployee.getAge(), findMIBEmployee.getIdCurator(), findMIBEmployee.getDescription());
         for(int i = 0; i < MIBEmployees.size(); i ++) {
             for(int j = 0; j < peoples.size(); j ++) {
                 if(MIBEmployees.get(i).getIdCurator() == peoples.get(j).getMIBEmployeeId()) {

@@ -22,4 +22,9 @@ public interface EarthDocumentRepository extends CrudRepository<EarthDocument, L
             "c.earthDocumentId ASC")
     List<EarthDocument> findEarthDocumentByEarthNameAndIdNationAndIdTypeDocumentAndidAlienAndDescription(@Param("earthName") String earthName, @Param("idNation") Long idNation, @Param("idTypeDocument") Long idTypeDocument, @Param("idAlien") Long idAlien, @Param("description") String description);
 
+    List<EarthDocument> findByIdTypeDocument(Long idTypeDocument);
+
+    List<EarthDocument> findByIdAlien(Long idTypeDocument);
+
+    List<EarthDocument> findByIdNation(Long idTypeDocument);
 }

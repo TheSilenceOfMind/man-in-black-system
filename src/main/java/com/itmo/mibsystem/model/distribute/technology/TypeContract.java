@@ -19,6 +19,16 @@ public class TypeContract {
     @Column(name = "type")
     private String type;
 
+    public TypeContract() {
+        typeContractId = null;
+        type = "";
+    }
+
+    public TypeContract(String type) {
+        typeContractId = null;
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

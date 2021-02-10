@@ -26,6 +26,9 @@ public class DistributeTechnologyService {
     @Autowired
     private DistributeTechnologyItemRepository distributeTechnologyItemRepository;
 
+    @Autowired
+    private BuyTechnologyDocumentRepository buyTechnologyDocumentRepository;
+
     public List<DeliveryType> getAllDeliveryType() {
         List<DeliveryType> deliveryType = new ArrayList<>();
         deliveryTypeRepository.findAll().iterator().forEachRemaining(deliveryType::add);
@@ -45,6 +48,27 @@ public class DistributeTechnologyService {
         typeContractRepository.findAll().iterator().forEachRemaining(typeContract::add);
 
         return typeContract;
+    }
+
+    public List<BuyTechnologyDocument> getAllBuyTechnologyDocument() {
+        List<BuyTechnologyDocument> buyTechnologyDocument = new ArrayList<BuyTechnologyDocument>();
+        buyTechnologyDocumentRepository.findAll().iterator().forEachRemaining(buyTechnologyDocument::add);
+
+        return buyTechnologyDocument;
+    }
+
+    public List<SellTechnologyDocument> getAllSellTechnologyDocument() {
+        List<SellTechnologyDocument> sellTechnologyDocument = new ArrayList<SellTechnologyDocument>();
+        sellTechnologyDocumentRepository.findAll().iterator().forEachRemaining(sellTechnologyDocument::add);
+
+        return sellTechnologyDocument;
+    }
+
+    public List<DistributeTechnologyItem> getAllDistributeTechnologyItem() {
+        List<DistributeTechnologyItem> distributeTechnologyItem = new ArrayList<DistributeTechnologyItem>();
+        distributeTechnologyItemRepository.findAll().iterator().forEachRemaining(distributeTechnologyItem::add);
+
+        return distributeTechnologyItem;
     }
 
     public List<SellTechnologyDocument> getSellTechnologyDocumentByFilds(String costForOne, Long count, long idTechnology, long idTypeContract, long idAlien, String discription) {
@@ -89,28 +113,40 @@ public class DistributeTechnologyService {
         return buyTechnologyDocumentRepository.findAllByFilds(count, idTechnology, idPaymentType, idDeliveryType, discription);
     }
 
-    public void insertSellTechnologyDocument(SellTechnologyDocument sellTechnologyDocument) {
-        sellTechnologyDocumentRepository.save(sellTechnologyDocument);
+    public SellTechnologyDocument insertSellTechnologyDocument(SellTechnologyDocument sellTechnologyDocument) {
+        return sellTechnologyDocumentRepository.save(sellTechnologyDocument);
     }
 
     public void deleteSellTechnologyDocument(SellTechnologyDocument sellTechnologyDocument) {
         sellTechnologyDocumentRepository.deleteById(sellTechnologyDocument.getSellTechnologyDocumentId());
     }
 
-    public void updateSellTechnologyDocument(SellTechnologyDocument sellTechnologyDocument){
-        sellTechnologyDocumentRepository.save(sellTechnologyDocument);
+    public SellTechnologyDocument updateSellTechnologyDocument(SellTechnologyDocument sellTechnologyDocument){
+        return sellTechnologyDocumentRepository.save(sellTechnologyDocument);
     }
 
-    public void insertDistributeTechnologyItem(DistributeTechnologyItem distributeTechnologyItem) {
-        distributeTechnologyItemRepository.save(distributeTechnologyItem);
+    public DistributeTechnologyItem insertDistributeTechnologyItem(DistributeTechnologyItem distributeTechnologyItem) {
+        return distributeTechnologyItemRepository.save(distributeTechnologyItem);
     }
 
     public void deleteDistributeTechnologyItem(DistributeTechnologyItem distributeTechnologyItem) {
         distributeTechnologyItemRepository.deleteById(distributeTechnologyItem.getDistributeTechnologyItemId());
     }
 
-    public void updateDistributeTechnologyItem(DistributeTechnologyItem distributeTechnologyItem){
-        distributeTechnologyItemRepository.save(distributeTechnologyItem);
+    public DistributeTechnologyItem updateDistributeTechnologyItem(DistributeTechnologyItem distributeTechnologyItem){
+        return distributeTechnologyItemRepository.save(distributeTechnologyItem);
+    }
+
+    public BuyTechnologyDocument insertBuyTechnologyDocument(BuyTechnologyDocument buyTechnologyDocuments) {
+        return buyTechnologyDocumentRepository.save(buyTechnologyDocuments);
+    }
+
+    public void deleteBuyTechnologyDocuments(BuyTechnologyDocument distributeTechnologyItem) {
+        buyTechnologyDocumentRepository.deleteById(distributeTechnologyItem.getBuyTechnologyDocumentId());
+    }
+
+    public BuyTechnologyDocument updateBuyTechnologyDocuments(BuyTechnologyDocument distributeTechnologyItem){
+        return buyTechnologyDocumentRepository.save(distributeTechnologyItem);
     }
 
 }

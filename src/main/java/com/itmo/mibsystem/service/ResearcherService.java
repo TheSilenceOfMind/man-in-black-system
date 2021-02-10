@@ -37,7 +37,7 @@ public class ResearcherService {
         return technologies;
     }
 
-    public List<Technology> getAliensByFilds(String name, String use, long idRace, long idSource, String discription) {
+    public List<Technology> getTechnologysByFilds(String name, String use, long idRace, long idSource, String discription) {
         return technologyRepository.findTechnologyByNameAndUseAndIdRaceAAndIdSourceAndDescription(name , use, idRace, idSource, discription);
     }
 
@@ -57,7 +57,7 @@ public class ResearcherService {
         technologyRepository.deleteById(technology.getTechnologyId());
     }
 
-    public void updateTechnology(Technology technology){
-        technologyRepository.save(technology);
+    public Technology updateTechnology(Technology technology){
+        return technologyRepository.save(technology);
     }
 }

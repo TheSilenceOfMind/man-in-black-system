@@ -35,13 +35,12 @@ public class AlienPassport {
         this.idRace = 0L;
     }
 
-    public AlienPassport(Long passportId, String name, String homePlanet, String description, Long idRace, String nameRace) {
+    public AlienPassport(Long passportId, String name, String homePlanet, String description, Long idRace) {
         this.passportId = passportId;
         this.name = name;
         this.homePlanet = homePlanet;
         this.description = description;
         this.idRace = idRace;
-        this.nameRace = nameRace;
     }
 
     @Override

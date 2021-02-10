@@ -19,4 +19,10 @@ public interface BuyTechnologyDocumentRepository extends CrudRepository<BuyTechn
             "(:description is null or :description = '' or c.description = :description) order by " +
             "c.buyTechnologyDocumentId ASC")
     List<BuyTechnologyDocument> findAllByFilds(@Param("count") Long count, @Param("idTechnology") Long idTechnology, @Param("idPaymentType") Long idPaymentType, @Param("idDeliveryType") Long idDeliveryType, @Param("description") String description);
+
+    List<BuyTechnologyDocument> findByIdPaymentType(Long idPaymentType);
+
+    List<BuyTechnologyDocument> findByIdDeliveryType(Long idDeliveryType);
+
+    Optional<BuyTechnologyDocument> findByDescription(String description);
 }

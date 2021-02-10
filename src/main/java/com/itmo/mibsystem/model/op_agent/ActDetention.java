@@ -37,6 +37,14 @@ public class ActDetention {
         description = "";
     }
 
+    public ActDetention(String scene, String description, Long idGuiltyAlien, Long idUserAgent) {
+        actDetentionId = null;
+        this.scene = scene;
+        this.description = description;
+        this.idGuiltyAlien = idGuiltyAlien;
+        this.idUserAgent = idUserAgent;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

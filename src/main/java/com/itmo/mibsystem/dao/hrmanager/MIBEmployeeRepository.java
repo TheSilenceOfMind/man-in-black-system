@@ -14,8 +14,11 @@ public interface MIBEmployeeRepository extends CrudRepository<MIBEmployee, Long>
 
     @Query("SELECT c FROM MIBEmployee c " +
             "WHERE (:name is null or :name = '' or c.name = :name) and " +
+            "(:age is null or :age = '' or c.age = :age) and" +
             "(:idCurator is null or :idCurator = 0L or c.idCurator = :idCurator) and" +
             "(:description is null or :description = '' or c.description = :description) order by " +
             "c.MIBEmployeeId ASC")
-    List<MIBEmployee> findMIBEmployeesByNameAndIdСuratorAndDescription(@Param("name") String name, @Param("idCurator") Long idCurator, @Param("description") String description);
+    List<MIBEmployee> findMIBEmployeesByNameAndIdСuratorAndDescription(@Param("name") String name, @Param("age") String age,@Param("idCurator") Long idCurator, @Param("description") String description);
+
+    List<MIBEmployee> findByIdUser(Long idUser);
 }

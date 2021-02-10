@@ -17,4 +17,7 @@ public interface ActDetentionRepository extends CrudRepository<ActDetention, Lon
             "c.actDetentionId ASC")
     List<ActDetention> findActDetentionBySceneAndIdGuiltyAlienAndIdUserAgentAndDescription(@Param("scene") String scene, @Param("idGuiltyAlien") Long idGuiltyAlien, @Param("idUserAgent") Long idUserAgent, @Param("description") String description);
 
+    List<ActDetention> findByIdUserAgent(Long idUserAgent);
+
+    Optional<ActDetention> findByScene(String scene);
 }

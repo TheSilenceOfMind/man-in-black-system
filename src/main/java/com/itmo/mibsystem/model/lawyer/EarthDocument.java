@@ -42,6 +42,15 @@ public class EarthDocument {
         description = "";
     }
 
+    public EarthDocument(String earthName, Long idNation, Long idTypeDocument, Long idAlien, String description) {
+        earthDocumentId = null;
+        this.earthName = earthName;
+        this.idNation = idNation;
+        this.idTypeDocument = idTypeDocument;
+        this.idAlien = idAlien;
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

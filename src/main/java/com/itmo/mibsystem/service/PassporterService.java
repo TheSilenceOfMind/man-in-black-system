@@ -37,16 +37,16 @@ public class PassporterService {
         return alienPassportRepository.findAlienPassportByNameAndHomePlanetAndIdRaceAndDescription(name , homePlanet, idRace, discription);
     }
 
-    public void insertPassport(AlienPassport alienPassport) {
-        alienPassportRepository.save(alienPassport);
+    public AlienPassport insertPassport(AlienPassport alienPassport) {
+        return alienPassportRepository.save(alienPassport);
     }
 
     public void deletePassport(AlienPassport alienPassport) {
         alienPassportRepository.deleteById(alienPassport.getPassportId());
     }
 
-    public void updatePassport(AlienPassport alienPassport){
-        alienPassportRepository.save(alienPassport);
+    public AlienPassport updatePassport(AlienPassport alienPassport){
+        return alienPassportRepository.save(alienPassport);
     }
 
 }

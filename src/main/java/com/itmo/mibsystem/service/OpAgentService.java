@@ -26,15 +26,15 @@ public class OpAgentService {
         return actDetentionRepository.findActDetentionBySceneAndIdGuiltyAlienAndIdUserAgentAndDescription(scene , idGuiltyAlien, idAgent, discription);
     }
 
-    public void insertActDetention(ActDetention actDetention) {
-        actDetentionRepository.save(actDetention);
+    public ActDetention insertActDetention(ActDetention actDetention) {
+        return actDetentionRepository.save(actDetention);
     }
 
     public void deleteActDetention(ActDetention actDetention) {
         actDetentionRepository.deleteById(actDetention.getActDetentionId());
     }
 
-    public void updateActDetention(ActDetention actDetention){
-        actDetentionRepository.save(actDetention);
+    public ActDetention updateActDetention(ActDetention actDetention){
+        return actDetentionRepository.save(actDetention);
     }
 }

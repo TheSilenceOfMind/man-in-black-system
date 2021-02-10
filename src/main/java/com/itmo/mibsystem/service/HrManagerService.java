@@ -94,13 +94,13 @@ public class HrManagerService {
         return user;
     }
 
-    public List<MIBEmployee> getMIBEmployeeByFilds(String name, Long idCurator, String discription) {
-        return mIBEmployeeRepository.findMIBEmployeesByNameAndIdСuratorAndDescription(name, idCurator, discription);
+    public List<MIBEmployee> getMIBEmployeeByFilds(String name, String age, Long idCurator, String discription) {
+        return mIBEmployeeRepository.findMIBEmployeesByNameAndIdСuratorAndDescription(name, age, idCurator, discription);
     }
 
-    public void insertMIBEmployee(MIBEmployee mIBEmployee, List<FreePersona> personas) {
+    public MIBEmployee insertMIBEmployee(MIBEmployee mIBEmployee, List<FreePersona> personas) {
         if(mIBEmployee.getUsername().length() == 0 || mIBEmployee.getPassword().length() == 0) {
-            return;
+            return null;
         }
 
         if(mIBEmployee.getIdFreePeople() != 0L) {
@@ -111,7 +111,7 @@ public class HrManagerService {
 
         mIBEmployee.setIdUser(buffUser.getUserId());
 
-        mIBEmployeeRepository.save(mIBEmployee);
+        return mIBEmployeeRepository.save(mIBEmployee);
     }
 
     public void deleteMIBEmployee(MIBEmployee mIBEmployee) {
@@ -119,7 +119,7 @@ public class HrManagerService {
         userService.deleteUserById(mIBEmployee.getIdUser());
     }
 
-    public void updateMIBEmployee(MIBEmployee mIBEmployee){
+    public MIBEmployee updateMIBEmployee(MIBEmployee mIBEmployee){
         User buff =  new User(mIBEmployee.getIdUser(), mIBEmployee.getUsername(), mIBEmployee.getPassword(), false);
         if(mIBEmployee.getPassword() == null || mIBEmployee.getPassword().length() == 0) {
             buff.setPassword(getUserbyId(buff.getUserId()).getPassword());
@@ -128,6 +128,6 @@ public class HrManagerService {
         else {
             userService.saveUser(buff, mIBEmployee.getIdRole(),true);
         }
-        mIBEmployeeRepository.save(mIBEmployee);
+        return mIBEmployeeRepository.save(mIBEmployee);
     }
 }

@@ -37,7 +37,7 @@
                        </div>
                         <select th:field="*{idUserAgent}" >
                             <option value="0"> -- </option>
-                            <option th:each="agent : ${agents}"  th:value="${agent.userId}"  th:utext="${agent.username}"/>
+                            <option th:each="agent : ${agents}"  th:value="${agent.MIBEmployeeId}"  th:utext="${agent.name}"/>
                         </select>
                    </div>
                    <div class="inline-block">
@@ -106,7 +106,7 @@
                        </td>
                        <td class="col-2">
                            <select th:field="*{idUserAgent}" >
-                               <option th:each="agent : ${agents}"  th:value="${agent.userId}"  th:utext="${agent.username}"/>
+                               <option th:each="agent : ${agents}"  th:value="${agent.MIBEmployeeId}"  th:utext="${agent.name}"/>
                            </select>
                        </td>
                     </tr>
@@ -169,7 +169,7 @@
                     </td>
                     <td class="col-2">
                         <select id="idUserAgent" th:field="*{idUserAgent}" >
-                            <option th:each="agent : ${agents}"  th:value="${agent.userId}"  th:utext="${agent.username}"/>
+                            <option th:each="agent : ${agents}"  th:value="${agent.MIBEmployeeId}"  th:utext="${agent.name}"/>
                         </select>
                     </td>
                  </tr>

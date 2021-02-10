@@ -7,5 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface TypeEarthDocumentRepository extends CrudRepository<TypeEarthDocument, Long> {
-    Optional<TypeEarthDocument> findAllByType(String type);
+    Optional<TypeEarthDocument> findByType(String type);
+
+
 }

@@ -19,6 +19,16 @@ public class TypeEarthDocument {
     @Column(name = "type")
     private String type;
 
+    public TypeEarthDocument() {
+        typeEarthDocumentId = null;
+        type = "";
+    }
+
+    public TypeEarthDocument(String type) {
+        typeEarthDocumentId = null;
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

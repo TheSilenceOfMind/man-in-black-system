@@ -53,6 +53,15 @@ public class BuyTechnologyDocument {
         description = "";
     }
 
+    public BuyTechnologyDocument(Long count, String description, Long idPaymentType, Long idDeliveryType, Long idTechnology) {
+        buyTechnologyDocumentId = null;
+        this.count = count;
+        this.description = description;
+        this.idPaymentType = idPaymentType;
+        this.idDeliveryType = idDeliveryType;
+        this.idTechnology = idTechnology;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -46,6 +46,16 @@ public class SellTechnologyDocument {
         idTechnology = 0L;
     }
 
+    public SellTechnologyDocument(String costForOne, Long count, String description, Long idTechnology, Long idTypeContract, Long idAlien) {
+        sellTechnologyDocumentId = null;
+        this.costForOne = costForOne;
+        this.count = count;
+        this.description = description;
+        this.idAlien = idAlien;
+        this.idTypeContract = idTypeContract;
+        this.idTechnology = idTechnology;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

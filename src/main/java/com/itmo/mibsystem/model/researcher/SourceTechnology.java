@@ -19,6 +19,16 @@ public class SourceTechnology {
     @Column(name = "value")
     private String value;
 
+    public SourceTechnology() {
+        sourceId = null;
+        this.value = "";
+    }
+
+    public SourceTechnology(String value) {
+        sourceId = null;
+        this.value = value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

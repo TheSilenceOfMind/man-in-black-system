@@ -81,7 +81,7 @@ public class ResearcherController {
         this.findFilds = findFilds;
 
         model.addAttribute("findFilds", findFilds);
-        List<Technology> technology = researcherService.getAliensByFilds(findFilds.getName(), findFilds.getUse(), findFilds.getIdRace(), findFilds.getIdSource(), findFilds.getDescription());
+        List<Technology> technology = researcherService.getTechnologysByFilds(findFilds.getName(), findFilds.getUse(), findFilds.getIdRace(), findFilds.getIdSource(), findFilds.getDescription());
         for(int i = 0; i < technology.size(); i ++) {
             for(int j = 0; j < race.size(); j ++) {
                 if(technology.get(i).getIdRace() == race.get(j).getRaceId()) {

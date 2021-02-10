@@ -40,6 +40,16 @@ public class DistributeTechnologyItem {
         idAgent = 0L;
         description = "";
     }
+
+    public DistributeTechnologyItem(Long count, String use, Long idTechnology, Long idAgent, String description) {
+        distributeTechnologyItemId = null;
+        this.count = count;
+        this.use = use;
+        this.idTechnology = idTechnology;
+        this.idAgent = idAgent;
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

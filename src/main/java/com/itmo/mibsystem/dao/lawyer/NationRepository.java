@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface NationRepository extends CrudRepository<Nation, Long> {
-    Optional<Nation> findAllByName(String name);
+    Optional<Nation> findByName(String name);
 }

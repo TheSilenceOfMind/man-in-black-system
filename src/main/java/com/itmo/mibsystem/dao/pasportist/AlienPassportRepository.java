@@ -14,5 +14,5 @@ public interface AlienPassportRepository extends CrudRepository<AlienPassport, L
     @Query("SELECT c FROM AlienPassport c WHERE (:name is null or :name = '' or c.name = :name) and (:homePlanet is null or :homePlanet = '' or c.homePlanet = :homePlanet) and (:idRace is null or :idRace = 0L or c.idRace = :idRace) and (:description is null or :description = '' or c.description = :description) order by c.passportId ASC")
     List<AlienPassport> findAlienPassportByNameAndHomePlanetAndIdRaceAndDescription(@Param("name") String name, @Param("homePlanet") String homePlanet, @Param("idRace") Long idRace, @Param("description") String description);
 
-
+    List<AlienPassport> findAllByIdRace(Long idRace);
 }

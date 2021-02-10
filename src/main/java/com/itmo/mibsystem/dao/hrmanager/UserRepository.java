@@ -20,4 +20,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("SELECT u FROM User u join u.roles r where u.userId = :userId order by u.userId ASC")
     List<User> findUserByUserId(Long userId);
+
+    void deleteByUsername(String username);
 }

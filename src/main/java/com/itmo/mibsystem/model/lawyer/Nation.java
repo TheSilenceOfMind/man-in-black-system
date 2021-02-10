@@ -19,6 +19,16 @@ public class Nation {
     @Column(name = "name")
     private String name;
 
+    public Nation() {
+        nationId = null;
+        name = "";
+    }
+
+    public Nation(String name) {
+        nationId = null;
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

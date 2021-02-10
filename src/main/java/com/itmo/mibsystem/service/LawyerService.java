@@ -47,15 +47,16 @@ public class LawyerService {
         return earthDocumentRepository.findEarthDocumentByEarthNameAndIdNationAndIdTypeDocumentAndidAlienAndDescription(earthName , idNation, idTypeDocument, idAlien, discription);
     }
 
-    public void insertEarthDocument(EarthDocument earthDocument) {
-        earthDocumentRepository.save(earthDocument);
+    public EarthDocument insertEarthDocument(EarthDocument earthDocument) {
+
+        return earthDocumentRepository.save(earthDocument);
     }
 
     public void deleteEarthDocument(EarthDocument earthDocument) {
         earthDocumentRepository.deleteById(earthDocument.getEarthDocumentId());
     }
 
-    public void updateEarthDocument(EarthDocument earthDocument){
-        earthDocumentRepository.save(earthDocument);
+    public EarthDocument updateEarthDocument(EarthDocument earthDocument){
+        return earthDocumentRepository.save(earthDocument);
     }
 }

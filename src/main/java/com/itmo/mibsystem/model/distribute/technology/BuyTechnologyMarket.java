@@ -38,6 +38,15 @@ public class BuyTechnologyMarket {
         description = "";
     }
 
+    public BuyTechnologyMarket(Long buyTechnologyMarketId, String use, Long count, Long idRace, Long idDeliveryType,String description) {
+        this.buyTechnologyMarketId = buyTechnologyMarketId;
+        this.use = use;
+        this.count = count;
+        this.idRace = idRace;
+        this.idDeliveryType = idDeliveryType;
+        this.description = description;
+    }
+
     public BuyTechnologyMarket(Long buyTechnologyMarketId, PassporterService passporterService, DistributeTechnologyService distributeTechnologyService) {
         String[] alph = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
                 "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",

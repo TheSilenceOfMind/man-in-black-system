@@ -19,6 +19,16 @@ public class AlienRace {
     @Column(name = "name")
     private String name;
 
+    public AlienRace(){
+        raceId = null;
+        name = "";
+    }
+
+    public AlienRace(String name){
+        raceId = null;
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

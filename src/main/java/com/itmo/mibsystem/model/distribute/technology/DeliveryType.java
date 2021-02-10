@@ -20,10 +20,17 @@ public class DeliveryType {
     private String type;
 
     public DeliveryType() {
+        this.deliveryTypeId = null;
+        this.type = "";
     }
 
     public DeliveryType(Long deliveryTypeId, String type) {
         this.deliveryTypeId = deliveryTypeId;
+        this.type = type;
+    }
+
+    public DeliveryType(String type) {
+        this.deliveryTypeId = null;
         this.type = type;
     }
 

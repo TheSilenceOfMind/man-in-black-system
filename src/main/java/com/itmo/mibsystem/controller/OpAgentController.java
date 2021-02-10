@@ -1,8 +1,10 @@
 package com.itmo.mibsystem.controller;
 
 import com.itmo.mibsystem.model.User;
+import com.itmo.mibsystem.model.hrmanager.MIBEmployee;
 import com.itmo.mibsystem.model.op_agent.ActDetention;
 import com.itmo.mibsystem.model.passporter.AlienPassport;
+import com.itmo.mibsystem.service.HrManagerService;
 import com.itmo.mibsystem.service.OpAgentService;
 import com.itmo.mibsystem.service.PassporterService;
 import com.itmo.mibsystem.service.UserService;
@@ -25,11 +27,11 @@ public class OpAgentController {
     private PassporterService passporterService;
 
     @Autowired
-    private UserService userService;
+    private HrManagerService hrManagerService;
 
     private ActDetention findFilds, addActDetention;
     List<AlienPassport> aliens;
-    List<User> users;
+    List<MIBEmployee> users;
 
     @ModelAttribute("aliens")
     public List<AlienPassport> getAliens() {
@@ -38,8 +40,8 @@ public class OpAgentController {
     }
 
     @ModelAttribute("agents")
-    public List<User> getUsers() {
-        users = userService.getAgent();
+    public List<MIBEmployee> getUsers() {
+        users = hrManagerService.getAllMIBEmployee();
         return users;
     }
 
@@ -96,8 +98,8 @@ public class OpAgentController {
             }
 
             for(int j = 0; j < users.size(); j ++) {
-                if(actDetention.get(i).getIdUserAgent() == users.get(j).getUserId()) {
-                    actDetention.get(i).setNameAgent(users.get(j).getUsername());
+                if(actDetention.get(i).getIdUserAgent() == users.get(j).getMIBEmployeeId()) {
+                    actDetention.get(i).setNameAgent(users.get(j).getName());
                     break;
                 }
             }

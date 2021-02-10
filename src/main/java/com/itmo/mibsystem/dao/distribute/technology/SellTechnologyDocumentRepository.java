@@ -32,4 +32,8 @@ public interface SellTechnologyDocumentRepository extends CrudRepository<SellTec
             @Param("count") long count, @Param("idTechnology") long idTechnology,
             @Param("idTypeContract") long idTypeContract, @Param("idAlien") long idAlien,
             @Param("description") String description);
+
+    List<SellTechnologyDocument> findByIdTypeContract(Long idTypeContract);
+
+    Optional<SellTechnologyDocument> findByDescription(String description);
 }
