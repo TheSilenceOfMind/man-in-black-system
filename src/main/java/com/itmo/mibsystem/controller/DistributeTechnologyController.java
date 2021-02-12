@@ -196,6 +196,12 @@ public class DistributeTechnologyController {
             idRace = addBuyTechnologyDocument.getIdRace();
         }
 
+        List<Technology> techList = researcherService.getTechnologysByFilds(addBuyTechnologyDocument.getTechnologyName(), "", 0L, 0l, "");
+
+        for(int i = 0; i < techList.size(); i++) {
+            researcherService.deleteTechnology(techList.get(i));
+        }
+
         Technology tech = researcherService.insertTechnology(new Technology(addBuyTechnologyDocument.getTechnologyName(), addBuyTechnologyDocument.getUse(), addBuyTechnologyDocument.getDescription(), idRace, idSource));
         addBuyTechnologyDocument.setIdTechnology(tech.getTechnologyId());
         distributeTechnologyService.insertBuyTechnologyDocument(addBuyTechnologyDocument);
