@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "mib_role", schema="public")
+@Table(name = "mib_role")
 @Getter
 @Setter
 public class Role {

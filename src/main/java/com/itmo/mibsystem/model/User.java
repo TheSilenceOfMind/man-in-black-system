@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "mib_user", schema="public")
+@Table(name = "mib_user")
 @Setter
 @Getter
 @Builder
