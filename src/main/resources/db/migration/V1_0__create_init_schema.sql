@@ -56,6 +56,16 @@ create table mib_technology
     id_source           integer references mib_source_technology (source_id)
 );
 
+create table mib_employees
+(
+    mib_employee_id     serial primary key,
+    name                varchar(100) not null,
+    age                 varchar(100) not null,
+    description         varchar(255) not null,
+    id_curator          integer references mib_employees (mib_employee_id),
+    id_user             integer references mib_user (user_id)
+);
+
 create table mib_act_detentions
 (
     act_detention_id    serial primary key,
@@ -85,16 +95,6 @@ create table mib_earth_document
     id_nation           integer references mib_nation (nation_id),
     id_type_document    integer references mib_type_earth_documents (type_earth_document_id),
     id_alien            integer references mib_alien_passport (passport_id)
-);
-
-create table mib_employees
-(
-    mib_employee_id     serial primary key,
-    name                varchar(100) not null,
-    age                 varchar(100) not null,
-    description         varchar(255) not null,
-    id_curator          integer references mib_employees (mib_employee_id),
-    id_user             integer references mib_user (user_id)
 );
 
 create table mib_delivery_type
@@ -192,6 +192,13 @@ insert into mib_technology(name, use, description, id_race, id_source) values ('
 insert into mib_technology(name, use, description, id_race, id_source) values ('rahtaebdfd', 'dsgwrbds ', 'dsgwsvxvd', 2, 2);
 insert into mib_technology(name, use, description, id_race, id_source) values ('hyjghm', 'bfbetjdfbv', 'rtmyjdfbwrbw', 3, 1);
 
+insert into mib_employees(name, age, description, id_curator, id_user) values ('k1 k1', '30', 'sdfsdvsfsb', null, 1);
+insert into mib_employees(name, age, description, id_curator, id_user) values ('k2 k2', '29', 'gavavdac', 1, 2);
+insert into mib_employees(name, age, description, id_curator, id_user) values ('k3 k3', '28', 'rjedvw', 1, 3);
+insert into mib_employees(name, age, description, id_curator, id_user) values ('k4 k4', '27', 'greh3rwg', 1, 4);
+insert into mib_employees(name, age, description, id_curator, id_user) values ('k5 k5', '26', 'ehhwbfssbvs', 1, 5);
+insert into mib_employees(name, age, description, id_curator, id_user) values ('k6 k6', '25', 'erh3hregw', 1, 6);
+
 insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien) values ('dsdsbryn', ',ln,lneb', 4, 1);
 insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien) values ('kmytjmtn', 'jy5jnrgdxv', 4, 2);
 insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien) values ('tijrgndsn', 'swgy4bdfdrthe', 4, 3);
@@ -207,13 +214,6 @@ insert into mib_type_earth_documents(type) values ('777');
 insert into mib_earth_document(earth_alien_name, description, id_nation, id_type_document, id_alien) values ('hjtdbsvwfbhn', 'bavneg', 1, 3, 1);
 insert into mib_earth_document(earth_alien_name, description, id_nation, id_type_document, id_alien) values ('hdetjyyklyh', 'asqqnwnmy', 2, 2, 2);
 insert into mib_earth_document(earth_alien_name, description, id_nation, id_type_document, id_alien) values ('nt,lukghvmjr', ',l,cxfsj', 3, 1, 3);
-
-insert into mib_employees(name, age, description, id_curator, id_user) values ('k1 k1', '30', 'sdfsdvsfsb', null, 2);
-insert into mib_employees(name, age, description, id_curator, id_user) values ('k2 k2', '29', 'gavavdac', 1, 3);
-insert into mib_employees(name, age, description, id_curator, id_user) values ('k3 k3', '28', 'rjedvw', 1, 4);
-insert into mib_employees(name, age, description, id_curator, id_user) values ('k4 k4', '27', 'greh3rwg', 1, 5);
-insert into mib_employees(name, age, description, id_curator, id_user) values ('k5 k5', '26', 'ehhwbfssbvs', 1, 6);
-insert into mib_employees(name, age, description, id_curator, id_user) values ('k6 k6', '25', 'erh3hregw', 1, 7);
 
 insert into mib_delivery_type(type) values ('117');
 insert into mib_delivery_type(type) values ('118');
