@@ -84,7 +84,7 @@ public class ResearcherController {
         List<Technology> technology = researcherService.getTechnologysByFilds(findFilds.getName(), findFilds.getUse(), findFilds.getIdRace(), findFilds.getIdSource(), findFilds.getDescription());
         for(int i = 0; i < technology.size(); i ++) {
             for(int j = 0; j < race.size(); j ++) {
-                if(technology.get(i).getIdRace() == race.get(j).getRaceId()) {
+                if(technology.get(i).getIdRace().equals(race.get(j).getRaceId())) {
                     technology.get(i).setNameRace(race.get(j).getName());
                     break;
                 }
@@ -93,7 +93,7 @@ public class ResearcherController {
 
         for(int i = 0; i < technology.size(); i ++) {
             for(int j = 0; j < sources.size(); j ++) {
-                if(technology.get(i).getIdSource() == sources.get(j).getSourceId()) {
+                if(technology.get(i).getIdSource().equals(sources.get(j).getSourceId())) {
                     technology.get(i).setValueSourse(sources.get(j).getValue());
                     break;
                 }

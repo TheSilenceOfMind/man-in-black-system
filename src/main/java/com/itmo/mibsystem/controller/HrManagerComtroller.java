@@ -98,7 +98,7 @@ public class HrManagerComtroller {
         List<MIBEmployee> MIBEmployees = hrManagerService.getMIBEmployeeByFilds(findMIBEmployee.getName(), findMIBEmployee.getAge(), findMIBEmployee.getIdCurator(), findMIBEmployee.getDescription());
         for(int i = 0; i < MIBEmployees.size(); i ++) {
             for(int j = 0; j < peoples.size(); j ++) {
-                if(MIBEmployees.get(i).getIdCurator() == peoples.get(j).getMIBEmployeeId()) {
+                if(MIBEmployees.get(i).getIdCurator().equals(peoples.get(j).getMIBEmployeeId())) {
                     MIBEmployees.get(i).setCuratorName(peoples.get(j).getName());
                     break;
                 }

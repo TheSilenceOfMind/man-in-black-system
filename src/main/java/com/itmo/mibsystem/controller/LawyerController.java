@@ -120,21 +120,21 @@ public class LawyerController {
         List<AlienPassport> buffAlien = passporterService.getAliens();
         for(int i = 0; i < earthDocument.size(); i ++) {
             for(int j = 0; j < nation.size(); j ++) {
-                if(earthDocument.get(i).getIdNation() == nation.get(j).getNationId()) {
+                if(earthDocument.get(i).getIdNation().equals(nation.get(j).getNationId())) {
                     earthDocument.get(i).setNameNation(nation.get(j).getName());
                     break;
                 }
             }
 
             for(int j = 0; j < typeEarthDocument.size(); j ++) {
-                if(earthDocument.get(i).getIdTypeDocument() == typeEarthDocument.get(j).getTypeEarthDocumentId()) {
+                if(earthDocument.get(i).getIdTypeDocument().equals(typeEarthDocument.get(j).getTypeEarthDocumentId())) {
                     earthDocument.get(i).setNameTypeDocument(typeEarthDocument.get(j).getType());
                     break;
                 }
             }
 
             for(int j = 0; j < buffAlien.size(); j ++) {
-                if(earthDocument.get(i).getIdAlien() == buffAlien.get(j).getPassportId()) {
+                if(earthDocument.get(i).getIdAlien().equals(buffAlien.get(j).getPassportId())) {
                     earthDocument.get(i).setNameAlien(buffAlien.get(j).getName());
                     break;
                 }

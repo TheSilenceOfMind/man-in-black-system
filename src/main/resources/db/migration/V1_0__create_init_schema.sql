@@ -36,6 +36,7 @@ create table mib_alien_passport
     passport_id         serial primary key,
     name                varchar(100) unique not null,
     home_planet         varchar(100) not null,
+    baggage             boolean,
     description         varchar(100) not null,
     id_race             integer references mib_alien_race (race_id)
 );
@@ -71,6 +72,8 @@ create table mib_act_detentions
     act_detention_id    serial primary key,
     scene               varchar(100) not null,
     description         varchar(100) not null,
+    technologys         boolean,
+    stripping           boolean,
     id_user_agent       integer references mib_employees (mib_employee_id),
     id_guilty_alien     integer references mib_alien_passport (passport_id)
 );
@@ -179,9 +182,9 @@ insert into mib_alien_race(name) values ('456');
 insert into mib_alien_race(name) values ('789');
 insert into mib_alien_race(name) values ('Unknown');
 
-insert into mib_alien_passport(name, home_planet, description, id_race) values ('afsa', 'dsfd', 'hted', 1);
-insert into mib_alien_passport(name, home_planet, description, id_race) values ('FSFA', 'sgrwb ', 'sdgh', 2);
-insert into mib_alien_passport(name, home_planet, description, id_race) values ('bfdnd', 'yrwfgvv', 'vjhr', 3);
+insert into mib_alien_passport(name, home_planet, description, id_race, baggage) values ('afsa', 'dsfd', 'hted', 1, FALSE);
+insert into mib_alien_passport(name, home_planet, description, id_race, baggage) values ('FSFA', 'sgrwb ', 'sdgh', 2, FALSE);
+insert into mib_alien_passport(name, home_planet, description, id_race, baggage) values ('bfdnd', 'yrwfgvv', 'vjhr', 3, FALSE);
 
 insert into mib_source_technology(value) values ('321');
 insert into mib_source_technology(value) values ('654');
@@ -199,9 +202,9 @@ insert into mib_employees(name, age, description, id_curator, id_user) values ('
 insert into mib_employees(name, age, description, id_curator, id_user) values ('k5 k5', '26', 'ehhwbfssbvs', 1, 5);
 insert into mib_employees(name, age, description, id_curator, id_user) values ('k6 k6', '25', 'erh3hregw', 1, 6);
 
-insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien) values ('dsdsbryn', ',ln,lneb', 4, 1);
-insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien) values ('kmytjmtn', 'jy5jnrgdxv', 4, 2);
-insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien) values ('tijrgndsn', 'swgy4bdfdrthe', 4, 3);
+insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien, technologys, stripping) values ('dsdsbryn', ',ln,lneb', 4, 1, FALSE, FALSE);
+insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien, technologys, stripping) values ('kmytjmtn', 'jy5jnrgdxv', 4, 2, FALSE, FALSE);
+insert into mib_act_detentions(scene, description, id_user_agent, id_guilty_alien, technologys, stripping) values ('tijrgndsn', 'swgy4bdfdrthe', 4, 3, FALSE, FALSE);
 
 insert into mib_nation(name) values ('111');
 insert into mib_nation(name) values ('222');

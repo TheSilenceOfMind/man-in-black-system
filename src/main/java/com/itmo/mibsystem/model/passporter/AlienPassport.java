@@ -24,6 +24,8 @@ public class AlienPassport {
     private String description;
     @Column(name = "id_race")
     private Long idRace;
+    @Column(name = "baggage")
+    private Boolean baggage;
     @Transient
     private String nameRace;
 
@@ -33,14 +35,16 @@ public class AlienPassport {
         this.homePlanet = "";
         this.description = "";
         this.idRace = 0L;
+        this.baggage = false;
     }
 
-    public AlienPassport(Long passportId, String name, String homePlanet, String description, Long idRace) {
+    public AlienPassport(Long passportId, String name, String homePlanet, String description, Long idRace, Boolean baggage) {
         this.passportId = passportId;
         this.name = name;
         this.homePlanet = homePlanet;
         this.description = description;
         this.idRace = idRace;
+        this.baggage = baggage;
     }
 
     @Override

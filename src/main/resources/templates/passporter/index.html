@@ -60,7 +60,7 @@
                        <td th:utext="${alien.nameRace}"></td>
                        <td th:utext="${alien.description}"></td>
                        <td>
-                           <button name = "edit" th:data1="${alien.name}" th:data2="${alien.homePlanet}" th:data3="${alien.description}" th:onmouseup="|getAlienPassport('${alien.passportId}', this.getAttribute('data1'), this.getAttribute('data2'), ${alien.idRace}, this.getAttribute('data3'));|" class = "button-edit">Редактировать</button>
+                           <button name = "edit" th:data1="${alien.name}" th:data2="${alien.homePlanet}" th:data3="${alien.description}" th:onmouseup="|getAlienPassport('${alien.passportId}', this.getAttribute('data1'), this.getAttribute('data2'), ${alien.idRace}, this.getAttribute('data3'), ${alien.baggage});|" class = "button-edit">Редактировать</button>
                            <button name = "delete" th:onmouseup="|getIdByButton(${alien.passportId});|" class = "button-edit" >Удалить</button>
                        </td>
                    </tr>
@@ -101,6 +101,13 @@
                            <select th:field="*{idRace}">
                                <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
                            </select>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td class="col-2">
+                       </td>
+                       <td class="col-1" align="right">
+                           <input type="checkbox" th:field="*{baggage}">Багаж
                        </td>
                    </tr>
                    <tr>
@@ -161,6 +168,13 @@
                         <select th:field="*{idRace}" id="passportIdRace">
                             <option th:each="alienRace : ${alienRaces}"  th:value="${alienRace.raceId}"  th:utext="${alienRace.name}"/>
                         </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-2">
+                    </td>
+                    <td class="col-1" align="right">
+                        <input type="checkbox" id="passportBaggage" th:field="*{baggage}">Багаж
                     </td>
                 </tr>
                 <tr>
@@ -230,12 +244,13 @@
        document.getElementById("passportIdDelete").value = id;
    }
 
-   function getAlienPassport(passportId, name, homePlanet, idRace, description) {
+   function getAlienPassport(passportId, name, homePlanet, idRace, description, baggage) {
        document.getElementById("passportId").value = passportId;
        document.getElementById("passportName").value = name;
        document.getElementById("passportHomePlanet").value = homePlanet;
        document.getElementById("passportIdRace").value = idRace;
        document.getElementById("passportDescription").value = description;
+       document.getElementById("passportBaggage").checked = baggage;
    }
 
     function closeModal(modal) {

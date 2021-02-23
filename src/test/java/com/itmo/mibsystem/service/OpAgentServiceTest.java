@@ -51,7 +51,7 @@ public class OpAgentServiceTest {
         MIBEmployee mibEmployee = CreateMIBEmployee("testName", "11 age", "testDiscription", testUser.getUserId());
 
         //Test
-        ActDetention actDetention = new ActDetention("testScene", "testDescription", alien.getPassportId(), mibEmployee.getMIBEmployeeId());
+        ActDetention actDetention = new ActDetention("testScene", "testDescription", alien.getPassportId(), mibEmployee.getMIBEmployeeId(), false, false);
         actDetention = opAgentService.insertActDetention(actDetention);
 
         ActDetention findMibEmployee = actDetentionRepository.findById(actDetention.getActDetentionId()).orElse(null);
@@ -294,7 +294,7 @@ public class OpAgentServiceTest {
             alienPassportRepository.deleteById(pass.getPassportId());
         }
 
-        return alienPassportRepository.save(new AlienPassport(null, name, homePlane, description, idRace));
+        return alienPassportRepository.save(new AlienPassport(null, name, homePlane, description, idRace, false));
     }
 
     User CreateTestUser(String username, String pasword) {
@@ -325,7 +325,7 @@ public class OpAgentServiceTest {
             actDetentionRepository.deleteById(act.getActDetentionId());
         }
 
-        return actDetentionRepository.save(new ActDetention(scene, description, idGuiltyAlien, idUserAgent));
+        return actDetentionRepository.save(new ActDetention(scene, description, idGuiltyAlien, idUserAgent, false, false));
     }
 
 }

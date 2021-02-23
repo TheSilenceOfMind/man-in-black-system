@@ -22,6 +22,10 @@ public class ActDetention {
     private Long idGuiltyAlien;
     @Column(name = "id_user_agent")
     private Long idUserAgent;
+    @Column(name = "technologys")
+    Boolean technologys;
+    @Column(name = "stripping")
+    Boolean stripping;
     @Column(name = "description")
     private String description;
     @Transient
@@ -35,14 +39,18 @@ public class ActDetention {
         idGuiltyAlien = 0L;
         idUserAgent = 0L;
         description = "";
+        technologys = false;
+        stripping = false;
     }
 
-    public ActDetention(String scene, String description, Long idGuiltyAlien, Long idUserAgent) {
+    public ActDetention(String scene, String description, Long idGuiltyAlien, Long idUserAgent, boolean technologys, boolean stripping) {
         actDetentionId = null;
         this.scene = scene;
         this.description = description;
         this.idGuiltyAlien = idGuiltyAlien;
         this.idUserAgent = idUserAgent;
+        this.technologys = technologys;
+        this.stripping = stripping;
     }
 
     @Override

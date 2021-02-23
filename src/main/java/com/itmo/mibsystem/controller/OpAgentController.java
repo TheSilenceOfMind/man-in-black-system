@@ -91,14 +91,14 @@ public class OpAgentController {
         List<ActDetention> actDetention = opAgentService.getActDetentionByFilds(findFilds.getScene(), findFilds.getIdGuiltyAlien(), findFilds.getIdUserAgent(), findFilds.getDescription());
         for(int i = 0; i < actDetention.size(); i ++) {
             for(int j = 0; j < aliens.size(); j ++) {
-                if(actDetention.get(i).getIdGuiltyAlien() == aliens.get(j).getPassportId()) {
+                if(actDetention.get(i).getIdGuiltyAlien().equals(aliens.get(j).getPassportId())) {
                     actDetention.get(i).setNameAlien(aliens.get(j).getName());
                     break;
                 }
             }
 
             for(int j = 0; j < users.size(); j ++) {
-                if(actDetention.get(i).getIdUserAgent() == users.get(j).getMIBEmployeeId()) {
+                if(actDetention.get(i).getIdUserAgent().equals(users.get(j).getMIBEmployeeId())) {
                     actDetention.get(i).setNameAgent(users.get(j).getName());
                     break;
                 }

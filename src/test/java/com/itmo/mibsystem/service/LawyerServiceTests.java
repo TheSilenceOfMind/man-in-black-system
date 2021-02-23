@@ -359,6 +359,6 @@ public class LawyerServiceTests {
             alienPassportRepository.deleteById(pass.getPassportId());
         }
 
-        return alienPassportRepository.save(new AlienPassport(null, name, homePlane, description, idRace));
+        return alienPassportRepository.save(new AlienPassport(null, name, homePlane, description, idRace, false));
     }
 }

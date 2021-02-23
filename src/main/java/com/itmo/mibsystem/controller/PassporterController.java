@@ -73,7 +73,7 @@ public class PassporterController {
         List<AlienPassport> alien = passporterService.getAliensByFilds(findFilds.getName(), findFilds.getHomePlanet(), findFilds.getIdRace(), findFilds.getDescription());
         for(int i = 0; i < alien.size(); i ++) {
             for(int j = 0; j < race.size(); j ++) {
-                if(alien.get(i).getIdRace() == race.get(j).getRaceId()) {
+                if(alien.get(i).getIdRace().equals(race.get(j).getRaceId())) {
                     alien.get(i).setNameRace(race.get(j).getName());
                     break;
                 }

@@ -252,21 +252,21 @@ public class DistributeTechnologyController {
         List<SellTechnologyDocument> sellTechnologyDocuments = distributeTechnologyService.getSellTechnologyDocumentByFilds(findSellTechnologyDocument.getCostForOne(),findSellTechnologyDocument.getCount(),findSellTechnologyDocument.getIdTechnology(),findSellTechnologyDocument.getIdTypeContract(),findSellTechnologyDocument.getIdAlien(),findSellTechnologyDocument.getDescription());
         for(int i = 0; i < sellTechnologyDocuments.size(); i++) {
             for(int j = 0; j < technologys.size(); j++) {
-                if(sellTechnologyDocuments.get(i).getIdTechnology() == technologys.get(j).getTechnologyId()) {
+                if(sellTechnologyDocuments.get(i).getIdTechnology().equals(technologys.get(j).getTechnologyId())) {
                     sellTechnologyDocuments.get(i).setTechnologyName(technologys.get(j).getName());
                     break;
                 }
             }
 
             for(int j = 0; j < aliens.size(); j++) {
-                if(sellTechnologyDocuments.get(i).getIdAlien() == aliens.get(j).getPassportId()) {
+                if(sellTechnologyDocuments.get(i).getIdAlien().equals(aliens.get(j).getPassportId())) {
                     sellTechnologyDocuments.get(i).setAlienName(aliens.get(j).getName());
                     break;
                 }
             }
 
             for(int j = 0; j < typeContracts.size(); j++) {
-                if(sellTechnologyDocuments.get(i).getIdTypeContract() == typeContracts.get(j).getTypeContractId()) {
+                if(sellTechnologyDocuments.get(i).getIdTypeContract().equals(typeContracts.get(j).getTypeContractId())) {
                     sellTechnologyDocuments.get(i).setTypeContractName(typeContracts.get(j).getType());
                     break;
                 }
@@ -277,13 +277,13 @@ public class DistributeTechnologyController {
         findBuyTechnologyMarkets = distributeTechnologyService.getBuyTechnologyMarketByFilds(findBuyTechnologyMarket, buyTechnologyMarkets);
         for(int i = 0; i < findBuyTechnologyMarkets.size(); i++) {
             for(int j = 0; j < alienRace.size(); j++) {
-                if(findBuyTechnologyMarkets.get(i).getIdRace() == alienRace.get(j).getRaceId()) {
+                if(findBuyTechnologyMarkets.get(i).getIdRace().equals(alienRace.get(j).getRaceId())) {
                     findBuyTechnologyMarkets.get(i).setRaceName(alienRace.get(j).getName());
                     break;
                 }
             }
             for(int j = 0; j < deliveryType.size(); j++) {
-                if(findBuyTechnologyMarkets.get(i).getIdDeliveryType() == deliveryType.get(j).getDeliveryTypeId()) {
+                if(findBuyTechnologyMarkets.get(i).getIdDeliveryType().equals(deliveryType.get(j).getDeliveryTypeId())) {
                     findBuyTechnologyMarkets.get(i).setDeliveryTypeName(deliveryType.get(j).getType());
                     break;
                 }
@@ -294,21 +294,21 @@ public class DistributeTechnologyController {
         List<BuyTechnologyDocument> buyTechnologyDocuments = distributeTechnologyService.getBuyTechnologyDocumentsByFilds(findBuyTechnologyDocument.getCount(), findBuyTechnologyDocument.getIdTechnology(), findBuyTechnologyDocument.getIdPaymentType(), findBuyTechnologyDocument.getIdDeliveryType(), findBuyTechnologyDocument.getDescription());
         for(int i = 0; i < buyTechnologyDocuments.size(); i++) {
             for (int j = 0; j < technologys.size(); j++) {
-                if (buyTechnologyDocuments.get(i).getIdTechnology() == technologys.get(j).getTechnologyId()) {
+                if (buyTechnologyDocuments.get(i).getIdTechnology().equals(technologys.get(j).getTechnologyId())) {
                     buyTechnologyDocuments.get(i).setTechnologyName(technologys.get(j).getName());
                     break;
                 }
             }
 
             for(int j = 0; j < paymentType.size(); j++) {
-                if(buyTechnologyDocuments.get(i).getIdPaymentType() == paymentType.get(j).getPaymentTypeId()) {
+                if(buyTechnologyDocuments.get(i).getIdPaymentType().equals(paymentType.get(j).getPaymentTypeId())) {
                     buyTechnologyDocuments.get(i).setPaymentTypeName(paymentType.get(j).getType());
                     break;
                 }
             }
 
             for(int j = 0; j < deliveryType.size(); j++) {
-                if(buyTechnologyDocuments.get(i).getIdDeliveryType() == deliveryType.get(j).getDeliveryTypeId()) {
+                if(buyTechnologyDocuments.get(i).getIdDeliveryType().equals(deliveryType.get(j).getDeliveryTypeId())) {
                     buyTechnologyDocuments.get(i).setDeliveryTypeName(deliveryType.get(j).getType());
                     break;
                 }
@@ -320,14 +320,14 @@ public class DistributeTechnologyController {
         List<DistributeTechnologyItem> distributeTechnologyItems = distributeTechnologyService.getDistributeTechnologyItemByFilds(findDistributeTechnologyItem.getCount(),findDistributeTechnologyItem.getUse(),findDistributeTechnologyItem.getIdTechnology(),findDistributeTechnologyItem.getIdAgent(),findDistributeTechnologyItem.getDescription());
         for(int i = 0; i < distributeTechnologyItems.size(); i ++) {
             for(int j = 0; j < technologys.size(); j++) {
-                if(distributeTechnologyItems.get(i).getIdTechnology() == technologys.get(j).getTechnologyId()) {
+                if(distributeTechnologyItems.get(i).getIdTechnology().equals(technologys.get(j).getTechnologyId())) {
                     distributeTechnologyItems.get(i).setTechnologyName(technologys.get(j).getName());
                     break;
                 }
             }
 
             for(int j = 0; j < mIBEmployee.size(); j++) {
-                if(distributeTechnologyItems.get(i).getIdAgent() == mIBEmployee.get(j).getMIBEmployeeId()) {
+                if(distributeTechnologyItems.get(i).getIdAgent().equals(mIBEmployee.get(j).getMIBEmployeeId())) {
                     distributeTechnologyItems.get(i).setAgentName(mIBEmployee.get(j).getName());
                     break;
                 }

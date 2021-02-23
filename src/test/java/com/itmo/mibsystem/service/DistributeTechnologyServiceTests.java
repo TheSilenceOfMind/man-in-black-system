@@ -981,7 +981,7 @@ public class DistributeTechnologyServiceTests {
             alienPassportRepository.deleteById(pass.getPassportId());
         }
 
-        return alienPassportRepository.save(new AlienPassport(null, name, homePlane, description, idRace));
+        return alienPassportRepository.save(new AlienPassport(null, name, homePlane, description, idRace, false));
     }
 
     SourceTechnology CreateTestSourceTechnology(String value) {

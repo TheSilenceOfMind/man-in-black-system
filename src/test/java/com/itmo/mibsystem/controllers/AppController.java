@@ -58,7 +58,7 @@ public class AppController {
         WebElement password = driver.findElement(By.name("password"));
         WebElement button = driver.findElement(By.xpath("//input[@class='field w-100']"));
 
-        userName.sendKeys(ConfProperties.getProperty("researcherLogin"));
+        userName.sendKeys(ConfProperties.getProperty("falseLogin"));
         password.sendKeys(ConfProperties.getProperty("truePassword"));
         button.click();
 

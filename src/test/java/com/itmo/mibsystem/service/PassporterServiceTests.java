@@ -36,7 +36,7 @@ public class PassporterServiceTests {
         AlienRace race = CreateTestRace("testRace1");
 
         //Test
-        AlienPassport pass = new AlienPassport(null, "testName", "testPlanet", "testDescription", race.getRaceId());
+        AlienPassport pass = new AlienPassport(null, "testName", "testPlanet", "testDescription", race.getRaceId(), false);
         pass = passporterService.insertPassport(pass);
 
         AlienPassport findPass = alienPassportRepository.findById(pass.getPassportId()).orElse(null);
@@ -236,7 +236,7 @@ public class PassporterServiceTests {
             alienPassportRepository.deleteById(pass.getPassportId());
         }
 
-        return alienPassportRepository.save(new AlienPassport(null, name, homePlane, description, idRace));
+        return alienPassportRepository.save(new AlienPassport(null, name, homePlane, description, idRace, false));
     }
 
 }
