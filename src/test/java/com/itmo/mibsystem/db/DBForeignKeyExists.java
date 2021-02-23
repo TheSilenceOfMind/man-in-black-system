@@ -232,4 +232,9 @@ public class DBForeignKeyExists {
 
         assertEquals(countFK, 2);
     }
+
+    ResultSet Select(String sql) throws SQLException {
+        Statement stmt = connection.createStatement();
+        return stmt.executeQuery(sql);
+    }
 }

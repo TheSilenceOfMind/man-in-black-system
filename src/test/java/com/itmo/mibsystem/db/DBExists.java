@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class DBExists {
@@ -42,120 +43,113 @@ public class DBExists {
 
     @Test
     void checkMibUserExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_user", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_user'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibRoleExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_role", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_role'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibUserRoleExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_user_role", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_user_role'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibAlienRaceExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_alien_race", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_alien_race'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibAlienPassportExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_alien_passport", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_alien_passport'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibSourceTechnologyExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_source_technology", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_source_technology'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibTechnologyExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_technology", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_technology'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibActDetentionsExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_act_detentions", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_act_detentions'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibNationExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_nation", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_nation'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibEarthDocumentExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_earth_document", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_earth_document'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibEmployeesExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_employees", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_employees'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibDeliveryTypeExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_delivery_type", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_delivery_type'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibPaymentTypeExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_payment_type", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_payment_type'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibTypesContractExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_types_contract", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_types_contract'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibSellTechnologyDocumentExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_sell_technology_document", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_sell_technology_document'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibBuyTechnologyDocumentExists() throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, "mib_buy_technology_document", null);
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_buy_technology_document'");
         assertTrue(rs.next());
     }
 
     @Test
     void checkMibDistributeTechnologyItemExists() throws SQLException {
+        /*
         DatabaseMetaData dbm = connection.getMetaData();
         ResultSet rs = dbm.getTables(null, null, "mib_types_contract", null);
         assertTrue(rs.next());
+*/
+        ResultSet rs = Select("SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename = 'mib_types_contract'");
+        assertTrue(rs.next());
+    }
+
+    ResultSet Select(String sql) throws SQLException {
+        Statement stmt = connection.createStatement();
+        return stmt.executeQuery(sql);
     }
 }
