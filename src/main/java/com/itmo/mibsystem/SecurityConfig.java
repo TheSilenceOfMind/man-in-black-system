@@ -44,14 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll();/*
                 .and()
             .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
             .logout()
-                .permitAll();
+                .permitAll();*/
     }
 
     @Bean

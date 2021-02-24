@@ -1,16 +1,16 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/mib
-    username: mib_admin
-    password: password
+    url: jdbc:postgresql://pg:5432/studs
+    username: s207216
+    password: trp049
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   flyway:
     enabled: false
-    user: mib_admin
-    password: password
-    url: jdbc:postgresql://localhost:5432/mib
+    user: s207216
+    password: trp049
+    url: jdbc:postgresql://pg:5432/studs
 
 logging:
   pattern:

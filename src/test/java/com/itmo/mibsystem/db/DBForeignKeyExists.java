@@ -41,9 +41,9 @@ public class DBForeignKeyExists {
     @Test
     public void checkKeyUserRoleExists() throws SQLException {
         String curTable = "mib_user_role";
-        DatabaseMetaData dm = connection.getMetaData();
-        ResultSet rs = dm.getImportedKeys(null, null, curTable);
+        ResultSet rs = FindForeignKey(curTable);
         int countFK = 0;
+
         while (rs.next()) {
             if(rs.getString(3).equals("mib_user") && rs.getString(7).equals(curTable)) {
                 countFK++;
@@ -62,8 +62,7 @@ public class DBForeignKeyExists {
     @Test
     public void checkKeyAlienPassportExists() throws SQLException {
         String curTable = "mib_alien_passport";
-        DatabaseMetaData dm = connection.getMetaData();
-        ResultSet rs = dm.getImportedKeys(null, null, curTable);
+        ResultSet rs = FindForeignKey(curTable);
         int countFK = 0;
         while (rs.next()) {
             if(rs.getString(3).equals("mib_alien_race") && rs.getString(7).equals(curTable)) {
@@ -80,8 +79,7 @@ public class DBForeignKeyExists {
     @Test
     public void checkKeyTechnologyExists() throws SQLException {
         String curTable = "mib_technology";
-        DatabaseMetaData dm = connection.getMetaData();
-        ResultSet rs = dm.getImportedKeys(null, null, curTable);
+        ResultSet rs = FindForeignKey(curTable);
         int countFK = 0;
         while (rs.next()) {
             if(rs.getString(3).equals("mib_alien_race") && rs.getString(7).equals(curTable)) {
@@ -101,8 +99,7 @@ public class DBForeignKeyExists {
     @Test
     public void checkKeyActDetentionsExists() throws SQLException {
         String curTable = "mib_act_detentions";
-        DatabaseMetaData dm = connection.getMetaData();
-        ResultSet rs = dm.getImportedKeys(null, null, curTable);
+        ResultSet rs = FindForeignKey(curTable);
         int countFK = 0;
         while (rs.next()) {
             if(rs.getString(3).equals("mib_employees") && rs.getString(7).equals(curTable)) {
@@ -122,8 +119,7 @@ public class DBForeignKeyExists {
     @Test
     public void checkKeyEarthDocumentExists() throws SQLException {
         String curTable = "mib_earth_document";
-        DatabaseMetaData dm = connection.getMetaData();
-        ResultSet rs = dm.getImportedKeys(null, null, curTable);
+        ResultSet rs = FindForeignKey(curTable);
         int countFK = 0;
         while (rs.next()) {
             if(rs.getString(3).equals("mib_nation") && rs.getString(7).equals(curTable)) {
@@ -146,8 +142,7 @@ public class DBForeignKeyExists {
     @Test
     public void checkKeyEmployeesExists() throws SQLException {
         String curTable = "mib_employees";
-        DatabaseMetaData dm = connection.getMetaData();
-        ResultSet rs = dm.getImportedKeys(null, null, curTable);
+        ResultSet rs = FindForeignKey(curTable);
         int countFK = 0;
         while (rs.next()) {
             if(rs.getString(3).equals("mib_employees") && rs.getString(7).equals(curTable)) {
@@ -167,8 +162,7 @@ public class DBForeignKeyExists {
     @Test
     public void checkKeySellTechnologyDocumentExists() throws SQLException {
         String curTable = "mib_sell_technology_document";
-        DatabaseMetaData dm = connection.getMetaData();
-        ResultSet rs = dm.getImportedKeys(null, null, curTable);
+        ResultSet rs = FindForeignKey(curTable);
         int countFK = 0;
         while (rs.next()) {
             if(rs.getString(3).equals("mib_technology") && rs.getString(7).equals(curTable)) {
@@ -191,8 +185,7 @@ public class DBForeignKeyExists {
     @Test
     public void checkKeyBuyTechnologyDocumentExists() throws SQLException {
         String curTable = "mib_buy_technology_document";
-        DatabaseMetaData dm = connection.getMetaData();
-        ResultSet rs = dm.getImportedKeys(null, null, curTable);
+        ResultSet rs = FindForeignKey(curTable);
         int countFK = 0;
         while (rs.next()) {
             if(rs.getString(3).equals("mib_payment_type") && rs.getString(7).equals(curTable)) {
@@ -215,8 +208,7 @@ public class DBForeignKeyExists {
     @Test
     public void checkKeyDistributeTechnologyItemExists() throws SQLException {
         String curTable = "mib_distribute_technology_item";
-        DatabaseMetaData dm = connection.getMetaData();
-        ResultSet rs = dm.getImportedKeys(null, null, curTable);
+        ResultSet rs = FindForeignKey(curTable);
         int countFK = 0;
         while (rs.next()) {
             if(rs.getString(3).equals("mib_technology") && rs.getString(7).equals(curTable)) {
@@ -231,6 +223,26 @@ public class DBForeignKeyExists {
         }
 
         assertEquals(countFK, 2);
+    }
+
+    ResultSet FindForeignKey(String table) throws SQLException {
+        return Select(" SELECT" +
+                "           tc.table_schema," +
+                "           tc.constraint_name," +
+                "           ccu.table_name AS foreign_table_name," +
+                "           kcu.column_name," +
+                "           ccu.column_name AS foreign_column_name," +
+                "           ccu.table_schema AS foreign_table_schema," +
+                "           tc.table_name" +
+                "           FROM" +
+                "           information_schema.table_constraints AS tc\n" +
+                "           JOIN information_schema.key_column_usage AS kcu\n" +
+                "           ON tc.constraint_name = kcu.constraint_name\n" +
+                "           AND tc.table_schema = kcu.table_schema\n" +
+                "           JOIN information_schema.constraint_column_usage AS ccu\n" +
+                "           ON ccu.constraint_name = tc.constraint_name\n" +
+                "           AND ccu.table_schema = tc.table_schema\n" +
+                "          WHERE tc.constraint_type = 'FOREIGN KEY' AND tc.table_name= '" + table + "'");
     }
 
     ResultSet Select(String sql) throws SQLException {
